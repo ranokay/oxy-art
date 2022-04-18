@@ -1,0 +1,26 @@
+{
+	"name": "oxy-project",
+	"version": "1.0.0",
+	"description": "",
+	"main": "gulpfile.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/YuutaDev/Oxy-Project.git"
+	},
+	"author": "Yuta",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/YuutaDev/Oxy-Project/issues"
+	},
+	"homepage": "https://github.com/YuutaDev/Oxy-Project#readme",
+	"devDependencies": {
+		"browser-sync": "^2.27.9",
+		"gulp": "^4.0.2",
+		"gulp-sass": "^5.1.0",
+		"gulp-terser": "^2.1.0",
+		"sass": "^1.50.0"
+	}
+}
