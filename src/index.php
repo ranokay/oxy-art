@@ -14,7 +14,7 @@
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="theme-color" content="#ffffff" />
 	<!-- styles -->
-	<link rel="stylesheet" href="src/css/style.css" />
+	<link rel="stylesheet" href="dist/css/main.min.css" />
 	<!-- font awesome -->
 	<script src="https://kit.fontawesome.com/e659bd6042.js" crossorigin="anonymous"></script>
 	<title>Oxy Project</title>
@@ -67,7 +67,7 @@
 		<div class="hero-container">
 			<div class="hero-content">
 				<h1>oxy project</h1>
-				<p>A simple, lightweight, and responsive web framework for PHP.</p>
+				<p>A simple, lightweight, and responsive web framework for mPHP.</p>
 				<a href="src/index.php" class="btn">Get Started</a>
 			</div>
 			<footer></footer>
@@ -75,7 +75,7 @@
 	</div>
 	<div class="waves-bottom"></div>
 
-	<script src="src/js/index.js"></script>
+	<script src="dist/js/main.min.js"></script>
 </body>
 
 </html>

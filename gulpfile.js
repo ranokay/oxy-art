@@ -1,26 +1,65 @@
-const { src, dest, watch, series } = require('gulp'),
+const gulp = require('gulp'),
+	del = require('del'),
 	sass = require('gulp-sass')(require('sass')),
-	// const prefixer = require('gulp-autoprefixer')
-	// const minify = require('gulp-clean-css')
-	terser = require('gulp-terser'),
-	// const imagemin = require('gulp-imagemin')
-	// const imagewebp = require('gulp-webp')
+	cleanCSS = require('gulp-clean-css'),
+	rename = require('gulp-rename'),
+	babel = require('gulp-babel'),
+	uglify = require('gulp-uglify'),
+	concat = require('gulp-concat'),
 	browserSync = require('browser-sync').create()
+
+const paths = {
+	styles: {
+		src: 'src/sass/**/*.sass',
+		dest: 'dist/css',
+	},
+	scripts: {
+		src: 'src/js/**/*.js',
+		dest: 'dist/js',
+	},
+}
+
+//clean task
+function cleanTask() {
+	return del(['dist'])
+}
 
 //sass task
 function sassTask() {
-	return (
-		src('src/sass/**/*.sass')
-			.pipe(sass())
-			// .pipe(prefixer())
-			// .pipe(minify())
-			.pipe(dest('dist/css'))
-	)
+	return gulp
+		.src(paths.styles.src)
+		.pipe(sass())
+		.pipe(cleanCSS())
+		.pipe(
+			rename({
+				basename: 'main',
+				suffix: '.min',
+			})
+		)
+		.pipe(gulp.dest(paths.styles.dest))
 }
 
 //js task
 function jsTask() {
-	return src('src/js/**/*.js').pipe(terser()).pipe(dest('dist/js'))
+	return gulp
+		.src(paths.scripts.src, { sourcemaps: true })
+		.pipe(babel())
+		.pipe(uglify())
+		.pipe(concat('main.min.js'))
+		.pipe(gulp.dest(paths.scripts.dest))
+}
+
+//browserSync serve
+function browserSyncServe(cb) {
+	browserSync.init({
+		proxy: 'http://localhost/Oxy-Project/src',
+	})
+	cb()
+}
+//browserSync reload
+function browserSyncReload(cb) {
+	browserSync.reload()
+	cb()
 }
 
 //Images
@@ -40,29 +79,20 @@ function jsTask() {
 // 	return src('dist/images/*.{jpg,jpeg,png,gif}').pipe(imagewebp({})).pipe(dest('dist/images'))
 // }
 
-//browserSync serve
-function browserSyncServe(cb) {
-	browserSync.init({
-		server: {
-			baseDir: './dist',
-		},
-	})
-	cb()
-}
-//browserSync reload
-function browserSyncReload(cb) {
-	browserSync.reload()
-	cb()
-}
-
-//watchtask
+//watch task
 function watchTask() {
-	watch('src/**/*.php', browserSyncReload)
-	watch('src/sass/**/*.sass', sassTask, browserSyncReload)
-	watch('src/js/**/*.js', jsTask, browserSyncReload)
-	// watch('src/images/**/*.{jpg,jpeg,png,gif}', imagesCompress, browsersyncReload)
-	// watch('dist/images/*.{jpg,jpeg,png,gif}', imagesWebp)
+	gulp.watch(paths.styles.src, sassTask)
+	gulp.watch(paths.scripts.src, jsTask)
 }
 
-//default gulp
-exports.default = series(sassTask, jsTask, watchTask, browserSyncServe)
+//build task
+const build = gulp.series(cleanTask, gulp.parallel(sassTask, jsTask), watchTask)
+
+//default gulp task
+exports.default = build
+exports.build = build
+
+exports.cleanTask = cleanTask
+exports.sassTask = sassTask
+exports.jsTask = jsTask
+exports.watchTask = watchTask
