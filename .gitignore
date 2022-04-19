@@ -11,6 +11,5 @@
 # Built Visual Studio Code Extensions
 *.vsix
 /node_modules
-/dist
 package-lock.json
 .eslintrc.js
