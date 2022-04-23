@@ -1,57 +1,81 @@
 import gulp from 'gulp'
-const { src, dest, watch, series, parallel } = gulp
 import del from 'del'
 import dartSass from 'sass'
 import gulpSass from 'gulp-sass'
-const sass = gulpSass(dartSass)
 import cleanCSS from 'gulp-clean-css'
 import rename from 'gulp-rename'
 import babel from 'gulp-babel'
-import uglify from 'gulp-uglify'
+import terser from 'gulp-terser'
 import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
-const { init, write } = sourcemaps
 import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
+import webp from 'gulp-webp'
 import htmlmin from 'gulp-htmlmin'
+import webphtml from 'gulp-webp-html'
+import fileinclude from 'gulp-file-include'
 import newer from 'gulp-newer'
-import browserSync from 'browser-sync'
+import browsersync from 'browser-sync'
 
-const paths = {
-	html: {
-		src: 'src/**/*.html',
-		dest: ['dist'],
+const prj_folder = 'oxy-project',
+	src_folder = 'src'
+
+const { src, dest, watch, series, parallel } = gulp,
+	sass = gulpSass(dartSass),
+	{ init, write } = sourcemaps
+
+const path = {
+	src: {
+		html: [src_folder + '/*.html', '!' + src_folder + '/_*.html'],
+		css: src_folder + '/sass/style.sass',
+		js: src_folder + '/js/index.js',
+		img: src_folder + '/img/**/*',
 	},
-	styles: {
-		src: ['src/sass/**/*.sass', 'src/sass/**/*.scss'],
-		dest: 'dist/css',
+	watch: {
+		html: src_folder + '/**/*.html',
+		css: [src_folder + '/sass/**/*.sass', src_folder + '/sass/**/*.scss'],
+		js: src_folder + '/js/**/*.js',
+		img: src_folder + '/img/**/*',
 	},
-	scripts: {
-		src: 'src/js/**/*.js',
-		dest: 'dist/js',
+	build: {
+		html: prj_folder + '/',
+		css: prj_folder + '/css/',
+		js: prj_folder + '/js/',
+		img: prj_folder + '/img/',
 	},
-	images: {
-		src: 'src/images/**/*',
-		dest: 'dist/images',
-	},
+	clean: './' + prj_folder + '/',
 }
 
 //clean task
 function cleanTask() {
-	return del(['dist/*', '!dist/images'])
+	return del(path.clean)
 }
 
-//htmlmin task
-function htmlminTask() {
-	return src(paths.html.src)
+//browsersync task
+function browsersyncTask() {
+	browsersync.init({
+		proxy: {
+			target: 'http://localhost/Oxy-Project/oxy-project/',
+		},
+		tunnel: true,
+		notify: false,
+		online: true,
+	})
+}
+
+//html task
+function htmlTask() {
+	return src(path.src.html)
+		.pipe(fileinclude())
+		.pipe(webphtml())
 		.pipe(htmlmin({ collapseWhitespace: true }))
-		.pipe(dest(paths.html.dest))
-		.pipe(browserSync.stream())
+		.pipe(dest(path.build.html))
+		.pipe(browsersync.stream())
 }
 
 //style task
 function styleTask() {
-	return src(paths.styles.src)
+	return src(path.src.css)
 		.pipe(init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(
@@ -71,68 +95,72 @@ function styleTask() {
 			})
 		)
 		.pipe(write('.'))
-		.pipe(dest(paths.styles.dest))
-		.pipe(browserSync.stream())
+		.pipe(dest(path.build.css))
+		.pipe(browsersync.stream())
 }
 
 //js task
 function jsTask() {
-	return src(paths.scripts.src)
+	return src(path.src.js)
 		.pipe(init())
 		.pipe(
 			babel({
 				presets: ['@babel/preset-env'],
 			})
 		)
-		.pipe(uglify())
+		.pipe(terser())
 		.pipe(concat('main.min.js'))
 		.pipe(write('.'))
-		.pipe(dest(paths.scripts.dest))
-		.pipe(browserSync.stream())
+		.pipe(dest(path.build.js))
+		.pipe(browsersync.stream())
 }
 
-//imagemin task
-function imgminTask() {
-	return src(paths.images.src)
-		.pipe(newer(paths.images.dest))
+//images task
+function imagesTask() {
+	return src(path.src.img)
+		.pipe(newer(path.build.img))
 		.pipe(
-			imagemin({
+			webp({
 				quality: 80,
-				progressive: true,
-				optimizationLevel: 2,
 			})
 		)
-		.pipe(dest(paths.images.dest))
+		.pipe(dest(path.build.img))
+		.pipe(src(path.src.img))
+		.pipe(
+			imagemin({
+				progressive: true,
+				svgoPlugins: [{ removeViewBox: false }],
+				interlaced: true,
+				optimizationLevel: 3,
+			})
+		)
+		.pipe(dest(path.build.img))
 }
-
-//Webp images
-// function imagesWebp() {
-// 	return src('dist/images/*.{jpg,jpeg,png,gif}').pipe(imagewebp({})).pipe(dest('dist/images'))
-// }
 
 //watch task
 function watchTask() {
-	browserSync.init({
-		proxy: {
-			target: 'http://localhost/Oxy-Project/dist/',
-		},
-		tunnel: true,
-	})
-	watch(paths.html.dest).on('change', browserSync.reload)
-	watch(paths.html.src, htmlminTask)
-	watch(paths.styles.src, styleTask)
-	watch(paths.scripts.src, jsTask)
-	watch(paths.images.src, imgminTask)
+	watch(path.build.html).on('change', browsersync.reload)
+	watch(path.watch.html, htmlTask)
+	watch(path.watch.css, styleTask)
+	watch(path.watch.js, jsTask)
+	watch(path.watch.img, imagesTask)
 }
+
+//build
+const _build = series(cleanTask, parallel(htmlTask, styleTask, jsTask, imagesTask))
+
+//watch
+const _watch = parallel(_build, watchTask, browsersyncTask)
 
 //gulp tasks
 export const _clean = cleanTask
-export const _htmlmin = htmlminTask
+export const _html = htmlTask
 export const _style = styleTask
 export const _js = jsTask
-export const _imgmin = imgminTask
-export const _watch = watchTask
+export const _img = imagesTask
+export const __build = _build
+export const __watch = _watch
 
 //default gulp task
-const _default = series(cleanTask, htmlminTask, parallel(styleTask, jsTask, imgminTask), watchTask)
+const _default = _watch
 export { _default as default }
