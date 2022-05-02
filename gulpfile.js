@@ -26,19 +26,19 @@ const { src, dest, watch, series, parallel } = gulp,
 
 const path = {
 	src: {
-		html: [src_folder + '/*.html', '!' + src_folder + '/_*.html'],
-		css: src_folder + '/sass/style.sass',
+		html: [src_folder + '/**/*.html', '!' + src_folder + '/**/_*.html'],
+		css: src_folder + '/sass/style.scss',
 		js: src_folder + '/js/index.js',
 		img: src_folder + '/img/**/*',
 	},
 	watch: {
 		html: src_folder + '/**/*.html',
-		css: [src_folder + '/sass/**/*.sass', src_folder + '/sass/**/*.scss'],
+		css: src_folder + '/sass/**/*.scss',
 		js: src_folder + '/js/**/*.js',
 		img: src_folder + '/img/**/*',
 	},
 	build: {
-		html: prj_folder + '/',
+		html: [prj_folder + '/'],
 		css: prj_folder + '/css/',
 		js: prj_folder + '/js/',
 		img: prj_folder + '/img/',

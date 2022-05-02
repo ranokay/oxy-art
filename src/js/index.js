@@ -1,9 +1,12 @@
-// const dropdownResources = document.getElementsByClassName('dropdown-resources')
-// const dropbtn = document.getElementsByClassName('dropbtn')
+const headerMain = document.querySelector('.header-main')
 
-// dropdownResources.addEventListener('mouseover', () => {
-// 	dropbtn.style.color = 'hsl(215, 20%, 65%)'
-// })
-// dropdownResources.addEventListener('mouseout', () => {
-// 	dropbtn.style.color = 'hsl(210, 40%, 98%)'
-// })
+window.onscroll = function () {
+	handleScroll()
+}
+function handleScroll() {
+	if (window.scrollY > 0) {
+		headerMain.classList.add('header-main--scrolled')
+	} else {
+		headerMain.classList.remove('header-main--scrolled')
+	}
+}
