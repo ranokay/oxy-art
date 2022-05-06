@@ -1,0 +1,54 @@
+@use 'variables' as *;
+@use 'fonts' as *;
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+	background: $blue-gray-800;
+	border-radius: 0.5rem;
+	&:hover {
+		background: $accent-color;
+	}
+}
+* {
+	font-family: $font-heebo;
+	font-size: 1rem;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	list-style: none;
+	color: $blue-gray-50;
+	background-color: transparent;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: $blue-gray-900;
+}
+img {
+	display: block;
+}
+.header-main--scrolled {
+	background-color: $blue-gray-900;
+	transition: background-color 0.3s;
+}
+
+.home-page {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(2, 1fr);
+	gap: 5% 0;
+	grid-auto-flow: row;
+	margin-inline: 10%;
+	grid-template-areas:
+		'hero-container'
+		'collections-container';
+}

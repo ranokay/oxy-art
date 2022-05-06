@@ -1,0 +1,14 @@
+$accent-color: hsla(225, 20%, 61%, 0.5);
+$blue-gray-50: hsl(210, 40%, 98%);
+$blue-gray-200: hsl(214, 32%, 91%);
+$blue-gray-300: hsl(213, 27%, 84%);
+$blue-gray-400: hsl(215, 20%, 65%);
+$blue-gray-600: hsl(214, 20%, 34%);
+$blue-gray-800: hsl(217, 33%, 17%);
+$blue-gray-900: hsl(222, 46%, 11%);
+$gradient-color: linear-gradient(to right, rgba(71, 118, 230, 1), rgba(142, 84, 233, 1));
+$gradient-background: linear-gradient(to right, rgba(255, 0, 255, 1), rgba(0, 255, 255, 1));
+$gradient-background-reverse: linear-gradient(to left, rgba(255, 0, 255, 1), rgba(0, 255, 255, 1));
+$box-shadow: 0 0.5rem 1rem hsla(0, 0%, 0%, 0.1);
+$box-shadow-top: 0 0 0.3rem hsla(0, 0%, 0%, 0.25), 0 0 0.9rem hsla(0, 0%, 0%, 0.165),
+	0 0 2rem hsla(0, 0%, 0%, 0.125), 0 0 6.5rem hsla(0, 0%, 0%, 0.085);

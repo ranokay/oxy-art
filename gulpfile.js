@@ -26,19 +26,19 @@ const { src, dest, watch, series, parallel } = gulp,
 
 const path = {
 	src: {
-		html: [src_folder + '/**/*.html', '!' + src_folder + '/**/_*.html'],
+		php: [src_folder + '/**/*.php', '!' + src_folder + '/**/_*.php'],
 		css: src_folder + '/sass/style.scss',
 		js: src_folder + '/js/index.js',
 		img: src_folder + '/img/**/*',
 	},
 	watch: {
-		html: src_folder + '/**/*.html',
+		php: src_folder + '/**/*.php',
 		css: src_folder + '/sass/**/*.scss',
 		js: src_folder + '/js/**/*.js',
 		img: src_folder + '/img/**/*',
 	},
 	build: {
-		html: [prj_folder + '/'],
+		php: [prj_folder + '/'],
 		css: prj_folder + '/css/',
 		js: prj_folder + '/js/',
 		img: prj_folder + '/img/',
@@ -56,20 +56,21 @@ function browsersyncTask() {
 	browsersync.init({
 		proxy: {
 			target: 'http://localhost/Oxy-Project/oxy-project/',
+			ws: true,
 		},
-		tunnel: true,
+		tunnel: 'oxy-project-demo',
 		notify: false,
 		online: true,
 	})
 }
 
-//html task
-function htmlTask() {
-	return src(path.src.html)
+//php task
+function phpTask() {
+	return src(path.src.php)
 		.pipe(fileinclude())
 		.pipe(webphtml())
 		.pipe(htmlmin({ collapseWhitespace: true }))
-		.pipe(dest(path.build.html))
+		.pipe(dest(path.build.php))
 		.pipe(browsersync.stream())
 }
 
@@ -139,22 +140,22 @@ function imagesTask() {
 
 //watch task
 function watchTask() {
-	watch(path.build.html).on('change', browsersync.reload)
-	watch(path.watch.html, htmlTask)
+	watch(path.build.php).on('change', browsersync.reload)
+	watch(path.watch.php, phpTask)
 	watch(path.watch.css, styleTask)
 	watch(path.watch.js, jsTask)
 	watch(path.watch.img, imagesTask)
 }
 
 //build
-const _build = series(cleanTask, parallel(htmlTask, styleTask, jsTask, imagesTask))
+const _build = series(cleanTask, parallel(phpTask, styleTask, jsTask, imagesTask))
 
 //watch
 const _watch = parallel(_build, watchTask, browsersyncTask)
 
 //gulp tasks
 export const _clean = cleanTask
-export const _html = htmlTask
+export const _php = phpTask
 export const _style = styleTask
 export const _js = jsTask
 export const _img = imagesTask
