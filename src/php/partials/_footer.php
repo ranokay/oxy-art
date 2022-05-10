@@ -3,7 +3,7 @@
 		<div class="column">
 			<div class="footer-logo">
 				<img src="img/logo/logo.svg" alt="Oxy Project Logo" />
-				<div class="logo-text">Oxy Project</div>
+				<div class="logo-text">OxyProject</div>
 			</div>
 			<div class="footer-icons">
 				<a href="#" class="icon-facebook"></a>
@@ -51,7 +51,7 @@
 	</div>
 	<div class="copyright-area">
 		<div class="copyright-text">
-			&copy; <?= date('Y') ?> Oxy Project. All rights reserved.
+			&copy; <?= date('Y') ?> OxyProject. All rights reserved.
 		</div>
 	</div>
 </footer>

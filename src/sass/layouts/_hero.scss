@@ -3,93 +3,28 @@
 
 .hero {
 	.hero-container {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr 0.4fr 1fr;
-		gap: 2% 0%;
-		grid-auto-flow: row;
-		grid-template-areas:
-			'hero-title'
-			'hero-subtitle'
-			'hero-buttons';
-		grid-area: hero-container;
-		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 3% 0;
+		height: calc(100vh - 4rem);
 
 		.hero-title {
-			justify-self: center;
-			align-self: end;
-			grid-area: hero-title;
-
 			max-width: 25ch;
 			font-size: 3rem;
 			letter-spacing: 0.1rem;
 			text-align: center;
 			line-height: 1;
-			text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 		}
 
 		.hero-subtitle {
-			justify-self: center;
-			align-self: stretch;
-			grid-area: hero-subtitle;
-
-			max-width: 55ch;
+			max-width: 60ch;
 			font-family: $font-open-sans;
 			font-weight: 400;
 			color: $blue-gray-400;
-			letter-spacing: 0.1rem;
 			text-align: center;
-		}
-		.hero-buttons {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: 1fr;
-			grid-auto-flow: row;
-			grid-template-areas: 'btn-gradient btn-default';
-			justify-self: center;
-			align-self: start;
-			grid-area: hero-buttons;
-
-			.btn {
-				text-align: center;
-				border-radius: 0.5rem;
-				font-size: 1rem;
-				padding: 0.75rem 1rem;
-				margin-inline: 0.5rem;
-
-				&.btn-gradient {
-					grid-area: btn-gradient;
-					background-image: $gradient-color;
-				}
-
-				&.btn-default {
-					grid-area: btn-default;
-					background-color: $blue-gray-600;
-
-					.arrow-icon {
-						padding-inline: 0.5rem;
-					}
-				}
-				&:hover,
-				&:focus {
-					background-image: none;
-					background-color: transparent;
-					outline: 1px solid $blue-gray-400;
-				}
-			}
-		}
-	}
-}
-
-@media (max-width: 768px) {
-	.hero {
-		.hero-container {
-			margin-top: -5rem;
-			gap: 3% 0%;
-
-			.hero-title {
-				font-size: 1.5rem;
-			}
+			margin-bottom: 3rem;
 		}
 	}
 }

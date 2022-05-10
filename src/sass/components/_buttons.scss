@@ -1,0 +1,86 @@
+@use 'util/variables' as *;
+
+.btn-to-top {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 100;
+	cursor: pointer;
+	padding: 1rem;
+	border-radius: 1.5rem;
+	background-color: $blue-gray-600;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.3s;
+
+	&.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&:hover {
+		background-color: $blue-gray-800;
+	}
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap;
+	text-align: center;
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	cursor: pointer;
+
+	&.btn-gradient {
+		background-image: $gradient-color;
+	}
+
+	&.btn-default {
+		background-color: $blue-gray-600;
+	}
+	&:hover,
+	&:focus {
+		background-image: none;
+		background-color: transparent;
+		outline: 1px solid $blue-gray-400;
+	}
+}
+
+.header-main {
+	.right-side {
+		.btn {
+			position: relative;
+			padding: 0 0.9rem;
+			font-size: 0.85rem;
+			&.btn-gradient {
+				padding-left: 1.5rem;
+
+				.wallet-icon {
+					position: absolute;
+					left: 0.5rem;
+
+					img {
+						width: 70%;
+					}
+				}
+			}
+		}
+	}
+}
+
+.hero-container {
+	.hero-buttons {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		.btn-default {
+			.arrow-icon {
+				margin: 0 0 0 0.5rem;
+			}
+		}
+	}
+}

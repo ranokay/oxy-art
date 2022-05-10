@@ -9,9 +9,11 @@
 		<main class="home-page">
 			@@include('php/partials/_hero.php',{})
 			@@include('php/partials/_collections.php',{})
+			@@include('php/partials/_auctions.php',{})
 		</main>
-		@@include('php/partials/_wavesBottom.php')
 	</div>
+	@@include('php/partials/_wavesBottom.php')
+	@@include('php/partials/_toTopButton.php',{})
 	@@include('php/partials/_js.php',{})
 </body>
 

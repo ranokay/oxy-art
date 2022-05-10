@@ -10,3 +10,13 @@ function handleScroll() {
 		headerMain.classList.remove('header-main--scrolled')
 	}
 }
+
+const toTopBtn = document.querySelector('.btn-to-top')
+
+window.addEventListener('scroll', function () {
+	if (window.scrollY > 100) {
+		toTopBtn.classList.add('active')
+	} else {
+		toTopBtn.classList.remove('active')
+	}
+})

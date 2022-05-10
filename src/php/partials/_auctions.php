@@ -1,0 +1,2 @@
+<section class="auctions">
+</section>

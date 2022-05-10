@@ -55,10 +55,9 @@ function cleanTask() {
 function browsersyncTask() {
 	browsersync.init({
 		proxy: {
-			target: 'http://localhost/Oxy-Project/oxy-project/',
-			ws: true,
+			target: 'http://oxy-project.dev.io/',
 		},
-		tunnel: 'oxy-project-demo',
+		// tunnel: 'oxy-project-5465',
 		notify: false,
 		online: true,
 	})

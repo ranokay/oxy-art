@@ -37,18 +37,14 @@ img {
 	display: block;
 }
 .header-main--scrolled {
+	padding: 0.2rem 5% !important;
 	background-color: $blue-gray-900;
-	transition: background-color 0.3s;
 }
 
-.home-page {
+.wrapper-page {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(2, 1fr);
-	gap: 5% 0;
+	gap: 100px 0;
 	grid-auto-flow: row;
-	margin-inline: 10%;
-	grid-template-areas:
-		'hero-container'
-		'collections-container';
+	margin: 0 10% 0 10%;
 }

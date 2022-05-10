@@ -2,7 +2,7 @@
 	<div class="left-side">
 		<a class="logo" href="index.php">
 			<img src="img/logo/logo.svg" alt="Oxy Project Logo" />
-			<div class="logo-text">Oxy Project</div>
+			<div class="logo-text">OxyProject</div>
 		</a>
 		<div class="line"></div>
 		<nav class="navbar">
@@ -31,9 +31,14 @@
 			<div class="magnify-icon">
 				<img src="img/icons/search.svg" alt="Search" />
 			</div>
-			<input id="search-input" name="search" type="text" placeholder="Search items..." />
+			<input id="search-input" name="search" type="search" placeholder="Search items..." />
 		</form>
-		<button class="btn btn-gradient" type="submit">Sign In</button>
+		<button class="btn btn-gradient" type="submit">
+			<div class="wallet-icon">
+				<img src="img/icons/wallet.svg" alt="Wallet" />
+			</div>
+			Sign In
+		</button>
 		<button class="btn btn-default" type="submit">Sign Up</button>
 	</div>
 </header>

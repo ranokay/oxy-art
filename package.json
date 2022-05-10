@@ -1,7 +1,6 @@
 {
 	"name": "oxy-project",
 	"version": "1.0.0",
-	"description": "",
 	"exports": "./gulpfile.js",
 	"type": "module",
 	"scripts": {
@@ -22,7 +21,7 @@
 		"@babel/preset-env": "^7.17.10",
 		"browser-sync": "^2.27.9",
 		"del": "^6.0.0",
-		"eslint": "^8.14.0",
+		"eslint": "^8.15.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-babel": "^8.0.0",
@@ -39,5 +38,7 @@
 		"gulp-webp": "^4.0.1",
 		"gulp-webp-html": "^1.0.2",
 		"sass": "^1.51.0"
-	}
+	},
+	"main": "gulpfile.js",
+	"description": ""
 }

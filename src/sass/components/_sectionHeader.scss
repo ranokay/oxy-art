@@ -1,3 +1,4 @@
+@use 'util/variables' as *;
 .section-container {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -10,9 +11,9 @@
 
 	.section-header {
 		display: grid;
-		grid-template-columns: 0.1fr repeat(2, 1fr);
+		grid-template-columns: auto 1fr auto;
 		grid-template-rows: 1fr;
-		gap: 0px 0px;
+		gap: 0 0.5rem;
 		grid-auto-flow: row;
 		grid-template-areas: 'section-header-icon section-title see-all-btn';
 		grid-area: section-header;
@@ -20,16 +21,28 @@
 		.section-header-icon {
 			grid-area: section-header-icon;
 			align-self: center;
+
+			img {
+				height: 2rem;
+			}
 		}
 
 		.section-title {
 			grid-area: section-title;
 			align-self: center;
+
+			h2 {
+				font-size: 1.2rem;
+			}
 		}
 
 		.see-all-btn {
 			grid-area: see-all-btn;
 			align-self: center;
+			width: 100%;
+			padding: 0.3rem 0.7rem;
+			margin: 0;
+			background-color: $blue-gray-800;
 		}
 	}
 }
