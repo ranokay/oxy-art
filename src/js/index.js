@@ -1,15 +1,12 @@
 const headerMain = document.querySelector('.header-main')
 
-window.onscroll = function () {
-	handleScroll()
-}
-function handleScroll() {
+window.addEventListener('scroll', function () {
 	if (window.scrollY > 0) {
 		headerMain.classList.add('header-main--scrolled')
 	} else {
 		headerMain.classList.remove('header-main--scrolled')
 	}
-}
+})
 
 const toTopBtn = document.querySelector('.btn-to-top')
 

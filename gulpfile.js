@@ -17,7 +17,7 @@ import fileinclude from 'gulp-file-include'
 import newer from 'gulp-newer'
 import browsersync from 'browser-sync'
 
-const prj_folder = 'oxy-project',
+const prj_folder = 'docs',
 	src_folder = 'src'
 
 const { src, dest, watch, series, parallel } = gulp,
@@ -55,11 +55,12 @@ function cleanTask() {
 function browsersyncTask() {
 	browsersync.init({
 		proxy: {
-			target: 'http://oxy-project.dev.io/',
+			target: 'http://oxyproject.io/',
 		},
-		// tunnel: 'oxy-project-5465',
+		tunnel: 'oxyprj-demo-5465',
 		notify: false,
 		online: true,
+		bypassCaches: true,
 	})
 }
 
