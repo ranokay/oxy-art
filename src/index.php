@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-@@include('php/partials/_head.php',{ "title":"Oxy Project | Homepage" })
+@@include('php/partials/_head.php',{ "title":"OxyProject | Homepage" })
 
 <body>
 	@@include('php/partials/_wavesTop.php')

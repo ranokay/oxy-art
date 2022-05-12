@@ -1,5 +1,5 @@
 {
-	"name": "oxy-project",
+	"name": "oxyproject",
 	"version": "1.0.0",
 	"exports": "./gulpfile.js",
 	"type": "module",
@@ -8,14 +8,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/YuutaDev/Oxy-Project.git"
+		"url": "git+https://github.com/YuutaDev/OxyProject.git"
 	},
 	"author": "Yuta",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/YuutaDev/Oxy-Project/issues"
+		"url": "https://github.com/YuutaDev/OxyProject/issues"
 	},
-	"homepage": "https://github.com/YuutaDev/Oxy-Project#readme",
+	"homepage": "https://github.com/YuutaDev/OxyProject#readme",
 	"devDependencies": {
 		"@babel/core": "^7.17.10",
 		"@babel/preset-env": "^7.17.10",
