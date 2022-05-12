@@ -17,7 +17,7 @@ import fileinclude from 'gulp-file-include'
 import newer from 'gulp-newer'
 import browsersync from 'browser-sync'
 
-const prj_folder = 'docs',
+const prj_folder = 'oxyproject',
 	src_folder = 'src'
 
 const { src, dest, watch, series, parallel } = gulp,
@@ -43,12 +43,15 @@ const path = {
 		js: prj_folder + '/js/',
 		img: prj_folder + '/img/',
 	},
-	clean: './' + prj_folder + '/',
+	clean: {
+		all: [prj_folder + '/'],
+		eximg: [prj_folder + '/css/', prj_folder + '/js/', prj_folder + '/php/', prj_folder + '/*.php'],
+	},
 }
 
 //clean task
 function cleanTask() {
-	return del(path.clean)
+	return del(path.clean.eximg)
 }
 
 //browsersync task
