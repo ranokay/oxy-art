@@ -60,10 +60,6 @@ function browsersyncTask() {
 		proxy: {
 			target: 'http://oxyproject.io/',
 		},
-		tunnel: 'oxyprj-demo-5465',
-		notify: false,
-		online: true,
-		bypassCaches: true,
 	})
 }
 
