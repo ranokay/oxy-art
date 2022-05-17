@@ -1,6 +1,4 @@
-@use 'header';
-@use 'hero';
-@use 'collections';
-@use 'auctions';
-@use 'footer';
-@use 'media';
+@forward 'hero';
+@forward 'collections';
+@forward 'auctions';
+@forward 'media';

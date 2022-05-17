@@ -9,7 +9,7 @@
 	box-shadow: $box-shadow;
 	align-items: center;
 	padding: 0.5rem 5%;
-	z-index: 99;
+	z-index: 1000;
 	transition: all 0.25s ease-in-out;
 
 	.left-side {
@@ -125,4 +125,9 @@
 			}
 		}
 	}
+}
+
+.header-main--scrolled {
+	padding: 0.2rem 5% !important;
+	background-color: $blue-gray-900;
 }

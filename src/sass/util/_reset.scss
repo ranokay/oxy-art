@@ -13,17 +13,15 @@
 	}
 }
 * {
-	font-family: $font-heebo;
-	font-size: 1rem;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	outline: none;
 	border: none;
-	text-decoration: none;
 	list-style: none;
 	color: $blue-gray-50;
 	background-color: transparent;
+	font-size: 1rem;
 }
 
 html {
@@ -31,20 +29,17 @@ html {
 }
 
 body {
+	font-family: $font-heebo;
 	background-color: $blue-gray-900;
 }
 img {
 	display: block;
 }
-.header-main--scrolled {
-	padding: 0.2rem 5% !important;
-	background-color: $blue-gray-900;
-}
 
-.wrapper-page {
+.main__content {
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 100px 0;
-	grid-auto-flow: row;
-	margin: 0 10% 0 10%;
+	margin: 0 10%;
+}
+.wrapper {
+	position: relative;
 }

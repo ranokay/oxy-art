@@ -1,6 +1,31 @@
 @use 'util/variables' as *;
 
-.btn-to-top {
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap;
+	text-align: center;
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	cursor: pointer;
+
+	&__gradient {
+		background-image: $gradient-color;
+	}
+
+	&__default {
+		background-color: $blue-gray-600;
+	}
+	&:hover,
+	&:focus {
+		background-image: none;
+		background-color: transparent;
+		outline: 1px solid $blue-gray-400;
+	}
+}
+
+.btn_to_top {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -26,38 +51,13 @@
 	}
 }
 
-.btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	white-space: nowrap;
-	text-align: center;
-	border-radius: 0.5rem;
-	font-size: 1rem;
-	cursor: pointer;
-
-	&.btn-gradient {
-		background-image: $gradient-color;
-	}
-
-	&.btn-default {
-		background-color: $blue-gray-600;
-	}
-	&:hover,
-	&:focus {
-		background-image: none;
-		background-color: transparent;
-		outline: 1px solid $blue-gray-400;
-	}
-}
-
 .header-main {
 	.right-side {
 		.btn {
 			position: relative;
 			padding: 0 0.9rem;
 			font-size: 0.85rem;
-			&.btn-gradient {
+			&__gradient {
 				padding-left: 1.5rem;
 
 				.wallet-icon {
@@ -68,18 +68,6 @@
 						width: 70%;
 					}
 				}
-			}
-		}
-	}
-}
-
-.hero-container {
-	.hero-buttons {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		.btn-default {
-			.arrow-icon {
-				margin: 0 0 0 0.5rem;
 			}
 		}
 	}

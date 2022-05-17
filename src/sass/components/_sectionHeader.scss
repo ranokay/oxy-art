@@ -1,25 +1,25 @@
 @use 'util/variables' as *;
-.section-container {
+.section__container {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 0.1fr 1fr;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	grid-template-areas:
-		'section-header'
+		'section__header'
 		'.';
 
-	.section-header {
+	.section__header {
 		display: grid;
 		grid-template-columns: auto 1fr auto;
 		grid-template-rows: 1fr;
 		gap: 0 0.5rem;
 		grid-auto-flow: row;
-		grid-template-areas: 'section-header-icon section-title see-all-btn';
-		grid-area: section-header;
+		grid-template-areas: 'section__header-icon section-title see-all-btn';
+		grid-area: section__header;
 
-		.section-header-icon {
-			grid-area: section-header-icon;
+		.section__header-icon {
+			grid-area: section__header-icon;
 			align-self: center;
 
 			img {

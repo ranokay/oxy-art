@@ -1,3 +1,5 @@
-@use 'waves';
-@use 'sectionHeader';
-@use 'buttons';
+@forward 'header';
+@forward 'waves';
+@forward 'sectionHeader';
+@forward 'buttons';
+@forward 'footer';

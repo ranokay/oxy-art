@@ -1,13 +1,13 @@
 <section class="collections">
-	<div class="collections-container section-container">
-		<div class="section-header">
-			<div class="section-header-icon">
+	<div class="collections__container section__container">
+		<div class="section__header">
+			<div class="section__header-icon">
 				<img src="img/icons/collections.svg" alt="">
 			</div>
 			<div class="section-title">
 				<h2>Art Collections</h2>
 			</div>
-			<button class="btn btn-default see-all-btn">
+			<button class="btn btn__default see-all-btn">
 				<a href="#">See All</a>
 				<i class="fa-solid fa-arrow-right-long"></i>
 			</button>

@@ -1,0 +1,125 @@
+@use 'util/variables' as *;
+
+.footer__main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem 0;
+
+	.column {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 2rem;
+		&__logo {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+
+			&_text {
+				margin-left: 0.5rem;
+				font-size: 1.5rem;
+			}
+		}
+		&__title {
+			font-size: 1.2rem;
+			letter-spacing: 0.05rem;
+		}
+		&__form {
+			position: relative;
+			padding-block: 0.1rem;
+			padding-right: 3rem;
+			&::before {
+				content: '';
+				display: block;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-image: $gradient-color;
+				border-radius: 0.5rem;
+				&:focus {
+					background-image: none;
+				}
+			}
+			.form__input {
+				padding: 0.75rem 1rem;
+				margin-left: 0.1rem;
+				border-radius: 0.5rem;
+				position: relative;
+				background-color: $blue-gray-900;
+			}
+			.plane__icon {
+				top: 0;
+				position: absolute;
+				padding: 1rem;
+				cursor: pointer;
+			}
+		}
+	}
+	.container {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0 5rem;
+		height: 60vh;
+
+		@media (min-width: $breakpoint-tablet) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		@media (min-width: $breakpoint-desktop) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+		.column {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1.5rem 0;
+
+			&__title {
+				font-size: 1.2rem;
+				letter-spacing: 0.05rem;
+			}
+			&__links {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 1rem;
+				a {
+					color: $blue-gray-400;
+					&:hover {
+						color: $blue-gray-50;
+					}
+				}
+			}
+		}
+	}
+	.copyright {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem 0;
+		margin-bottom: 2rem;
+		&__text,
+		&__link {
+			font-size: 0.8rem;
+			letter-spacing: 0.05rem;
+			color: $blue-gray-400;
+		}
+		&__link {
+			&:hover {
+				color: $blue-gray-50;
+			}
+		}
+
+		@media (min-width: $breakpoint-tablet) {
+			flex-direction: row;
+			gap: 0 1rem;
+			&__text,
+			&__link {
+				font-size: 0.9rem;
+			}
+		}
+	}
+}

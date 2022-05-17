@@ -1,4 +1,4 @@
-<header class="header header-main">
+<header class="header-main">
 	<div class="left-side">
 		<a class="logo" href="index.php">
 			<img src="img/logo/logo.svg" alt="Oxy Project Logo" />
@@ -33,12 +33,12 @@
 			</div>
 			<input id="search-input" name="search" type="search" placeholder="Search items..." />
 		</form>
-		<button class="btn btn-gradient" type="submit">
+		<button class="btn btn__gradient" type="submit">
 			<div class="wallet-icon">
 				<img src="img/icons/wallet.svg" alt="Wallet" />
 			</div>
 			Sign In
 		</button>
-		<button class="btn btn-default" type="submit">Sign Up</button>
+		<button class="btn btn__default" type="submit">Sign Up</button>
 	</div>
 </header>

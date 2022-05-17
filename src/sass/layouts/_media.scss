@@ -14,20 +14,20 @@
 		}
 	}
 	.hero {
-		.hero-container {
+		.hero__container {
 			margin-top: -5rem;
 
-			.hero-title {
+			.hero__title {
 				font-size: 1.7rem;
 				line-height: 1.2;
 			}
-			.hero-buttons {
+			.hero__buttons {
 				margin-top: 1rem;
 			}
 		}
 	}
 	.collections {
-		.collections-container {
+		.collections__container {
 			.collections-category {
 				gap: 0 0;
 				.collections-category-item {

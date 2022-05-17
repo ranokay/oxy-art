@@ -8,7 +8,7 @@ window.addEventListener('scroll', function () {
 	}
 })
 
-const toTopBtn = document.querySelector('.btn-to-top')
+const toTopBtn = document.querySelector('.btn_to_top')
 
 window.addEventListener('scroll', function () {
 	if (window.scrollY > 100) {
