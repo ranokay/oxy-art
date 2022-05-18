@@ -1,9 +1,14 @@
 {
+	"name": "yutad/oxyproject",
+	"description": "Digital Art Marketplace",
+	"authors": [
+		{
+			"name": "Yuta",
+			"email": "yuuta.dev@gmail.com"
+		}
+	],
 	"require": {
-		"silex/silex": "^v2.3.0",
-		"monolog/monolog": "^3.0.0",
-		"twig/twig": "^2.0",
-		"symfony/twig-bridge": "^v6.0.8"
+		"monolog/monolog": "^3.0.0"
 	},
 	"require-dev": {
 		"heroku/heroku-buildpack-php": "*"
