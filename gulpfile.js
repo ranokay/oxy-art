@@ -60,7 +60,6 @@ function browsersyncTask() {
 		proxy: {
 			target: 'https://oxyproject.test/oxyproject/',
 		},
-		tunnel: true,
 	})
 }
 

@@ -9,19 +9,27 @@
 	width: 100%;
 	opacity: 0.13;
 	z-index: -1;
+	.wave__1,
+	.wave__2,
+	.wave__3 {
+		display: none;
+	}
+
+	@media (min-width: $breakpoint-tablet) {
+		.wave__1,
+		.wave__2,
+		.wave__3 {
+			display: block;
+		}
+	}
 
 	&__bottom {
 		top: auto;
 		bottom: 0;
 		transform: rotate(180deg);
-	}
 
-	@media (max-width: 768px) {
-		height: 80vh;
-		.wave__1,
-		.wave__2,
-		.wave__3 {
-			display: none;
+		@media (min-width: $breakpoint-desktop) {
+			height: 60vh;
 		}
 	}
 }

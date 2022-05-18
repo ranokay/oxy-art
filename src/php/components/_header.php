@@ -10,20 +10,20 @@
 			<div class="dropdown-resources">
 				<button class="dropbtn">Explore</button>
 				<div class="dropdown-content">
-					<a href="php/pages/collections.php">Collections</a>
-					<a href="php/pages/auctions.php">Auctions</a>
-					<a href="php/pages/leaderboard.php">Leaderboard</a>
+					<a href="collections.php">Collections</a>
+					<a href="auctions.php">Auctions</a>
+					<a href="leaderboard.php">Leaderboard</a>
 				</div>
 			</div>
 			<div class="dropdown-resources">
 				<button class="dropbtn">Resources</button>
 				<div class="dropdown-content">
-					<a href="php/pages/partners.php">Partners</a>
-					<a href="php/pages/blog.php">Blog</a>
-					<a href="php/pages/news.php">Newsletter</a>
+					<a href="partners.php">Partners</a>
+					<a href="blog.php">Blog</a>
+					<a href="news.php">Newsletter</a>
 				</div>
 			</div>
-			<a class="dropbtn" href="php/pages/contact.php">Contact</a>
+			<a class="dropbtn" href="contact.php">Contact</a>
 		</nav>
 	</div>
 	<div class="right-side">

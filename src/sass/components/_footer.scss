@@ -1,95 +1,187 @@
 @use 'util/variables' as *;
-
+@use 'util/fonts' as *;
 .footer__main {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 2rem 0;
-
-	.column {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: 2rem;
-		&__logo {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: center;
-
-			&_text {
-				margin-left: 0.5rem;
-				font-size: 1.5rem;
-			}
-		}
-		&__title {
-			font-size: 1.2rem;
-			letter-spacing: 0.05rem;
-		}
-		&__form {
-			position: relative;
-			padding-block: 0.1rem;
-			padding-right: 3rem;
-			&::before {
-				content: '';
-				display: block;
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				background-image: $gradient-color;
-				border-radius: 0.5rem;
-				&:focus {
-					background-image: none;
-				}
-			}
-			.form__input {
-				padding: 0.75rem 1rem;
-				margin-left: 0.1rem;
-				border-radius: 0.5rem;
-				position: relative;
-				background-color: $blue-gray-900;
-			}
-			.plane__icon {
-				top: 0;
-				position: absolute;
-				padding: 1rem;
-				cursor: pointer;
-			}
-		}
-	}
 	.container {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 0 5rem;
-		height: 60vh;
+		position: relative;
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		gap: 3rem 0;
+		height: 100%;
+		margin-bottom: 4rem;
+
+		@media (min-width: $breakpoint-desktop) {
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: space-between;
+			margin-inline: 10%;
+			margin-bottom: 4rem;
+		}
 
 		@media (min-width: $breakpoint-tablet) {
-			grid-template-columns: repeat(3, 1fr);
+			&__line {
+				display: none;
+			}
 		}
-		@media (min-width: $breakpoint-desktop) {
-			grid-template-columns: repeat(4, 1fr);
+
+		&__line {
+			width: 80%;
+			border: 0.1rem solid;
+			border-color: $blue-gray-800;
+			background-color: $blue-gray-800;
+			border-radius: 0.1rem;
 		}
-		.column {
+
+		.subscribe {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			gap: 1.5rem 0;
+			gap: 1rem 0;
+			order: 1;
+
+			@media (min-width: $breakpoint-tablet) {
+				position: absolute;
+				right: 20%;
+			}
+
+			@media (min-width: $breakpoint-desktop) {
+				position: static;
+				order: 3;
+			}
 
 			&__title {
 				font-size: 1.2rem;
 				letter-spacing: 0.05rem;
+
+				@media (min-width: $breakpoint-desktop) {
+					align-self: flex-start;
+				}
 			}
-			&__links {
+
+			&__subtitle {
+				font-style: $font-open-sans;
+				font-size: 0.7rem;
+				color: $blue-gray-400;
+			}
+
+			&__form {
+				position: relative;
+				padding-block: 0.1rem;
+				padding-right: 3rem;
+				&::before {
+					content: '';
+					display: block;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-image: $gradient-color;
+					border-radius: 0.5rem;
+					&:focus {
+						background-image: none;
+					}
+				}
+				.form__input {
+					padding: 0.75rem 1rem;
+					margin-left: 0.1rem;
+					border-radius: 0.5rem;
+					position: relative;
+					background-color: $blue-gray-900;
+				}
+				.plane__icon {
+					top: 0;
+					position: absolute;
+					padding: 1rem;
+					cursor: pointer;
+				}
+			}
+		}
+
+		.logo {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1.5rem 0;
+			order: 2;
+			width: 10rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: flex-start;
+				margin-left: 20%;
+			}
+
+			@media (min-width: $breakpoint-desktop) {
+				align-self: center;
+				margin-left: 0;
+			}
+			&__content {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+
+				&_text {
+					margin-left: 0.5rem;
+					font-size: 1.5rem;
+				}
+			}
+
+			&__icons {
+				.icon {
+					fill: $blue-gray-200;
+					path {
+						fill: $blue-gray-900;
+					}
+					&:hover {
+						fill: $indigo;
+						path {
+							fill: $blue-gray-200;
+						}
+					}
+				}
+			}
+		}
+		.navigation {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem 5rem;
+			order: 3;
+
+			@media (min-width: $breakpoint-tablet) {
+				display: flex;
+				justify-content: space-evenly;
+				width: 100%;
+				gap: 0;
+			}
+			.column {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 1rem;
-				a {
-					color: $blue-gray-400;
-					&:hover {
-						color: $blue-gray-50;
+				gap: 1.5rem 0;
+
+				@media (min-width: $breakpoint-tablet) {
+					align-items: flex-start;
+				}
+
+				&__title {
+					font-size: 1.2rem;
+					letter-spacing: 0.05rem;
+				}
+				&__links {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					gap: 1rem 0;
+
+					@media (min-width: $breakpoint-tablet) {
+						align-items: flex-start;
+					}
+					a {
+						color: $blue-gray-400;
+						&:hover {
+							color: $blue-gray-50;
+						}
 					}
 				}
 			}
@@ -99,26 +191,29 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
+		padding-bottom: 2rem;
 		gap: 0.5rem 0;
-		margin-bottom: 2rem;
-		&__text,
-		&__link {
-			font-size: 0.8rem;
-			letter-spacing: 0.05rem;
-			color: $blue-gray-400;
-		}
-		&__link {
-			&:hover {
-				color: $blue-gray-50;
-			}
-		}
 
 		@media (min-width: $breakpoint-tablet) {
 			flex-direction: row;
 			gap: 0 1rem;
-			&__text,
-			&__link {
-				font-size: 0.9rem;
+		}
+
+		&__links {
+			display: flex;
+			gap: 0 1rem;
+		}
+
+		&__text,
+		&__links a {
+			font-size: 0.8rem;
+			letter-spacing: 0.05rem;
+			color: $blue-gray-400;
+		}
+		&__links a {
+			&:hover {
+				color: $blue-gray-50;
 			}
 		}
 	}
