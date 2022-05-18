@@ -1,2 +1,1 @@
-# OxyProject
-[click here](https://oxyproject.herokuapp.com/)
+# [OxyProject](https://oxyproject.herokuapp.com/)
