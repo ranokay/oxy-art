@@ -15,13 +15,16 @@
 	}
 
 	&__default {
-		background-color: $blue-gray-600;
+		background-color: transparent;
+	}
+
+	&__blue {
+		background-color: $blue-500;
 	}
 	&:hover,
 	&:focus {
-		background-image: none;
-		background-color: transparent;
-		outline: 1px solid $blue-gray-400;
+		// background-image: none;
+		transform: scale(1.05);
 	}
 }
 
@@ -35,6 +38,8 @@
 	z-index: 100;
 	cursor: pointer;
 	padding: 1rem;
+	width: 3rem;
+	height: 3rem;
 	border-radius: 1.5rem;
 	background-color: $blue-gray-600;
 	opacity: 0;
@@ -48,27 +53,5 @@
 
 	&:hover {
 		background-color: $blue-gray-800;
-	}
-}
-
-.header-main {
-	.right-side {
-		.btn {
-			position: relative;
-			padding: 0 0.9rem;
-			font-size: 0.85rem;
-			&__gradient {
-				padding-left: 1.5rem;
-
-				.wallet-icon {
-					position: absolute;
-					left: 0.5rem;
-
-					img {
-						width: 70%;
-					}
-				}
-			}
-		}
 	}
 }

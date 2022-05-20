@@ -44,14 +44,19 @@ const path = {
 		img: prj_folder + '/img/',
 	},
 	clean: {
-		all: [prj_folder + '/'],
-		eximg: [prj_folder + '/css/', prj_folder + '/js/', prj_folder + '/php/', prj_folder + '/*.php'],
+		all: [
+			prj_folder + '/css/',
+			prj_folder + '/js/',
+			prj_folder + '/php/',
+			prj_folder + '/*.php',
+			prj_folder + '/img/',
+		],
 	},
 }
 
 //clean task
 function cleanTask() {
-	return del(path.clean.eximg)
+	return del(path.clean.all)
 }
 
 //browsersync task

@@ -3,6 +3,11 @@
 
 ::-webkit-scrollbar {
 	width: 0.5rem;
+	display: none;
+
+	@media (min-width: $breakpoint-desktop) {
+		display: block;
+	}
 }
 
 ::-webkit-scrollbar-thumb {
@@ -22,6 +27,9 @@
 	color: $blue-gray-50;
 	background-color: transparent;
 	font-size: 1rem;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 html {
@@ -31,6 +39,11 @@ html {
 body {
 	font-family: $font-heebo;
 	background-color: $blue-gray-900;
+	width: 100%;
+
+	&.scroll__lock {
+		overflow: hidden;
+	}
 }
 img {
 	display: block;

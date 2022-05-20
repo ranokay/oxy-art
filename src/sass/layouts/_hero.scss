@@ -21,7 +21,7 @@
 
 		&__subtitle {
 			max-width: 60ch;
-			font-family: $font-open-sans;
+			font-family: $font-heebo;
 			font-weight: 400;
 			color: $blue-gray-400;
 			text-align: center;
@@ -31,10 +31,15 @@
 		&__buttons {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			.btn__default {
-				.arrow-icon {
-					margin: 0 0 0 0.5rem;
-				}
+			gap: 1rem;
+
+			.btn {
+				padding: 0.5rem 1rem;
+				border-radius: 0.5rem;
+				font-size: 1.2rem;
+				font-weight: 700;
+				letter-spacing: 0.05rem;
+				transition: all 0.5s ease;
 			}
 		}
 	}
