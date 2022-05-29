@@ -1,0 +1,244 @@
+@use 'util/variables' as *;
+
+.main__login,
+.main__signup,
+.main__reset {
+	margin-top: 3rem;
+	margin-bottom: 10rem;
+	gap: 0;
+
+	@media (min-width: $breakpoint-desktop) {
+		display: flex;
+		align-items: center;
+		height: 100vh;
+		margin-bottom: 0;
+	}
+	.form {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 1.2rem;
+
+		@media (min-width: $breakpoint-desktop) {
+			box-shadow: $box-shadow-top;
+			border-radius: 0.5rem;
+			padding: 2rem;
+			width: 40rem;
+			align-items: center;
+		}
+
+		&__error {
+			color: $red-500;
+			padding: 0.2rem 0.5rem;
+			background-color: $red-300;
+			border-radius: 0.5rem;
+			border: 1px solid $red-500;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: center;
+			}
+		}
+
+		&__success {
+			color: $green-500;
+			padding: 0.2rem 0.5rem;
+			background-color: $green-300;
+			border-radius: 0.5rem;
+			border: 1px solid $green-500;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: center;
+			}
+		}
+
+		label[for='form'] {
+			font-size: 1.2rem;
+			align-self: flex-start;
+		}
+
+		&__line {
+			width: 100%;
+			border: 0.1rem solid;
+			border-color: $blue-gray-800;
+			background-color: $blue-gray-800;
+			border-radius: 0.1rem;
+		}
+
+		&__group {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				width: 25rem;
+				align-self: center;
+			}
+
+			@media (min-width: $breakpoint-desktop) {
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			label {
+				color: $blue-gray-300;
+			}
+
+			input {
+				font-size: 1rem;
+				padding: 0.7rem;
+
+				@media (min-width: $breakpoint-desktop) {
+					width: 15rem;
+				}
+			}
+		}
+
+		&__group-reset {
+			display: flex;
+			flex-direction: column;
+			gap: 1.5rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				width: 25rem;
+				align-self: center;
+			}
+
+			label {
+				color: $blue-gray-300;
+				margin-bottom: -1rem;
+			}
+
+			input {
+				font-size: 1rem;
+				padding: 0.7rem;
+
+				@media (min-width: $breakpoint-desktop) {
+					width: 100%;
+				}
+			}
+		}
+
+		&__buttons {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+
+			@media (min-width: $breakpoint-desktop) {
+				flex-direction: row;
+				justify-content: space-between;
+				width: 25rem;
+				margin-top: 1rem;
+			}
+			.btn__gradient {
+				padding: 0.6rem;
+				font-size: 1.2rem;
+
+				@media (min-width: $breakpoint-tablet) {
+					width: 25rem;
+					align-self: center;
+				}
+
+				@media (min-width: $breakpoint-desktop) {
+					font-size: 1rem;
+					align-self: flex-start;
+					width: 6rem;
+				}
+			}
+			.forgot-password {
+				align-self: center;
+				color: $blue-gray-400;
+				text-decoration: underline;
+
+				&:hover {
+					color: $blue-gray-200;
+				}
+			}
+		}
+		&__delimiter {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			margin-block: 0.5rem;
+			font-size: 1.1rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: center;
+				width: 25rem;
+			}
+
+			.line {
+				width: 100%;
+				height: 0.1rem;
+				border: 0.1rem solid;
+				border-color: $blue-gray-800;
+				background-color: $blue-gray-800;
+				border-radius: 0.1rem;
+			}
+		}
+
+		.have-account {
+			align-self: center;
+			color: $blue-gray-400;
+			text-decoration: underline;
+
+			&:hover {
+				color: $blue-gray-200;
+			}
+		}
+
+		&__checkbox {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			font-size: 0.9rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: center;
+				width: 25rem;
+			}
+
+			input[type='checkbox'] {
+				cursor: pointer;
+				transform: scale(1.3);
+
+				&:checked {
+					animation: scaleBox 0.5s ease-in-out;
+					@keyframes scaleBox {
+						0% {
+							transform: scale(1.3);
+						}
+						50% {
+							transform: scale(1.5);
+						}
+						100% {
+							transform: scale(1.3);
+						}
+					}
+				}
+			}
+			a {
+				color: $indigo;
+				text-decoration: underline;
+
+				&:hover {
+					color: $blue-gray-400;
+				}
+			}
+			.label {
+				margin-left: 0.5rem;
+			}
+		}
+
+		.btn__default {
+			@media (min-width: $breakpoint-tablet) {
+				width: 25rem;
+				align-self: center;
+			}
+
+			@media (min-width: $breakpoint-desktop) {
+				width: 10rem;
+			}
+		}
+	}
+}

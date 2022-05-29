@@ -1,15 +1,14 @@
 {
 	"name": "yutad/oxyproject",
 	"description": "Digital Art Marketplace",
+	"type": "no",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Yuta",
 			"email": "yuuta.dev@gmail.com"
 		}
 	],
-	"require": {
-		"monolog/monolog": "^3.0.0"
-	},
 	"require-dev": {
 		"heroku/heroku-buildpack-php": "*"
 	}

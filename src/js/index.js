@@ -1,3 +1,12 @@
+// connect message to the server optional
+// function hideMessage() {
+// 	const connectMessage = document.getElementById('connect-message')
+// 	if (connectMessage) {
+// 		connectMessage.style.display = 'none'
+// 	}
+// }
+// setTimeout(hideMessage, 2000)
+
 // const breakpointTablet = matchMedia('(min-width: 768px)')
 const breakpointDesktop = matchMedia('(min-width: 1024px)')
 

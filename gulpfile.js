@@ -12,6 +12,7 @@ import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
 import webp from 'gulp-webp'
 import htmlmin from 'gulp-htmlmin'
+import phpMinify from '@cedx/gulp-php-minify'
 import webphtml from 'gulp-webp-html'
 import fileinclude from 'gulp-file-include'
 import newer from 'gulp-newer'
@@ -26,7 +27,8 @@ const { src, dest, watch, series, parallel } = gulp,
 
 const path = {
 	src: {
-		php: [src_folder + '/**/*.php', '!' + src_folder + '/**/_*.php'],
+		php: src_folder + '/*.php',
+		phpServer: [src_folder + '/php/*.php', '!' + src_folder + '/**/_*.php'],
 		css: src_folder + '/sass/style.scss',
 		js: src_folder + '/js/index.js',
 		img: src_folder + '/img/**/*',
@@ -38,7 +40,8 @@ const path = {
 		img: src_folder + '/img/**/*',
 	},
 	build: {
-		php: [prj_folder + '/'],
+		php: prj_folder + '/',
+		phpServer: prj_folder + '/php/',
 		css: prj_folder + '/css/',
 		js: prj_folder + '/js/',
 		img: prj_folder + '/img/',
@@ -75,6 +78,15 @@ function phpTask() {
 		.pipe(webphtml())
 		.pipe(htmlmin({ collapseWhitespace: true }))
 		.pipe(dest(path.build.php))
+		.pipe(browsersync.stream())
+}
+
+//php server task
+function phpServerTask() {
+	return src(path.src.phpServer)
+		.pipe(fileinclude())
+		.pipe(phpMinify())
+		.pipe(dest(path.build.phpServer))
 		.pipe(browsersync.stream())
 }
 
@@ -146,13 +158,14 @@ function imagesTask() {
 function watchTask() {
 	watch(path.build.php).on('change', browsersync.reload)
 	watch(path.watch.php, phpTask)
+	watch(path.watch.php, phpServerTask)
 	watch(path.watch.css, styleTask)
 	watch(path.watch.js, jsTask)
 	watch(path.watch.img, imagesTask)
 }
 
 //build
-const _build = series(cleanTask, parallel(phpTask, styleTask, jsTask, imagesTask))
+const _build = series(cleanTask, parallel(phpTask, phpServerTask, styleTask, jsTask, imagesTask))
 
 //watch
 const _watch = parallel(_build, watchTask, browsersyncTask)
@@ -160,6 +173,7 @@ const _watch = parallel(_build, watchTask, browsersyncTask)
 //gulp tasks
 export const _clean = cleanTask
 export const _php = phpTask
+export const _phpServer = phpServerTask
 export const _style = styleTask
 export const _js = jsTask
 export const _img = imagesTask

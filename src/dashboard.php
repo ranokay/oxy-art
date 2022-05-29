@@ -1,9 +1,12 @@
-@@include('php/components/_head.php',{ "title":"OxyProject | Collections" })
+@@include('php/components/_head.php',{ "title":"OxyProject | Dashboard" })
 
 <body>
 	<div class="wrapper">
 		@@include('php/components/_header.php',{})
 		<main class="main__content">
+			<div class="dashboard">
+				<h1 class="dashboard__title">Dashboard</h1>
+			</div>
 		</main>
 		@@include('php/components/_footer.php')
 	</div>

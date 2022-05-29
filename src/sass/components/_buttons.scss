@@ -7,24 +7,31 @@
 	white-space: nowrap;
 	text-align: center;
 	border-radius: 0.5rem;
+	padding: 0.7rem;
 	font-size: 1rem;
 	cursor: pointer;
 
 	&__gradient {
 		background-image: $gradient-color;
+
+		&:hover,
+		&:focus {
+			background-image: none;
+			background-color: $blue-gray-600;
+		}
 	}
 
 	&__default {
-		background-color: transparent;
+		background-color: $blue-gray-600;
+
+		&:hover,
+		&:focus {
+			background-color: $blue-gray-800;
+		}
 	}
 
 	&__blue {
 		background-color: $blue-500;
-	}
-	&:hover,
-	&:focus {
-		// background-image: none;
-		transform: scale(1.05);
 	}
 }
 

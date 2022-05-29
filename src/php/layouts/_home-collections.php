@@ -1,10 +1,8 @@
 <section class="collections">
 	<div class="collections__container section__container">
 		<div class="section__header">
-			<div class="section__header-icon">
+			<div class="section__header-title">
 				<img src="img/icons/collections.svg" alt="">
-			</div>
-			<div class="section-title">
 				<h2>Art Collections</h2>
 			</div>
 			<button class="btn btn__default see-all-btn">

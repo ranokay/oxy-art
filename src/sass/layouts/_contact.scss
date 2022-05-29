@@ -1,0 +1,9 @@
+@use 'util/variables' as *;
+
+.main__contact {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 100vh;
+}

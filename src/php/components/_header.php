@@ -47,20 +47,36 @@
 					<a class="nav__btn" href="contact.php"><img class="link__icon" src="img/icons/contact.svg" alt="">Contact</a>
 				</div>
 			</nav>
-			<button class="btn btn__gradient btn_connect" type="submit">
-				<div class="wallet__icon">
-					<img src="img/icons/wallet.svg" alt="Connect" />
-				</div>
-				Connect
-			</button>
-			<button class="btn btn__default btn_profile" type="submit">
-				<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" />
-			</button>
+			<?php
+			if (isset($_SESSION['userId'])) {
+			?>
+				<a class="btn btn__gradient btn-connect" href="php/logout.inc.php">
+					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Logout" />
+					Logout
+				</a>
+				<a class="btn  btn-profile" href="dashboard.php">
+					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" />
+				</a>
+			<?php
+			} else {
+			?>
+				<a class="btn btn__gradient btn-connect" href="signup.php">
+					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Sign Up" />
+					Sign Up
+				</a>
+				<a class="btn  btn-profile" href="login.php">
+					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" />
+				</a>
+			<?php
+			}
+			?>
 		</div>
 		<div class="mobile__footer">
-			<button class="btn btn__blue" type="submit">Connect</button>
+			<a class="btn btn__blue" href="login.php">
+				Connect
+			</a>
 			<div class="mobile__footer_bg">
-				@@include('_shareButtons.php')
+				@@include('_share-buttons.php')
 			</div>
 		</div>
 	</div>

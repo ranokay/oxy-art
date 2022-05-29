@@ -3,10 +3,10 @@
 		<span class="container__line"></span>
 		<div class="logo">
 			<div class="logo__content">
-				<img src="img/logo/logo.svg" alt="Oxy Project Logo" />
+				<img src="img/logo/logo-footer.svg" alt="Oxy Project Logo" />
 				<a class="logo__content_text" href="index.php">OxyProject</a>
 			</div>
-			@@include('_shareButtons.php')
+			@@include('_share-buttons.php')
 		</div>
 		<div class="navigation">
 			<div class="column">
@@ -40,9 +40,9 @@
 		<div class="subscribe">
 			<div class="subscribe__title">Subscribe Us</div>
 			<div class="subscribe__form">
-				<form action="" method="post">
-					<input class="form__input" name="subscribe" type="text" placeholder="Enter your email..." />
-					<button class="plane__icon fa-regular fa-paper-plane" type="submit"></button>
+				<form action="sendEmail.php" method="POST">
+					<input class="form__input" name="subscribe" type="email" placeholder="Enter your email" />
+					<button class="plane__icon fa-regular fa-paper-plane" type="submit" name="submit"></button>
 				</form>
 			</div>
 			<p class="subscribe__subtitle">Your privacy is protected! We dont disclose Email.</p>

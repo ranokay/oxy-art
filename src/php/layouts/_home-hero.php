@@ -1,5 +1,5 @@
 <section class="hero">
-	@@include('../components/_wavesTop.php',{})
+	@@include('../components/_waves-top.php',{})
 	<div class="container">
 		<h1 class="container__title">Largest online marketplace to buy and sell Digital Arts</h1>
 		<h4 class="container__subtitle">Join the world's biggest Digital Arts marketplace discover truely rare digital artwork and get connected with millions of artists and artworks.</h4>
