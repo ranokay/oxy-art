@@ -30,8 +30,7 @@
 				?>
 				<p>An email will be send to you with instructions on how to reset your password.</p>
 				<div class="form__group-reset">
-					<label for="email">Email address</label>
-					<input type="text" name="email" placeholder="enter your email address">
+					<input type="text" name="email" placeholder="Enter your email address">
 					<button type="submit" name="reset-request-submit" class="btn btn__default">Reset password</button>
 				</div>
 			</form>

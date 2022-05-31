@@ -4,10 +4,27 @@
 		<div class="logo__text">OxyProject</div>
 	</a>
 	<div class="line"></div>
-	<div class="mobile__burger">
-		<span class="mobile__burger_line"></span>
-		<span class="mobile__burger_line"></span>
-		<span class="mobile__burger_line"></span>
+	<div class="left__side-mobile">
+		<?php
+		if (isset($_SESSION['userId'])) {
+		?>
+			<a class="btn btn-profile-mobile" href="dashboard.php">
+				<img class="profile__icon-mobile" src="img/icons/circle-user-regular.svg" alt="Profile" />
+			</a>
+		<?php
+		} else {
+		?>
+			<a class="btn btn-profile-mobile" href="login.php">
+				<img class="profile__icon-mobile" src="img/icons/circle-user-regular.svg" alt="Profile" />
+			</a>
+		<?php
+		}
+		?>
+		<div class="mobile__burger">
+			<span class="mobile__burger_line"></span>
+			<span class="mobile__burger_line"></span>
+			<span class="mobile__burger_line"></span>
+		</div>
 	</div>
 	<div class="mobile">
 		<div class="mobile__menu">
@@ -50,7 +67,7 @@
 			<?php
 			if (isset($_SESSION['userId'])) {
 			?>
-				<a class="btn btn__gradient btn-connect" href="php/logout.inc.php">
+				<a class="btn btn__default btn-connect" href="php/logout.inc.php">
 					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Logout" />
 					Logout
 				</a>
@@ -72,9 +89,21 @@
 			?>
 		</div>
 		<div class="mobile__footer">
-			<a class="btn btn__blue" href="login.php">
-				Connect
-			</a>
+			<?php
+			if (isset($_SESSION['userId'])) {
+			?>
+				<a class="btn btn__blue" href="php/logout.inc.php">
+					Logout
+				</a>
+			<?php
+			} else {
+			?>
+				<a class="btn btn__blue" href="signup.php">
+					Sign Up
+				</a>
+			<?php
+			}
+			?>
 			<div class="mobile__footer_bg">
 				@@include('_share-buttons.php')
 			</div>

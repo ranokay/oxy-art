@@ -93,6 +93,10 @@ if (isset($_POST['reset-password-submit'])) {
 				header("Location: $_SERVER[HTTP_REFERER]&error=emptyfields");
 				exit();
 			}
+			if ($this->validatePasswordLength() == false) {
+				header("Location: $_SERVER[HTTP_REFERER]&error=passwordlength");
+				exit();
+			}
 			if ($this->validatePassword() == false) {
 				header("Location: $_SERVER[HTTP_REFERER]&error=invalidpassword");
 				exit();
@@ -112,9 +116,22 @@ if (isset($_POST['reset-password-submit'])) {
 			}
 			return $result;
 		}
+		private function validatePasswordLength()
+		{
+			if (strlen($this->password) < 8 || strlen($this->password) > 25) {
+				$result = false;
+			} else {
+				$result = true;
+			}
+			return $result;
+		}
 		private function validatePassword()
 		{
-			if (strlen($this->password) < 8) {
+			$number = preg_match('/[0-9]/', $this->password);
+			$letter = preg_match('/[a-z]/', $this->password);
+			$upper = preg_match('/[A-Z]/', $this->password);
+			$specialChars = preg_match('/[^\w]/', $this->password);
+			if (!$number || !$letter || !$upper || !$specialChars) {
 				$result = false;
 			} else {
 				$result = true;

@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
 			$sql = "SELECT `password` FROM users WHERE `username` = ? OR `email` = ?;";
 			$stmt = $this->connect()->prepare($sql);
 
-			if (!$stmt->execute([$username, $password])) {
+			if (!$stmt->execute([$username, $username])) {
 				$stmt = null;
 				header("Location: ../login.php?error=stmtfailed");
 				exit();
@@ -26,15 +26,15 @@ if (isset($_POST['submit'])) {
 			$passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$checkPassword = password_verify($password, $passwordHashed[0]['password']);
 
-			if ($checkPassword == false) {
+			if ($checkPassword === false) {
 				$stmt = null;
 				header("Location: ../login.php?error=usernotfound");
 				exit();
-			} else if ($checkPassword == true) {
-				$sql = "SELECT * FROM users WHERE `username` = ? OR `email` = ? AND `password` = ?;";
+			} elseif ($checkPassword === true) {
+				$sql = "SELECT * FROM users WHERE (`username` = ? OR `email` = ?) AND `password` = ?;";
 				$stmt = $this->connect()->prepare($sql);
 
-				if (!$stmt->execute([$username, $password, $passwordHashed[0]['password']])) {
+				if (!$stmt->execute([$username, $username, $passwordHashed[0]['password']])) {
 					$stmt = null;
 					header("Location: ../login.php?error=stmtfailed");
 					exit();
@@ -50,6 +50,7 @@ if (isset($_POST['submit'])) {
 				$_SESSION['userId'] = $user[0]['id'];
 				$_SESSION['user'] = $user[0]['username'];
 				$_SESSION['userType'] = $user[0]['user_type'];
+				$_SESSION['userVerified'] = $user[0]['verified'];
 				$stmt = null;
 			}
 		}

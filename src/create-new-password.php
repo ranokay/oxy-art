@@ -5,37 +5,35 @@
 		@@include('php/components/_header.php',{})
 		<main class="main__content main__reset">
 			<?php
-			$selector = $_GET['selector'];
-			$validator = $_GET['validator'];
-
-			if (empty($selector) || empty($validator)) {
+			if (empty($_GET['selector']) || empty($_GET['validator'])) {
 				echo '<p class="form__error">Could not validate your request! Please try again.</p>';
 			} else {
-				if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
+				if (ctype_xdigit($_GET['selector']) !== false && ctype_xdigit($_GET['validator']) !== false) {
 			?>
 					<form class="form form__reset" action="php/reset-password.inc.php" method="POST">
-						<input type="hidden" name="selector" value="<?php echo $selector; ?>">
-						<input type="hidden" name="validator" value="<?php echo $validator; ?>">
+						<input type="hidden" name="selector" value="<?php echo $_GET['selector']; ?>">
+						<input type="hidden" name="validator" value="<?php echo $_GET['validator']; ?>">
 						<label for="form">Enter a new password for your account.</label>
 						<span class="form__line"></span>
 						<?php
 						if (isset($_GET['error'])) {
 							if ($_GET['error'] == 'emptyfields') {
 								echo '<p class="form__error">Fill in all fields!</p>';
+							} else if ($_GET['error'] == 'passwordlength') {
+								echo '<p class="form__error">Password must be between 8 and 25 characters long!</p>';
 							} else if ($_GET['error'] == 'invalidpassword') {
-								echo '<p class="form__error">Your password must be at least 8 characters long!</p>';
+								echo '<p class="form__error">Password must contain at least 1 number, 1 letter, 1 uppercase letter and 1 special character!</p>';
 							} else if ($_GET['error'] == 'passwordcheck') {
 								echo '<p class="form__error">Your passwords do not match!</p>';
 							}
 						}
 						?>
 						<div class="form__group">
-							<label for="password"> New password *</label>
-							<input type="password" name="password" placeholder="enter new password">
+							<input type="password" name="password" placeholder="New password *">
+							<p class="form__group-suggest">Password must contain at least one number, one letter, one uppercase letter and one special character!</p>
 						</div>
 						<div class="form__group">
-							<label for="password_confirm">Confirm password *</label>
-							<input type="password" name="confirmPassword" placeholder="confirm password">
+							<input type="password" name="confirmPassword" placeholder="Confirm password *">
 						</div>
 						<button type="submit" class="btn btn__default" name="reset-password-submit">Reset password</button>
 					</form>

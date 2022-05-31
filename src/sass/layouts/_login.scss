@@ -6,11 +6,11 @@
 	margin-top: 3rem;
 	margin-bottom: 10rem;
 	gap: 0;
+	height: 100vh;
 
 	@media (min-width: $breakpoint-desktop) {
 		display: flex;
 		align-items: center;
-		height: 100vh;
 		margin-bottom: 0;
 	}
 	.form {
@@ -67,29 +67,22 @@
 		&__group {
 			display: flex;
 			flex-direction: column;
-			gap: 0.5rem;
 
 			@media (min-width: $breakpoint-tablet) {
 				width: 25rem;
 				align-self: center;
 			}
 
-			@media (min-width: $breakpoint-desktop) {
-				flex-direction: row;
-				align-items: center;
-				justify-content: space-between;
-			}
-
-			label {
-				color: $blue-gray-300;
-			}
-
 			input {
 				font-size: 1rem;
 				padding: 0.7rem;
+			}
+			&-suggest {
+				font-size: 0.8rem;
+				color: $blue-gray-400;
 
 				@media (min-width: $breakpoint-desktop) {
-					width: 15rem;
+					font-size: 0.9rem;
 				}
 			}
 		}
@@ -104,18 +97,9 @@
 				align-self: center;
 			}
 
-			label {
-				color: $blue-gray-300;
-				margin-bottom: -1rem;
-			}
-
 			input {
 				font-size: 1rem;
 				padding: 0.7rem;
-
-				@media (min-width: $breakpoint-desktop) {
-					width: 100%;
-				}
 			}
 		}
 
@@ -222,7 +206,7 @@
 				text-decoration: underline;
 
 				&:hover {
-					color: $blue-gray-400;
+					color: $blue-gray-300;
 				}
 			}
 			.label {
