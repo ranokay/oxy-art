@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteRule ^home/?$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+# <FilesMatch "\.(jpg|jpeg|gif|png|ico|swf|js|css|xml|svg|webp)$">
+# 		Header set Cache-Control "max-age=2592000, public"
+# </FilesMatch>

@@ -3,12 +3,9 @@
 function redirect($error)
 {
 	if (isset($_SESSION['userId'])) {
-		header("Location: ../dashboard.php?error=$error");
-		exit();
-	}
-	if (!isset($_SESSION['userId'])) {
-		header("Location: ../login.php?error=$error");
-		exit();
+		header("Location: ../dashboard?error=$error");
+	} else {
+		header("Location: ../login?error=$error");
 	}
 }
 
@@ -89,5 +86,5 @@ if (isset($_GET['vkey']) && !empty($_GET['vkey'])) {
 	$verifyAccount = new VerifyAccountContr($email, $vKey);
 	$verifyAccount->verifyUser();
 } else {
-	header("Location: ../index.php");
+	header("Location: ../home");
 }

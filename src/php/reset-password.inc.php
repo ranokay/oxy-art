@@ -18,12 +18,12 @@ if (isset($_POST['reset-password-submit'])) {
 
 			if (!$stmt->execute([$selector, $currentDate])) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=stmtfailed");
+				header("Location: ../reset-password?error=stmtfailed");
 				exit();
 			}
 			if ($stmt->rowCount() == 0) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=invalidtoken");
+				header("Location: ../reset-password?error=invalidtoken");
 				exit();
 			}
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ if (isset($_POST['reset-password-submit'])) {
 
 			if ($tokenCheck === false) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=invalidtoken");
+				header("Location: ../reset-password?error=invalidtoken");
 				exit();
 			} else if ($tokenCheck === true) {
 				$tokenEmail = $result[0]['reset_email'];
@@ -42,12 +42,12 @@ if (isset($_POST['reset-password-submit'])) {
 
 				if (!$stmt->execute([$tokenEmail])) {
 					$stmt = null;
-					header("Location: ../reset-password.php?error=stmtfailed");
+					header("Location: ../reset-password?error=stmtfailed");
 					exit();
 				}
 				if ($stmt->rowCount() == 0) {
 					$stmt = null;
-					header("Location: ../reset-password.php?error=invalidtoken");
+					header("Location: ../reset-password?error=invalidtoken");
 					exit();
 				}
 			}
@@ -58,7 +58,7 @@ if (isset($_POST['reset-password-submit'])) {
 
 			if (!$stmt->execute([$hashedPassword, $tokenEmail])) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=stmtfailed");
+				header("Location: ../reset-password?error=stmtfailed");
 				exit();
 			}
 			$sql = "DELETE FROM password_reset WHERE `reset_email` = ?;";
@@ -66,7 +66,7 @@ if (isset($_POST['reset-password-submit'])) {
 
 			if (!$stmt->execute([$tokenEmail])) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=stmtfailed");
+				header("Location: ../reset-password?error=stmtfailed");
 				exit();
 			}
 			$stmt = null;
@@ -90,19 +90,19 @@ if (isset($_POST['reset-password-submit'])) {
 		public function resetPassword()
 		{
 			if ($this->emptyFields() == false) {
-				header("Location: $_SERVER[HTTP_REFERER]&error=emptyfields");
+				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator . "&error=emptyfields");
 				exit();
 			}
 			if ($this->validatePasswordLength() == false) {
-				header("Location: $_SERVER[HTTP_REFERER]&error=passwordlength");
+				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator . "&error=passwordlength");
 				exit();
 			}
 			if ($this->validatePassword() == false) {
-				header("Location: $_SERVER[HTTP_REFERER]&error=invalidpassword");
+				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator . "&error=invalidpassword");
 				exit();
 			}
 			if ($this->passwordsMatch() == false) {
-				header("Location: $_SERVER[HTTP_REFERER]&error=passwordcheck");
+				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator . "&error=passwordmatch");
 				exit();
 			}
 			$this->updatePassword($this->selector, $this->validator, $this->password);
@@ -151,7 +151,7 @@ if (isset($_POST['reset-password-submit'])) {
 	$resetPassword = new ResetPasswordContr($selector, $validator, $password, $confirmPassword);
 	$resetPassword->resetPassword();
 
-	header("Location: ../login.php?reset=passwordupdated");
+	header("Location: ../login?reset=passwordupdated");
 } else {
-	header("Location: ../index.php");
+	header("Location: ../home");
 }

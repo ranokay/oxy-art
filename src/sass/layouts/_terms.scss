@@ -1,0 +1,41 @@
+@use 'util/variables' as *;
+.main__terms {
+	gap: 1rem;
+	margin-bottom: 10rem;
+	.terms {
+		margin-top: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		h3 {
+			margin-top: 1rem;
+			text-decoration: underline;
+			text-underline-offset: 0.1rem;
+		}
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.send-msg {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				flex-direction: row;
+				align-items: center;
+
+				.btn {
+					padding: 0.5rem 1rem;
+				}
+			}
+		}
+	}
+}

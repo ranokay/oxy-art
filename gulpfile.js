@@ -32,12 +32,14 @@ const path = {
 		css: src_folder + '/sass/style.scss',
 		js: src_folder + '/js/index.js',
 		img: src_folder + '/img/**/*',
+		collection: src_folder + '/collection/**/*',
 	},
 	watch: {
 		php: src_folder + '/**/*.php',
 		css: src_folder + '/sass/**/*.scss',
 		js: src_folder + '/js/**/*.js',
 		img: src_folder + '/img/**/*',
+		collection: src_folder + '/collection/**/*',
 	},
 	build: {
 		php: prj_folder + '/',
@@ -45,6 +47,7 @@ const path = {
 		css: prj_folder + '/css/',
 		js: prj_folder + '/js/',
 		img: prj_folder + '/img/',
+		collection: prj_folder + '/collection/',
 	},
 	clean: {
 		all: [
@@ -154,6 +157,28 @@ function imagesTask() {
 		.pipe(dest(path.build.img))
 }
 
+//collection task
+function collectionTask() {
+	return src(path.src.collection)
+		.pipe(newer(path.build.collection))
+		.pipe(
+			webp({
+				quality: 90,
+			})
+		)
+		.pipe(dest(path.build.collection))
+		.pipe(src(path.src.collection))
+		.pipe(
+			imagemin({
+				progressive: true,
+				svgoPlugins: [{ removeViewBox: false }],
+				interlaced: true,
+				optimizationLevel: 2,
+			})
+		)
+		.pipe(dest(path.build.collection))
+}
+
 //watch task
 function watchTask() {
 	watch(path.build.php).on('change', browsersync.reload)
@@ -162,10 +187,14 @@ function watchTask() {
 	watch(path.watch.css, styleTask)
 	watch(path.watch.js, jsTask)
 	watch(path.watch.img, imagesTask)
+	watch(path.watch.collection, collectionTask)
 }
 
 //build
-const _build = series(cleanTask, parallel(phpTask, phpServerTask, styleTask, jsTask, imagesTask))
+const _build = series(
+	cleanTask,
+	parallel(phpTask, phpServerTask, styleTask, jsTask, imagesTask, collectionTask)
+)
 
 //watch
 const _watch = parallel(_build, watchTask, browsersyncTask)
@@ -177,6 +206,7 @@ export const _phpServer = phpServerTask
 export const _style = styleTask
 export const _js = jsTask
 export const _img = imagesTask
+export const _collection = collectionTask
 export const __build = _build
 export const __watch = _watch
 

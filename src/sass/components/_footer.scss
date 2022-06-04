@@ -65,7 +65,8 @@
 
 			&__subtitle {
 				font-style: $font-heebo;
-				font-size: 0.7rem;
+				font-size: 0.75rem;
+				align-self: center;
 				color: $blue-gray-400;
 			}
 
@@ -73,30 +74,57 @@
 				position: relative;
 				padding-block: 0.1rem;
 				padding-right: 3rem;
+				display: flex;
+				flex-direction: row;
 				&::before {
 					content: '';
 					display: block;
 					width: 100%;
-					height: 100%;
+					height: 3rem;
 					position: absolute;
 					top: 0;
 					left: 0;
 					background-image: $gradient-color;
 					border-radius: 0.5rem;
+					z-index: -10;
 				}
 				.form__input {
-					padding: 0.75rem 1.5rem;
+					padding: 0.75rem 1rem;
+					font-size: 1rem;
 					border: none;
 					margin-left: 0.1rem;
 					border-radius: 0.5rem;
 					position: relative;
 					background-color: $blue-gray-900;
+					height: 2.8rem;
 				}
-				.plane__icon {
-					top: 0;
+				.plane__btn {
 					position: absolute;
-					padding: 0.8rem 1rem;
-					cursor: pointer;
+					top: 0;
+					right: 0;
+					width: 2.5rem;
+					height: 2.5rem;
+					z-index: 10;
+					.plane__icon {
+						top: 0;
+						right: 0;
+						position: absolute;
+						padding: 0.8rem 1rem;
+						cursor: pointer;
+						width: 3.2rem;
+					}
+				}
+				.form__error {
+					color: $red-500;
+					font-size: 0.8rem;
+					border-radius: 0.5rem;
+					padding: 0.5rem 0;
+				}
+				.form__success {
+					color: $green-500;
+					font-size: 0.8rem;
+					border-radius: 0.5rem;
+					padding: 0.5rem 0;
 				}
 			}
 		}

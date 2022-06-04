@@ -15,12 +15,12 @@ if (isset($_POST['submit'])) {
 
 			if (!$stmt->execute([$username, $username])) {
 				$stmt = null;
-				header("Location: ../login.php?error=stmtfailed");
+				header("Location: ../login?error=stmtfailed");
 				exit();
 			}
 			if ($stmt->rowCount() == 0) {
 				$stmt = null;
-				header("Location: ../login.php?error=usernotfound");
+				header("Location: ../login?error=usernotfound");
 				exit();
 			}
 			$passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 
 			if ($checkPassword === false) {
 				$stmt = null;
-				header("Location: ../login.php?error=usernotfound");
+				header("Location: ../login?error=usernotfound");
 				exit();
 			} elseif ($checkPassword === true) {
 				$sql = "SELECT * FROM users WHERE (`username` = ? OR `email` = ?) AND `password` = ?;";
@@ -36,12 +36,12 @@ if (isset($_POST['submit'])) {
 
 				if (!$stmt->execute([$username, $username, $passwordHashed[0]['password']])) {
 					$stmt = null;
-					header("Location: ../login.php?error=stmtfailed");
+					header("Location: ../login?error=stmtfailed");
 					exit();
 				}
 				if ($stmt->rowCount() == 0) {
 					$stmt = null;
-					header("Location: ../login.php?error=usernotfound");
+					header("Location: ../login?error=usernotfound");
 					exit();
 				}
 				$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
 		public function loginUser()
 		{
 			if ($this->emptyFields() == false) {
-				header("Location: ../login.php?error=emptyfields");
+				header("Location: ../login?error=emptyfields");
 				exit();
 			}
 			$this->getUser($this->username, $this->password);
@@ -86,7 +86,7 @@ if (isset($_POST['submit'])) {
 	$login = new LoginContr($username, $password);
 	$login->loginUser();
 
-	header("Location: ../dashboard.php?login=success");
+	header("Location: ../dashboard?login=success");
 } else {
-	header("Location: ../index.php");
+	header("Location: ../home");
 }

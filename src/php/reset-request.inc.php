@@ -17,7 +17,7 @@ if (isset($_POST['reset-request-submit'])) {
 
 			if (!$stmt->execute([$userEmail])) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=stmtfailed");
+				header("Location: ../reset-password?error=stmtfailed");
 				exit();
 			}
 			if ($stmt->rowCount() == 0) {
@@ -34,7 +34,7 @@ if (isset($_POST['reset-request-submit'])) {
 
 			if (!$stmt->execute([$userEmail])) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=stmtfailed");
+				header("Location: ../reset-password?error=stmtfailed");
 				exit();
 			}
 		}
@@ -42,7 +42,7 @@ if (isset($_POST['reset-request-submit'])) {
 		{
 			$selector = bin2hex(random_bytes(8));
 			$token = random_bytes(32);
-			$url = "http://localhost/OxyProject/oxyproject/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+			$url = "http://localhost/OxyProject/oxyproject/create-new-password?selector=" . $selector . "&validator=" . bin2hex($token);
 
 			$expires = date("U") + 1800;
 
@@ -53,7 +53,7 @@ if (isset($_POST['reset-request-submit'])) {
 
 			if (!$stmt->execute([$userEmail, $selector, $hashedToken, $expires])) {
 				$stmt = null;
-				header("Location: ../reset-password.php?error=stmtfailed");
+				header("Location: ../reset-password?error=stmtfailed");
 				exit();
 			}
 			$stmt = null;
@@ -91,11 +91,11 @@ if (isset($_POST['reset-request-submit'])) {
 		public function resetRequest()
 		{
 			if ($this->emptyFields() == false) {
-				header("Location: ../reset-password.php?error=emptyfields");
+				header("Location: ../reset-password?error=emptyfields");
 				exit();
 			}
 			if ($this->userNotFound() == false) {
-				header("Location: ../reset-password.php?error=usernotfound");
+				header("Location: ../reset-password?error=usernotfound");
 				exit();
 			}
 			$this->deleteToken($this->email);
@@ -123,7 +123,7 @@ if (isset($_POST['reset-request-submit'])) {
 	$resetRequest = new ResetRequestContr($userEmail);
 	$resetRequest->resetRequest();
 
-	header("Location: ../reset-password.php?reset=success");
+	header("Location: ../reset-password?reset=success");
 } else {
-	header("Location: ../index.php");
+	header("Location: ../home");
 }

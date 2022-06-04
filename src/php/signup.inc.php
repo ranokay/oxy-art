@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_POST['submit'])) {
 	$fullName = $_POST['fullName'];
 	$username = $_POST['username'];
@@ -25,7 +24,7 @@ if (isset($_POST['submit'])) {
 
 			if (!$stmt->execute([$fullName, $username, $email, $hashedKey, $hashedPassword])) {
 				$stmt = null;
-				header("Location: ../signup.php?error=stmtfailed");
+				header("Location: ../signup?error=stmtfailed");
 				exit();
 			}
 			$stmt = null;
@@ -58,7 +57,7 @@ if (isset($_POST['submit'])) {
 
 			if (!$stmt->execute([$username])) {
 				$stmt = null;
-				header("Location: ../signup.php?error=stmtfailed");
+				header("Location: ../signup?error=stmtfailed");
 				exit();
 			}
 			if ($stmt->rowCount() > 0) {
@@ -75,7 +74,7 @@ if (isset($_POST['submit'])) {
 
 			if (!$stmt->execute([$email])) {
 				$stmt = null;
-				header("Location: ../signup.php?error=stmtfailed");
+				header("Location: ../signup?error=stmtfailed");
 				exit();
 			}
 			if ($stmt->rowCount() > 0) {
@@ -107,43 +106,43 @@ if (isset($_POST['submit'])) {
 		public function signupUser()
 		{
 			if ($this->emptyFields() == false) {
-				header("Location: ../signup.php?error=emptyfields");
+				header("Location: ../signup?error=emptyfields");
 				exit();
 			}
 			if ($this->validateFullName() == false) {
-				header("Location: ../signup.php?error=invalidfullname");
+				header("Location: ../signup?error=invalidfullname");
 				exit();
 			}
 			if ($this->validateUsername() == false) {
-				header("Location: ../signup.php?error=invalidusername");
+				header("Location: ../signup?error=invalidusername");
 				exit();
 			}
 			if ($this->validateEmail() == false) {
-				header("Location: ../signup.php?error=invalidmail");
+				header("Location: ../signup?error=invalidmail");
 				exit();
 			}
 			if ($this->validatePasswordLength() == false) {
-				header("Location: ../signup.php?error=passwordlength");
+				header("Location: ../signup?error=passwordlength");
 				exit();
 			}
 			if ($this->validatePassword() == false) {
-				header("Location: ../signup.php?error=invalidpassword");
+				header("Location: ../signup?error=invalidpassword");
 				exit();
 			}
 			if ($this->passwordsMatch() == false) {
-				header("Location: ../signup.php?error=passwordcheck");
+				header("Location: ../signup?error=passwordcheck");
 				exit();
 			}
 			if ($this->validateCheckbox() == false) {
-				header("Location: ../signup.php?error=checkbox");
+				header("Location: ../signup?error=checkbox");
 				exit();
 			}
 			if ($this->usernameTakenCheck() == false) {
-				header("Location: ../signup.php?error=usernameexists");
+				header("Location: ../signup?error=usernameexists");
 				exit();
 			}
 			if ($this->emailTakenCheck() == false) {
-				header("Location: ../signup.php?error=emailexists");
+				header("Location: ../signup?error=emailexists");
 				exit();
 			}
 			$this->setUser($this->fullName, $this->username, $this->email, $this->password);
@@ -248,7 +247,7 @@ if (isset($_POST['submit'])) {
 	$signup = new SignupContr($fullName, $username, $email, $password, $confirmPassword, $checkbox);
 	$signup->signupUser();
 
-	header("Location: ../login.php?signup=success");
+	header("Location: ../login?signup=success");
 } else {
-	header("Location: ../index.php");
+	header("Location: ../home");
 }

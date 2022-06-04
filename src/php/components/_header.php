@@ -1,5 +1,5 @@
 <header class="header__main">
-	<a class="logo" href="index.php">
+	<a class="logo" href="home" title="Homepage">
 		<img src="img/logo/logo.svg" alt="Oxy Project Logo" />
 		<div class="logo__text">OxyProject</div>
 	</a>
@@ -8,13 +8,13 @@
 		<?php
 		if (isset($_SESSION['userId'])) {
 		?>
-			<a class="btn btn-profile-mobile" href="dashboard.php">
+			<a class="btn btn-profile-mobile" href="dashboard">
 				<img class="profile__icon-mobile" src="img/icons/circle-user-regular.svg" alt="Profile" />
 			</a>
 		<?php
 		} else {
 		?>
-			<a class="btn btn-profile-mobile" href="login.php">
+			<a class="btn btn-profile-mobile" href="login">
 				<img class="profile__icon-mobile" src="img/icons/circle-user-regular.svg" alt="Profile" />
 			</a>
 		<?php
@@ -32,21 +32,18 @@
 				<div class="search__icon">
 					<img src="img/icons/search.svg" alt="Search" />
 				</div>
-				<input class="search__input" name="search" type="search" placeholder="Search items, collections, and creators" />
+				<input class="search__input" name="search" type="search" placeholder="Search arts, collections, and creators" />
 			</form>
 			<nav class="navbar">
-				<div class="navbar__resources">
-					<a class="nav__btn" href="index.php"><img class="link__icon" src="img/icons/home.svg" alt="">Home</a>
-				</div>
 				<div class="navbar__resources dropbtn">
 					<a class="nav__btn dropdown_menu">
 						<img class="link__icon" src="img/icons/explore.svg" alt="">Explore
 						<img class="link__icon arrow__down" src="img/icons/arrow-down.svg" alt="">
 					</a>
 					<div class="dropdown__content content">
-						<a href="collections.php">Collections</a>
-						<a href="auctions.php">Auctions</a>
-						<a href="leaderboard.php">Leaderboard</a>
+						<a href="collections">Collections</a>
+						<a href="auctions">Auctions</a>
+						<a href="leaderboard">Leaderboard</a>
 					</div>
 				</div>
 				<div class="navbar__resources dropbtn">
@@ -55,34 +52,37 @@
 						<img class="link__icon arrow__down" src="img/icons/arrow-down.svg" alt="">
 					</a>
 					<div class="dropdown__content content">
-						<a href="partners.php">Partners</a>
-						<a href="blog.php">Blog</a>
-						<a href="news.php">Newsletter</a>
+						<a href="partners">Partners</a>
+						<a href="blog">Blog</a>
+						<a href="news">Newsletter</a>
 					</div>
 				</div>
 				<div class="navbar__resources">
-					<a class="nav__btn" href="contact.php"><img class="link__icon" src="img/icons/contact.svg" alt="">Contact</a>
+					<a class="nav__btn" href="contact"><img class="link__icon" src="img/icons/contact.svg" alt="">Contact</a>
+				</div>
+				<div class="navbar__resources">
+					<a class="nav__btn" href="about"><img class="link__icon" src="img/icons/home.svg" alt="">About</a>
 				</div>
 			</nav>
 			<?php
 			if (isset($_SESSION['userId'])) {
 			?>
-				<a class="btn btn__default btn-connect" href="php/logout.inc.php">
-					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Logout" />
-					Logout
+				<a class="btn btn-balance" href="dashboard" title="Balance">
+					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Balance" />
+					$ 123.45
 				</a>
-				<a class="btn  btn-profile" href="dashboard.php">
-					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" />
+				<a class="btn btn-profile" href="dashboard">
+					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" title="Profile" />
+				</a>
+				<a class="btn btn-profile" href="php/logout.inc.php">
+					<img class="profile__icon" src="img/icons/logout.svg" alt="Logout" title="Logout" />
 				</a>
 			<?php
 			} else {
 			?>
-				<a class="btn btn__gradient btn-connect" href="signup.php">
-					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Sign Up" />
-					Sign Up
-				</a>
-				<a class="btn  btn-profile" href="login.php">
-					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" />
+				<a class="btn btn__gradient btn-connect" href="signup">Sign Up</a>
+				<a class="btn  btn-profile" href="login">
+					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" title="Login" />
 				</a>
 			<?php
 			}
@@ -98,7 +98,7 @@
 			<?php
 			} else {
 			?>
-				<a class="btn btn__blue" href="signup.php">
+				<a class="btn btn__blue" href="signup">
 					Sign Up
 				</a>
 			<?php

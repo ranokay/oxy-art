@@ -23,7 +23,7 @@
 								echo '<p class="form__error">Password must be between 8 and 25 characters long!</p>';
 							} else if ($_GET['error'] == 'invalidpassword') {
 								echo '<p class="form__error">Password must contain at least 1 number, 1 letter, 1 uppercase letter and 1 special character!</p>';
-							} else if ($_GET['error'] == 'passwordcheck') {
+							} else if ($_GET['error'] == 'passwordmatch') {
 								echo '<p class="form__error">Your passwords do not match!</p>';
 							}
 						}

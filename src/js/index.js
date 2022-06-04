@@ -1,12 +1,3 @@
-// connect message to the server optional
-// function hideMessage() {
-// 	const connectMessage = document.getElementById('connect-message')
-// 	if (connectMessage) {
-// 		connectMessage.style.display = 'none'
-// 	}
-// }
-// setTimeout(hideMessage, 2000)
-
 // const breakpointTablet = matchMedia('(min-width: 768px)')
 const breakpointDesktop = matchMedia('(min-width: 1024px)')
 
@@ -16,13 +7,11 @@ const navBtn = document.querySelectorAll('.nav__btn')
 window.addEventListener('scroll', () => {
 	if (window.scrollY > 0) {
 		headerMain.classList.add('scrolled')
-
 		navBtn.forEach(item => {
 			item.classList.add('scrolled')
 		})
 	} else {
 		headerMain.classList.remove('scrolled')
-
 		navBtn.forEach(item => {
 			item.classList.remove('scrolled')
 		})
@@ -54,22 +43,28 @@ mobileBurger.addEventListener('click', () => {
 const dropbtn = document.querySelectorAll('.dropbtn')
 const dropdownContent = document.querySelectorAll('.content')
 
-window.onclick = function (event) {
+window.onclick = event => {
 	dropdownContent.forEach(item => {
 		if (!event.target.closest('.dropbtn')) {
 			item.classList.remove('open')
 		}
 	})
 }
-dropbtn[0].addEventListener('click', () => {
-	dropdownContent[0].classList.toggle('open')
-	dropdownContent[1].classList.remove('open')
-})
-
-dropbtn[1].addEventListener('click', () => {
-	dropdownContent[1].classList.toggle('open')
-	dropdownContent[0].classList.remove('open')
-})
+const showDropdown = () => {
+	dropbtn[0].addEventListener('click', () => {
+		if (!breakpointDesktop.matches) {
+			dropdownContent[0].classList.toggle('open')
+			dropdownContent[1].classList.remove('open')
+		}
+	})
+	dropbtn[1].addEventListener('click', () => {
+		if (!breakpointDesktop.matches) {
+			dropdownContent[1].classList.toggle('open')
+			dropdownContent[0].classList.remove('open')
+		}
+	})
+}
+showDropdown()
 
 window.addEventListener('resize', () => {
 	if (breakpointDesktop.matches) {
