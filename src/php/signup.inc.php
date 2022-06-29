@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
 
 		public function __construct($fullName, $username, $email, $password, $confirmPassword, $checkbox)
 		{
-			$this->fullName = $fullName;
+			$this->fullName = ucwords($fullName);
 			$this->username = $username;
 			$this->email = $email;
 			$this->password = $password;

@@ -1,0 +1,50 @@
+@use 'util/variables' as *;
+
+.main__explore {
+	margin-top: 2rem;
+	display: flex;
+	gap: 2rem;
+
+	.explore__container {
+		margin-bottom: 2rem;
+
+		.explore__header {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			border-radius: 0.5rem;
+			margin-bottom: 1rem;
+			overflow-x: auto;
+
+			.btn {
+				padding: 0.5rem 0.7rem;
+				background-color: $blue-gray-800;
+
+				&:hover {
+					background-color: $blue-gray-600;
+				}
+			}
+		}
+		.explore__arts {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+			gap: 1rem;
+
+			&-card {
+				width: fit-content;
+				height: 100%;
+				border-radius: 0.5rem;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				img {
+					width: 15rem;
+					height: auto;
+					border-radius: 0.5rem;
+				}
+			}
+		}
+	}
+}

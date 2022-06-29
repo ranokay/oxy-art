@@ -13,7 +13,6 @@ import imagemin from 'gulp-imagemin'
 import webp from 'gulp-webp'
 import htmlmin from 'gulp-htmlmin'
 import phpMinify from '@cedx/gulp-php-minify'
-import webphtml from 'gulp-webp-html'
 import fileinclude from 'gulp-file-include'
 import newer from 'gulp-newer'
 import browsersync from 'browser-sync'
@@ -56,6 +55,7 @@ const path = {
 			prj_folder + '/php/',
 			prj_folder + '/*.php',
 			prj_folder + '/img/',
+			prj_folder + '/collection/',
 		],
 	},
 }
@@ -78,7 +78,6 @@ function browsersyncTask() {
 function phpTask() {
 	return src(path.src.php)
 		.pipe(fileinclude())
-		.pipe(webphtml())
 		.pipe(htmlmin({ collapseWhitespace: true }))
 		.pipe(dest(path.build.php))
 		.pipe(browsersync.stream())

@@ -1,10 +1,9 @@
 <?php
-
 class User extends Dbh
 {
 	protected function getUser($userId)
 	{
-		$sql = "SELECT `full_name`, `display_name`,`username`, `email`,`verified`, `profile_img`, `about`, `balance`, `subscribed` FROM users WHERE `id` = ?;";
+		$sql = "SELECT * FROM `user_profile` WHERE `user_id` = ?;";
 		$stmt = $this->connect()->prepare($sql);
 
 		if (!$stmt->execute([$userId])) {
@@ -20,8 +19,43 @@ class User extends Dbh
 		$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $user;
 	}
-}
 
+	protected function userItems($userId)
+	{
+		$sql = "SELECT `total_items` FROM user_collection WHERE `user_id` = ?;";
+		$stmt = $this->connect()->prepare($sql);
+
+		if (!$stmt->execute([$userId])) {
+			$stmt = null;
+			header("Location: home?error=stmtfailed");
+			exit();
+		}
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			$userItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $userItems;
+		}
+	}
+
+	protected function userLevel($userId)
+	{
+		$sql = "SELECT `user_level` FROM user_level WHERE `user_id` = ?;";
+		$stmt = $this->connect()->prepare($sql);
+
+		if (!$stmt->execute([$userId])) {
+			$stmt = null;
+			header("Location: home?error=stmtfailed");
+			exit();
+		}
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			$userLevel = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $userLevel;
+		}
+	}
+}
 class UserContr extends User
 {
 	private $fullName;
@@ -33,6 +67,8 @@ class UserContr extends User
 	public $about;
 	private $balance;
 	private $subscribed;
+	public $userItems;
+	public $userLevel;
 
 	public function __construct($userId)
 	{
@@ -46,6 +82,15 @@ class UserContr extends User
 		$this->about = $user[0]['about'];
 		$this->balance = $user[0]['balance'];
 		$this->subscribed = $user[0]['subscribed'];
+
+		if ($this->userItems($userId)) {
+			$userItems = $this->userItems($userId);
+			$this->userItems = $userItems[0]['total_items'];
+		}
+		if ($this->userLevel($userId)) {
+			$userLevel = $this->userLevel($userId);
+			$this->userLevel = $userLevel[0]['user_level'];
+		}
 	}
 	public function getFullName()
 	{
@@ -65,11 +110,7 @@ class UserContr extends User
 	}
 	public function getVerified()
 	{
-		if ($this->verified == 1) {
-			return "Your account is verified";
-		} else {
-			return "Please verify your account";
-		}
+		return $this->verified;
 	}
 	public function getProfileImg()
 	{
@@ -85,10 +126,22 @@ class UserContr extends User
 	}
 	public function getSubscribed()
 	{
-		if ($this->subscribed == 1) {
-			return "You are subscribed to our newsletter";
+		return $this->subscribed;
+	}
+	public function getUserItems()
+	{
+		if (!$this->userItems == false) {
+			return $this->userItems;
 		} else {
-			return "You are not subscribed";
+			return "0";
+		}
+	}
+	public function getUserLevel()
+	{
+		if (!$this->userLevel == false) {
+			return $this->userLevel;
+		} else {
+			return "Bronze";
 		}
 	}
 }

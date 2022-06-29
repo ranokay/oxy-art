@@ -1,6 +1,9 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Homepage" })
 
 <body>
+	<div class="loader">
+		<img src="img/logo/logo-footer.svg" alt="">
+	</div>
 	<div class="wrapper wrapper__home">
 		@@include('php/components/_header.php',{})
 		<main class="main__content">

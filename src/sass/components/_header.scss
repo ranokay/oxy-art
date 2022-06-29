@@ -148,6 +148,7 @@
 		&__menu {
 			display: flex;
 			flex-direction: column;
+			position: relative;
 			@media (min-width: $breakpoint-desktop) {
 				flex-direction: row;
 				align-items: center;
@@ -338,7 +339,6 @@
 					}
 				}
 				&-balance {
-					position: absolute;
 					display: flex;
 					gap: 0.5rem;
 					width: fit-content;
@@ -347,7 +347,6 @@
 					border-style: solid;
 					border-color: $blue-gray-600;
 					border-radius: 0.5rem;
-					bottom: 11.5rem;
 					padding: 0.5rem 1rem;
 
 					@media (min-width: $breakpoint-desktop) {
@@ -375,6 +374,7 @@
 			flex-direction: column;
 			width: 100%;
 			gap: 1rem 0;
+			margin-top: 1rem;
 			@media (min-width: $breakpoint-desktop) {
 				display: none;
 			}

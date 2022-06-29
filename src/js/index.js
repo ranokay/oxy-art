@@ -42,7 +42,6 @@ mobileBurger.addEventListener('click', () => {
 // open menu dropdown links
 const dropbtn = document.querySelectorAll('.dropbtn')
 const dropdownContent = document.querySelectorAll('.content')
-
 window.onclick = event => {
 	dropdownContent.forEach(item => {
 		if (!event.target.closest('.dropbtn')) {
@@ -66,6 +65,7 @@ const showDropdown = () => {
 }
 showDropdown()
 
+// remove open class when resize window
 window.addEventListener('resize', () => {
 	if (breakpointDesktop.matches) {
 		mobile.classList.remove('open')
@@ -75,5 +75,13 @@ window.addEventListener('resize', () => {
 		dropdownContent.forEach(item => {
 			item.classList.remove('open')
 		})
+	}
+})
+
+// fadeout loader on page load
+const loader = document.querySelector('.loader')
+window.addEventListener('load', () => {
+	if (loader) {
+		loader.classList.add('fadeout')
 	}
 })

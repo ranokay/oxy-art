@@ -7,6 +7,10 @@
 	<div class="left__side-mobile">
 		<?php
 		if (isset($_SESSION['userId'])) {
+			$userId = $_SESSION['userId'];
+			include "php/dbh.inc.php";
+			include 'php/auto-loader.inc.php';
+			$user = new UserContr($userId);
 		?>
 			<a class="btn btn-profile-mobile" href="dashboard">
 				<img class="profile__icon-mobile" src="img/icons/circle-user-regular.svg" alt="Profile" />
@@ -54,7 +58,7 @@
 					<div class="dropdown__content content">
 						<a href="partners">Partners</a>
 						<a href="blog">Blog</a>
-						<a href="news">Newsletter</a>
+						<a href="newsletter">Newsletter</a>
 					</div>
 				</div>
 				<div class="navbar__resources">
@@ -69,7 +73,9 @@
 			?>
 				<a class="btn btn-balance" href="dashboard" title="Balance">
 					<img class="wallet__icon" src="img/icons/wallet.svg" alt="Balance" />
-					$ 123.45
+					<?php
+					echo $user->getBalance();
+					?>
 				</a>
 				<a class="btn btn-profile" href="dashboard">
 					<img class="profile__icon" src="img/icons/circle-user-regular.svg" alt="Profile" title="Profile" />

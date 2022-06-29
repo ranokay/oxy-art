@@ -5,7 +5,7 @@
 			<h2>Art Collections</h2>
 		</div>
 		<button class="btn btn__default see-all-btn">
-			<a href="#">See All</a>
+			<a href="collections">See All</a>
 			<i class="fa-solid fa-arrow-right-long"></i>
 		</button>
 	</div>

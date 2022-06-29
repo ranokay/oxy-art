@@ -1,8 +1,90 @@
 @use 'util/variables' as *;
 
-// .main__dashboard {
-// 	display: flex;
-// 	align-items: center;
-// 	justify-content: center;
-// 	height: 100vh;
-// }
+.main__dashboard {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-block: 3rem;
+
+	.profile {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		margin-block: 2rem;
+		gap: 2rem;
+
+		&__image {
+			display: flex;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			.user-pic {
+				width: 6rem;
+				height: 6rem;
+				border-radius: 50%;
+				box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+			}
+			.profile-verified {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+		}
+		&__content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+
+			&-about {
+				color: $blue-gray-300;
+				text-align: center;
+
+				@media (min-width: $breakpoint-tablet) {
+					max-width: 65ch;
+				}
+			}
+		}
+		&__stats {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			align-items: start;
+
+			@media (min-width: $breakpoint-tablet) {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+			}
+
+			&-item {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				text-align: center;
+				gap: 0.5rem;
+
+				@media (min-width: $breakpoint-tablet) {
+					flex-direction: row;
+					align-items: center;
+				}
+
+				img {
+					width: 2rem;
+				}
+			}
+		}
+	}
+
+	.section__buttons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+}
