@@ -14,12 +14,12 @@
 					<div class="profile__image">
 						<?php
 						if ($user->getProfileImg() == "") {
-							echo '<img class="user-pic" src="img/icons/user.svg" alt="Profile Image">';
+							echo '<img class="user-pic" src="assets/icons/user.svg" alt="Profile Image">';
 						} else {
 							echo '<img class="user-pic" src="' . $user->getProfileImg() . '" alt="Profile Image">';
 						}
 						if ($user->getVerified() == 1) {
-							echo '<img class="profile-verified" src="img/icons/verified.svg" alt="Verified">';
+							echo '<img class="profile-verified" src="assets/icons/verified.svg" alt="Verified">';
 						}
 						?>
 					</div>
@@ -41,7 +41,7 @@
 					</div>
 					<div class="profile__stats">
 						<div class="profile__stats-item">
-							<img src="img/icons/level.svg" alt="User Level">
+							<img src="assets/icons/level.svg" alt="User Level">
 							<h4>
 								<?php
 								echo 'Rank ' . $user->getUserLevel();
@@ -49,13 +49,13 @@
 							</h4>
 						</div>
 						<div class="profile__stats-item">
-							<img src="img/icons/likes.svg" alt="Likes">
+							<img src="assets/icons/likes.svg" alt="Likes">
 							<h4>
 								324 Likes
 							</h4>
 						</div>
 						<div class="profile__stats-item">
-							<img src="img/icons/items.svg" alt="Items">
+							<img src="assets/icons/items.svg" alt="Items">
 							<h4>
 								<?php
 								echo $user->getUserItems() . ' Items';
@@ -83,7 +83,6 @@
 		@@include('php/components/_footer.php')
 		</div>
 		@@include('php/components/_to-top-btn.php',{})
-		@@include('php/components/_scripts.php',{})
 	</body>
 
 	</html>

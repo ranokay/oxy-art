@@ -1,9 +1,8 @@
 {
 	"name": "oxyproject",
 	"version": "1.0.0",
-	"exports": "./gulpfile.js",
-	"main": "gulpfile.js",
 	"description": "",
+	"main": "gulpfile.js",
 	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +11,7 @@
 		"type": "git",
 		"url": "git+https://github.com/YuutaDev/OxyProject.git"
 	},
+	"keywords": [],
 	"author": "Yuta",
 	"license": "ISC",
 	"bugs": {
@@ -19,12 +19,11 @@
 	},
 	"homepage": "https://github.com/YuutaDev/OxyProject#readme",
 	"devDependencies": {
-		"@babel/core": "^7.18.2",
-		"@babel/preset-env": "^7.18.2",
-		"@cedx/gulp-php-minify": "^12.0.0",
+		"@babel/core": "^7.18.9",
+		"@babel/preset-env": "^7.18.9",
 		"browser-sync": "^2.27.10",
-		"del": "^6.1.1",
-		"eslint": "^8.17.0",
+		"del": "^7.0.0",
+		"eslint": "^8.20.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-babel": "^8.0.0",
@@ -33,13 +32,13 @@
 		"gulp-file-include": "^2.3.0",
 		"gulp-htmlmin": "^5.0.1",
 		"gulp-imagemin": "^8.0.0",
-		"gulp-newer": "^1.4.0",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^5.1.0",
 		"gulp-sourcemaps": "^3.0.0",
 		"gulp-terser": "^2.1.0",
-		"gulp-webp": "^4.0.1",
-		"gulp-webp-html": "^1.0.2",
-		"sass": "^1.52.2"
+		"sass": "^1.54.0"
+	},
+	"dependencies": {
+		"npm": "^8.15.0"
 	}
 }

@@ -1,5 +1,5 @@
 import gulp from 'gulp'
-import del from 'del'
+import { deleteAsync } from 'del'
 import dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 import cleanCSS from 'gulp-clean-css'
@@ -10,11 +10,8 @@ import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
-import webp from 'gulp-webp'
 import htmlmin from 'gulp-htmlmin'
-import phpMinify from '@cedx/gulp-php-minify'
 import fileinclude from 'gulp-file-include'
-import newer from 'gulp-newer'
 import browsersync from 'browser-sync'
 
 const prj_folder = 'oxyproject',
@@ -30,14 +27,14 @@ const path = {
 		phpServer: [src_folder + '/php/*.php', '!' + src_folder + '/**/_*.php'],
 		css: src_folder + '/sass/style.scss',
 		js: src_folder + '/js/index.js',
-		img: src_folder + '/img/**/*',
+		assets: src_folder + '/assets/**/*',
 		collection: src_folder + '/collection/**/*',
 	},
 	watch: {
 		php: src_folder + '/**/*.php',
 		css: src_folder + '/sass/**/*.scss',
 		js: src_folder + '/js/**/*.js',
-		img: src_folder + '/img/**/*',
+		assets: src_folder + '/assets/**/*',
 		collection: src_folder + '/collection/**/*',
 	},
 	build: {
@@ -45,7 +42,7 @@ const path = {
 		phpServer: prj_folder + '/php/',
 		css: prj_folder + '/css/',
 		js: prj_folder + '/js/',
-		img: prj_folder + '/img/',
+		assets: prj_folder + '/assets/',
 		collection: prj_folder + '/collection/',
 	},
 	clean: {
@@ -54,7 +51,7 @@ const path = {
 			prj_folder + '/js/',
 			prj_folder + '/php/',
 			prj_folder + '/*.php',
-			prj_folder + '/img/',
+			prj_folder + '/assets/',
 			prj_folder + '/collection/',
 		],
 	},
@@ -62,14 +59,14 @@ const path = {
 
 //clean task
 function cleanTask() {
-	return del(path.clean.all)
+	return deleteAsync(path.clean.all)
 }
 
 //browsersync task
 function browsersyncTask() {
 	browsersync.init({
 		proxy: {
-			target: 'https://oxyproject.test/oxyproject/',
+			target: 'https://oxyproject.test',
 		},
 	})
 }
@@ -87,7 +84,6 @@ function phpTask() {
 function phpServerTask() {
 	return src(path.src.phpServer)
 		.pipe(fileinclude())
-		.pipe(phpMinify())
 		.pipe(dest(path.build.phpServer))
 		.pipe(browsersync.stream())
 }
@@ -136,15 +132,9 @@ function jsTask() {
 
 //images task
 function imagesTask() {
-	return src(path.src.img)
-		.pipe(newer(path.build.img))
-		.pipe(
-			webp({
-				quality: 80,
-			})
-		)
-		.pipe(dest(path.build.img))
-		.pipe(src(path.src.img))
+	return src(path.src.assets)
+		.pipe(dest(path.build.assets))
+		.pipe(src(path.src.assets))
 		.pipe(
 			imagemin({
 				progressive: true,
@@ -153,18 +143,12 @@ function imagesTask() {
 				optimizationLevel: 3,
 			})
 		)
-		.pipe(dest(path.build.img))
+		.pipe(dest(path.build.assets))
 }
 
 //collection task
 function collectionTask() {
 	return src(path.src.collection)
-		.pipe(newer(path.build.collection))
-		.pipe(
-			webp({
-				quality: 90,
-			})
-		)
 		.pipe(dest(path.build.collection))
 		.pipe(src(path.src.collection))
 		.pipe(
@@ -185,7 +169,7 @@ function watchTask() {
 	watch(path.watch.php, phpServerTask)
 	watch(path.watch.css, styleTask)
 	watch(path.watch.js, jsTask)
-	watch(path.watch.img, imagesTask)
+	watch(path.watch.assets, imagesTask)
 	watch(path.watch.collection, collectionTask)
 }
 
@@ -204,7 +188,7 @@ export const _php = phpTask
 export const _phpServer = phpServerTask
 export const _style = styleTask
 export const _js = jsTask
-export const _img = imagesTask
+export const _assets = imagesTask
 export const _collection = collectionTask
 export const __build = _build
 export const __watch = _watch

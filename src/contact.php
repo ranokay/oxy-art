@@ -65,7 +65,6 @@
 		@@include('php/components/_footer.php')
 	</div>
 	@@include('php/components/_to-top-btn.php',{})
-	@@include('php/components/_scripts.php',{})
 </body>
 
 </html>

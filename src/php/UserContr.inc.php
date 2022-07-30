@@ -3,7 +3,7 @@ class User extends Dbh
 {
 	protected function getUser($userId)
 	{
-		$sql = "SELECT * FROM `user_profile` WHERE `user_id` = ?;";
+		$sql = "SELECT * FROM `users` WHERE `id` = ?;";
 		$stmt = $this->connect()->prepare($sql);
 
 		if (!$stmt->execute([$userId])) {
@@ -20,41 +20,41 @@ class User extends Dbh
 		return $user;
 	}
 
-	protected function userItems($userId)
-	{
-		$sql = "SELECT `total_items` FROM user_collection WHERE `user_id` = ?;";
-		$stmt = $this->connect()->prepare($sql);
+	// protected function userItems($userId)
+	// {
+	// 	$sql = "SELECT `total_items` FROM user_collection WHERE `user_id` = ?;";
+	// 	$stmt = $this->connect()->prepare($sql);
 
-		if (!$stmt->execute([$userId])) {
-			$stmt = null;
-			header("Location: home?error=stmtfailed");
-			exit();
-		}
-		if ($stmt->rowCount() == 0) {
-			return false;
-		} else {
-			$userItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			return $userItems;
-		}
-	}
+	// 	if (!$stmt->execute([$userId])) {
+	// 		$stmt = null;
+	// 		header("Location: home?error=stmtfailed");
+	// 		exit();
+	// 	}
+	// 	if ($stmt->rowCount() == 0) {
+	// 		return false;
+	// 	} else {
+	// 		$userItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	// 		return $userItems;
+	// 	}
+	// }
 
-	protected function userLevel($userId)
-	{
-		$sql = "SELECT `user_level` FROM user_level WHERE `user_id` = ?;";
-		$stmt = $this->connect()->prepare($sql);
+	// protected function userLevel($userId)
+	// {
+	// 	$sql = "SELECT `user_level` FROM user_level WHERE `user_id` = ?;";
+	// 	$stmt = $this->connect()->prepare($sql);
 
-		if (!$stmt->execute([$userId])) {
-			$stmt = null;
-			header("Location: home?error=stmtfailed");
-			exit();
-		}
-		if ($stmt->rowCount() == 0) {
-			return false;
-		} else {
-			$userLevel = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			return $userLevel;
-		}
-	}
+	// 	if (!$stmt->execute([$userId])) {
+	// 		$stmt = null;
+	// 		header("Location: home?error=stmtfailed");
+	// 		exit();
+	// 	}
+	// 	if ($stmt->rowCount() == 0) {
+	// 		return false;
+	// 	} else {
+	// 		$userLevel = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	// 		return $userLevel;
+	// 	}
+	// }
 }
 class UserContr extends User
 {
@@ -65,7 +65,6 @@ class UserContr extends User
 	private $verified;
 	public $profileImg;
 	public $about;
-	private $balance;
 	private $subscribed;
 	public $userItems;
 	public $userLevel;
@@ -80,17 +79,16 @@ class UserContr extends User
 		$this->verified = $user[0]['verified'];
 		$this->profileImg = $user[0]['profile_img'];
 		$this->about = $user[0]['about'];
-		$this->balance = $user[0]['balance'];
 		$this->subscribed = $user[0]['subscribed'];
 
-		if ($this->userItems($userId)) {
-			$userItems = $this->userItems($userId);
-			$this->userItems = $userItems[0]['total_items'];
-		}
-		if ($this->userLevel($userId)) {
-			$userLevel = $this->userLevel($userId);
-			$this->userLevel = $userLevel[0]['user_level'];
-		}
+		// if ($this->userItems($userId)) {
+		// 	$userItems = $this->userItems($userId);
+		// 	$this->userItems = $userItems[0]['total_items'];
+		// }
+		// if ($this->userLevel($userId)) {
+		// 	$userLevel = $this->userLevel($userId);
+		// 	$this->userLevel = $userLevel[0]['user_level'];
+		// }
 	}
 	public function getFullName()
 	{
@@ -119,10 +117,6 @@ class UserContr extends User
 	public function getAbout()
 	{
 		return $this->about;
-	}
-	public function getBalance()
-	{
-		return $this->balance . " $";
 	}
 	public function getSubscribed()
 	{

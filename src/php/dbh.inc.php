@@ -7,7 +7,7 @@ class Dbh
 		try {
 			$servername = "localhost";
 			$username = "root";
-			$password = "";
+			$password = "qazwsx123";
 			$dbname = "oxyproject";
 
 			$dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

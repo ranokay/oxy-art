@@ -2,49 +2,54 @@
 @use 'util/fonts' as *;
 
 .hero {
-	height: 100vh;
+	height: calc(100vh - 4rem);
 	.container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		gap: 4% 0;
-		height: calc(100vh - 4rem);
+		height: 100%;
 
-		&__title {
-			letter-spacing: 0.1rem;
-			text-align: center;
-			font-size: 1.8rem;
-
-			@media (min-width: $breakpoint-desktop) {
-				font-size: 2.5rem;
-			}
-		}
-
-		&__subtitle {
-			// font-family: $font-heebo;
-			font-weight: 400;
-			color: $blue-gray-400;
-			text-align: center;
-			margin-bottom: 5rem;
-
-			@media (min-width: $breakpoint-desktop) {
-				font-size: 1.2rem;
-				max-width: 60ch;
-			}
-		}
-
-		&__buttons {
+		@media (min-width: $breakpoint-desktop) {
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 1.5rem;
+			grid-template-columns: 1fr 1fr;
+		}
 
-			.btn {
-				padding: 0.5rem 1rem;
-				border-radius: 0.5rem;
-				font-size: 1.2rem;
-				font-weight: 600;
-				transition: background-color 0.25s ease;
+		iframe {
+			display: none;
+			@media (min-width: $breakpoint-desktop) {
+				display: block;
+			}
+		}
+
+		.left__side {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 5rem 0;
+
+			.title {
+				letter-spacing: 0.1rem;
+				text-align: center;
+				font-size: 2rem;
+				@media (min-width: $breakpoint-desktop) {
+					font-size: 3.5rem;
+				}
+			}
+
+			.buttons {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.5rem;
+
+				.btn {
+					padding: 0.5rem 1rem;
+					border-radius: 0.5rem;
+					font-size: 1.2rem;
+					font-weight: 600;
+				}
 			}
 		}
 	}

@@ -47,10 +47,9 @@
 			@media (min-width: $breakpoint-desktop) {
 				order: 3;
 				position: static;
-				align-items: flex-start;
+				justify-content: center;
 				background-color: $blue-gray-800;
 				padding-right: 10%;
-				padding-top: 4rem;
 				height: inherit;
 			}
 
