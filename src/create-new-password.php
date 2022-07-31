@@ -11,8 +11,8 @@
 				if (ctype_xdigit($_GET['selector']) !== false && ctype_xdigit($_GET['validator']) !== false) {
 			?>
 					<form class="form form__reset" action="php/reset-password.inc.php" method="POST">
-						<input type="hidden" name="selector" value="<?php echo $_GET['selector']; ?>">
-						<input type="hidden" name="validator" value="<?php echo $_GET['validator']; ?>">
+						<input type="hidden" name="selector" value="<?php echo htmlspecialchars($_GET['selector']); ?>">
+						<input type="hidden" name="validator" value="<?php echo htmlspecialchars($_GET['validator']); ?>">
 						<label for="form">Enter a new password for your account.</label>
 						<span class="form__line"></span>
 						<?php

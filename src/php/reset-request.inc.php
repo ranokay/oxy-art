@@ -42,7 +42,7 @@ if (isset($_POST['reset-request-submit'])) {
 		{
 			$selector = bin2hex(random_bytes(8));
 			$token = random_bytes(32);
-			$url = "http://localhost/OxyProject/oxyproject/create-new-password?selector=" . $selector . "&validator=" . bin2hex($token);
+			$url = "https://localhost:3000/create-new-password?selector=" . $selector . "&validator=" . bin2hex($token);
 
 			$expires = date("U") + 1800;
 
@@ -74,8 +74,8 @@ if (isset($_POST['reset-request-submit'])) {
 										background-color: hsl(214, 20%, 34%);
 										color: white;'
 										href='" . $url . "'>Reset Password</a>";
-			$headers = "From: OxyProject <chief5465@gmail.com>\r\n";
-			$headers .= "Reply-To: chief5465@gmail.com\r\n";
+			$headers = "From: OxyProject <octaw13@gmail.com>\r\n";
+			$headers .= "Reply-To: octaw13@gmail.com\r\n";
 			$headers .= "Content-type: text/html\r\n";
 
 			mail($to, $subject, $message, $headers);

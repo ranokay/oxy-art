@@ -4,7 +4,7 @@
 	<div class="wrapper">
 		@@include('php/components/_header.php',{})
 		<main class="main__content main__about">
-			<section class="about__content">
+			<section class="about__content first-section">
 				<div class="container">
 					<h1 class="about__title">Building an open digital economy</h1>
 					<p class="about__text">
@@ -15,10 +15,10 @@
 				</div>
 				<img class="about-img" src="assets/images/about.svg" alt="About">
 			</section>
-			<section class="about__content">
-				<img class="about-img" src="assets/images/lightbulb.svg" alt="About">
+			<section class="about__content second-section">
+				<img class="about-img lightbulb" src="assets/images/lightbulb.svg" alt="About">
 
-				<div class="container">
+				<div class="container story-container">
 					<h1 class="about__title">Our story</h1>
 					<p class="about__text">
 						In 2020 the world witnessed the birth of CryptoKitties. For the first time, the world experienced a decentralized application built on blockchains but targetted towards a mainstream audience.

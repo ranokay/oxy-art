@@ -9,9 +9,9 @@
 	<div class="line"></div>
 	<div class="left__side-mobile">
 		<?php
+		include "php/dbh.inc.php";
 		if (isset($_SESSION['userId'])) {
 			$userId = $_SESSION['userId'];
-			include "php/dbh.inc.php";
 			include "php/UserContr.inc.php";
 			$user = new UserContr($userId);
 		?>

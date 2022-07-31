@@ -33,21 +33,8 @@
 							}
 							?>
 						</h2>
-						<p class="profile__content-about">
-							<?php
-							echo $user->getAbout();
-							?>
-						</p>
 					</div>
 					<div class="profile__stats">
-						<div class="profile__stats-item">
-							<img src="assets/icons/level.svg" alt="User Level">
-							<h4>
-								<?php
-								echo 'Rank ' . $user->getUserLevel();
-								?>
-							</h4>
-						</div>
 						<div class="profile__stats-item">
 							<img src="assets/icons/likes.svg" alt="Likes">
 							<h4>
@@ -63,24 +50,27 @@
 							</h4>
 						</div>
 					</div>
+					<?php
+					if ($user->getVerified() == 0) {
+						echo '<p style="color: hsl(348, 76%, 62%);">Your account is not verified. Please check your email for the verification link.</p>';
+					}
+					?>
+					<div class="section__buttons">
+						<form class="form form__reset" action="upload-art" method="POST">
+							<div class="form__group-reset">
+								<button type="submit" name="upload-art" class="btn btn__gradient">Upload Art</button>
+							</div>
+						</form>
+						<a href="edit-profile">
+							<button type="submit" name="edit-profile" class="btn btn__default">
+								<img class="edit-profile-icon" src="assets/icons/edit.svg" alt="Edit">
+								Edit profile
+							</button>
+						</a>
+					</div>
 				</section>
-
-				<section class="section__buttons">
-					<form class="form form__reset" action="reset-password" method="POST">
-						<div class="form__group-reset">
-							<button type="submit" name="reset-request-submit" class="btn btn__default">Change password</button>
-						</div>
-					</form>
-					<form class="form form__reset" action="create-art" method="POST">
-						<div class="form__group-reset">
-							<button type="submit" name="upload-art" class="btn btn__gradient">Create Art</button>
-						</div>
-					</form>
-				</section>
-
-		</div>
-		</main>
-		@@include('php/components/_footer.php')
+			</main>
+			@@include('php/components/_footer.php')
 		</div>
 		@@include('php/components/_to-top-btn.php',{})
 	</body>

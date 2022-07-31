@@ -7,7 +7,6 @@
 		<main class="main__content main__explore">
 
 			<?php
-			include "php/dbh.inc.php";
 			include "php/ArtContr.inc.php";
 			?>
 			<h2>

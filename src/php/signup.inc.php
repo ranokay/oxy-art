@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 		protected function setUser($fullName, $username, $email, $password)
 		{
 			$vKey = random_bytes(32);
-			$url = "http://localhost/OxyProject/oxyproject/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
+			$url = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 
 			$sql = "INSERT INTO users (`full_name`, `username`, `email`, `v_key`, `password`) VALUES (?, ?, ?, ?, ?);";
 			$stmt = $this->connect()->prepare($sql);

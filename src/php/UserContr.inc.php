@@ -37,24 +37,6 @@ class User extends Dbh
 	// 		return $userItems;
 	// 	}
 	// }
-
-	// protected function userLevel($userId)
-	// {
-	// 	$sql = "SELECT `user_level` FROM user_level WHERE `user_id` = ?;";
-	// 	$stmt = $this->connect()->prepare($sql);
-
-	// 	if (!$stmt->execute([$userId])) {
-	// 		$stmt = null;
-	// 		header("Location: home?error=stmtfailed");
-	// 		exit();
-	// 	}
-	// 	if ($stmt->rowCount() == 0) {
-	// 		return false;
-	// 	} else {
-	// 		$userLevel = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	// 		return $userLevel;
-	// 	}
-	// }
 }
 class UserContr extends User
 {
@@ -64,10 +46,8 @@ class UserContr extends User
 	private $email;
 	private $verified;
 	public $profileImg;
-	public $about;
 	private $subscribed;
 	public $userItems;
-	public $userLevel;
 
 	public function __construct($userId)
 	{
@@ -77,17 +57,12 @@ class UserContr extends User
 		$this->username = $user[0]['username'];
 		$this->email = $user[0]['email'];
 		$this->verified = $user[0]['verified'];
-		$this->profileImg = $user[0]['profile_img'];
-		$this->about = $user[0]['about'];
+		$this->profileImg = $user[0]['avatar'];
 		$this->subscribed = $user[0]['subscribed'];
 
 		// if ($this->userItems($userId)) {
 		// 	$userItems = $this->userItems($userId);
 		// 	$this->userItems = $userItems[0]['total_items'];
-		// }
-		// if ($this->userLevel($userId)) {
-		// 	$userLevel = $this->userLevel($userId);
-		// 	$this->userLevel = $userLevel[0]['user_level'];
 		// }
 	}
 	public function getFullName()
@@ -114,10 +89,6 @@ class UserContr extends User
 	{
 		return $this->profileImg;
 	}
-	public function getAbout()
-	{
-		return $this->about;
-	}
 	public function getSubscribed()
 	{
 		return $this->subscribed;
@@ -128,14 +99,6 @@ class UserContr extends User
 			return $this->userItems;
 		} else {
 			return "0";
-		}
-	}
-	public function getUserLevel()
-	{
-		if (!$this->userLevel == false) {
-			return $this->userLevel;
-		} else {
-			return "Bronze";
 		}
 	}
 }
