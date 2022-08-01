@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_GET['art'])) {
-	$artId = $_GET['art'];
+if (isset($_GET['id'])) {
+	$artId = $_GET['id'];
 	class Art extends Dbh
 	{
 		public function getArt($artId)

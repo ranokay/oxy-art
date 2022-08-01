@@ -1,54 +1,95 @@
 @use 'util/variables' as *;
 @use 'util/fonts' as *;
 
-.hero {
-	height: calc(100vh - 4rem);
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 4% 0;
-		height: 100%;
-
-		@media (min-width: $breakpoint-desktop) {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-		}
-
-		iframe {
-			display: none;
-			@media (min-width: $breakpoint-desktop) {
-				display: block;
-			}
-		}
-
-		.left__side {
+.home__body {
+	overflow: hidden;
+	.hero {
+		height: calc(100vh - 4rem);
+		.container {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			gap: 5rem 0;
+			gap: 4% 0;
+			height: 100%;
 
-			.title {
-				letter-spacing: 0.1rem;
-				text-align: center;
-				font-size: 2rem;
+			@media (min-width: $breakpoint-desktop) {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+			}
+
+			iframe {
+				display: none;
 				@media (min-width: $breakpoint-desktop) {
-					font-size: 3.5rem;
+					display: block;
 				}
 			}
 
-			.buttons {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				gap: 1.5rem;
+			.left__side {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 5rem 0;
+				margin-bottom: 6rem;
 
-				.btn {
-					padding: 0.5rem 1rem;
-					border-radius: 0.5rem;
-					font-size: 1.2rem;
-					font-weight: 600;
+				@media (min-width: $breakpoint-desktop) {
+					margin-bottom: 0;
+				}
+				.title {
+					letter-spacing: 0.1rem;
+					text-align: center;
+					font-size: 2.7rem;
+					@media (min-width: $breakpoint-desktop) {
+						font-size: 3.5rem;
+						text-align: start;
+					}
+
+					&__content {
+						display: block;
+						opacity: 0;
+						animation: revealText 2s forwards;
+					}
+
+					&__content:nth-child(1) {
+						animation-delay: 1.5s;
+					}
+
+					&__content:nth-child(2) {
+						animation-delay: 1.6s;
+					}
+
+					&__content:nth-child(3) {
+						animation-delay: 1.7s;
+					}
+
+					@keyframes revealText {
+						from {
+							opacity: 0;
+							transform: translateY(20px);
+						}
+						to {
+							opacity: 1;
+							transform: none;
+						}
+					}
+				}
+
+				.buttons {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					gap: 2rem;
+
+					@media (min-width: $breakpoint-desktop) {
+						grid-template-columns: repeat(3, 1fr);
+					}
+
+					.btn {
+						padding: 0.5rem 1rem;
+						border-radius: 0.5rem;
+						font-size: 1.2rem;
+						font-weight: 600;
+					}
 				}
 			}
 		}

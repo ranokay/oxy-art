@@ -1,6 +1,6 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Homepage" })
 
-<body>
+<body class="home__body">
 	<div class="wrapper wrapper__home">
 		@@include('php/components/_header.php',{})
 		<main class="main__content">
@@ -8,7 +8,11 @@
 				@@include('php/components/_waves-top.php',{})
 				<div class="container">
 					<div class="left__side">
-						<h1 class="title">Perfect place for your digital arts</h1>
+						<h1 class="title">
+							<span class="title__content">The Platform</span>
+							<span class="title__content">For</span>
+							<span class="title__content">Digital Arts</span>
+						</h1>
 						<div class="buttons">
 							<a href="collections" class="btn btn__gradient">Explore</a>
 							<a href="dashboard" class="btn btn__default">Upload</a>

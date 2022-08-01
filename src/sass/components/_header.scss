@@ -201,14 +201,6 @@
 					width: 100%;
 				}
 				&__resources {
-					@media (min-width: $breakpoint-desktop) {
-						&:hover .dropdown__content {
-							display: block;
-						}
-						&:hover .dropdown_menu {
-							color: $blue-gray-50;
-						}
-					}
 					.nav__btn {
 						display: flex;
 						align-items: center;
@@ -238,77 +230,6 @@
 							}
 							@media (min-width: $breakpoint-desktop) {
 								display: none;
-							}
-						}
-						&.dropdown_menu {
-							cursor: pointer;
-							@media (min-width: $breakpoint-desktop) {
-								cursor: default;
-							}
-						}
-					}
-					.dropdown__content {
-						display: none;
-						@media (min-width: $breakpoint-desktop) {
-							position: absolute;
-							background-color: $blue-gray-900;
-							box-shadow: $box-shadow;
-							border-bottom-right-radius: 0.5rem;
-							border-bottom-left-radius: 0.5rem;
-							z-index: 100;
-							width: 10rem;
-							animation: growDown 0.2s ease-in-out;
-							transform-origin: top center;
-
-							@keyframes growDown {
-								0% {
-									transform: scaleY(0);
-								}
-								100% {
-									transform: scaleY(1);
-								}
-							}
-						}
-						&.open {
-							display: block;
-							animation: growDown 0.25s ease;
-							transform-origin: top center;
-							@media (min-width: $breakpoint-desktop) {
-								display: none;
-							}
-							@keyframes growDown {
-								0% {
-									transform: scaleY(0);
-								}
-								100% {
-									transform: scaleY(1);
-								}
-							}
-						}
-						a {
-							padding: 0.5rem 3rem;
-							display: block;
-							font-size: 1.2rem;
-							width: fit-content;
-							@media (min-width: $breakpoint-desktop) {
-								font-size: 1rem;
-								font-weight: 600;
-								padding: 1rem 0.5rem;
-								width: 100%;
-								color: $blue-gray-400;
-								transition: color 0.2s ease;
-								&:nth-child(2) {
-									border-block: 1px solid;
-									border-color: $blue-gray-800;
-								}
-								&:last-child {
-									border-radius: 0 0 0.5rem 0.5rem;
-								}
-								&:hover {
-									box-shadow: $box-shadow-top;
-									color: $blue-gray-50;
-									background-color: $blue-gray-800;
-								}
 							}
 						}
 					}

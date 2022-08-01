@@ -16,9 +16,9 @@
 						$artDir = $art['art_dir'];
 				?>
 						<div class="explore__arts">
-							<a class="explore__arts-card" href="art.php?art=<?php echo $artId; ?>">
-								<img src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>">
-								<h3><?php echo $artName; ?></h3>
+							<a class="explore__arts-card" href="art?id=<?php echo $artId; ?>">
+								<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>">
+								<h3 class="card-name"><?php echo $artName; ?></h3>
 							</a>
 						</div>
 				<?php

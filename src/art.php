@@ -13,8 +13,8 @@
 				<?php echo $art->getArtName(); ?>
 			</h2>
 			<section class="explore__container">
-				<div class="explore__arts">
-					<div class="explore__arts-card">
+				<div class="explore__art">
+					<div class="explore__art-card">
 						<img src="<?php echo $art->getArtDir(); ?>" alt="Art Image">
 					</div>
 				</div>
