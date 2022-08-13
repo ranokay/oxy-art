@@ -19,11 +19,11 @@
 	},
 	"homepage": "https://github.com/YuutaDev/OxyProject#readme",
 	"devDependencies": {
-		"@babel/core": "^7.18.9",
-		"@babel/preset-env": "^7.18.9",
+		"@babel/core": "^7.18.10",
+		"@babel/preset-env": "^7.18.10",
 		"browser-sync": "^2.27.10",
 		"del": "^7.0.0",
-		"eslint": "^8.20.0",
+		"eslint": "^8.21.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-babel": "^8.0.0",
@@ -36,9 +36,9 @@
 		"gulp-sass": "^5.1.0",
 		"gulp-sourcemaps": "^3.0.0",
 		"gulp-terser": "^2.1.0",
-		"sass": "^1.54.0"
+		"sass": "^1.54.4"
 	},
 	"dependencies": {
-		"npm": "^8.15.1"
+		"npm": "^8.17.0"
 	}
 }

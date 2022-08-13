@@ -1,4 +1,3 @@
-// const breakpointTablet = matchMedia('(min-width: 768px)')
 const breakpointDesktop = matchMedia('(min-width: 1024px)')
 
 // header scrolled

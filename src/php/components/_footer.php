@@ -33,17 +33,23 @@
 						<img class="plane__icon" src="assets/icons/paper-plane.svg" alt="Send message">
 					</button>
 					<?php
-					if (isset($_GET['error'])) {
-						if ($_GET['error'] == 'emptyfields') {
+					$url = $_SERVER['REQUEST_URI'];
+					if (str_contains($url, 'error')) {
+						if (str_contains($url, 'error=emptyfields')) {
 							echo '<p class="form__error">Please fill in all fields!</p>';
 						}
-						if ($_GET['error'] == 'invalidemail') {
+						if (str_contains($url, 'error=invalidemail')) {
 							echo '<p class="form__error">Invalid email!</p>';
 						}
-						if ($_GET['error'] == 'alreadysubscribed') {
+						if (str_contains($url, 'error=usernotfound')) {
+							echo '<p class="form__error">User not found!</p>';
+						}
+						if (str_contains($url, 'error=alreadysubscribed')) {
 							echo '<p class="form__error">You are already subscribed!</p>';
 						}
-						if ($_GET['error'] == 'success') {
+					}
+					if (str_contains($url, 'success')) {
+						if (str_contains($url, 'success=subscribed')) {
 							echo '<p class="form__success">You have been subscribed!</p>';
 						}
 					}

@@ -2,7 +2,6 @@
 @use 'util/fonts' as *;
 
 .home__body {
-	overflow: hidden;
 	.hero {
 		height: calc(100vh - 4rem);
 		.container {

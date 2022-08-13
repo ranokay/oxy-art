@@ -15,10 +15,10 @@ if (!isset($_SESSION['userId'])) {
 				<form action="edit-profile" class="form-edit">
 					<div class="change-avatar">
 						<?php
-						if ($user->getProfileImg() == "") {
+						if ($user->getAvatar() == "") {
 							echo '<img class="user-pic" src="assets/icons/user.svg" alt="Profile Image">';
 						} else {
-							echo '<img class="user-pic" src="' . $user->getProfileImg() . '" alt="Profile Image">';
+							echo '<img class="user-pic" src="' . $user->getAvatar() . '" alt="Profile Image">';
 						}
 						?>
 						<input type="file" id="actual-btn" name="profile-img" hidden />
@@ -27,10 +27,6 @@ if (!isset($_SESSION['userId'])) {
 					<div class="form__group">
 						<label for="full-name">Full name</label>
 						<input type="text" id="full-name" name="fullName" aria-describedby="fullnameHelp" placeholder="first and last name">
-					</div>
-					<div class="form__group">
-						<label for="display-name">Display name</label>
-						<input type="text" id="display-name" name="displayName" aria-describedby="displaynameHelp" placeholder="display name">
 					</div>
 					<div class="form__group">
 						<label for="username">Username</label>

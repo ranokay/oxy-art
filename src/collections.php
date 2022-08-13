@@ -4,7 +4,7 @@
 	<div class="wrapper">
 		@@include('php/components/_header.php',{})
 		<main class="main__content main__explore">
-			<h2>Explore another arts</h2>
+			<h2>Explore public arts</h2>
 			<section class="explore__container">
 				<?php
 				include "php/CollectionClass.inc.php";
