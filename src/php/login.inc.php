@@ -47,10 +47,8 @@ if (isset($_POST['submit'])) {
 				$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 				session_start();
-				$_SESSION['userId'] = $user[0]['id'];
-				$_SESSION['user'] = $user[0]['username'];
+				$_SESSION['userID'] = $user[0]['id'];
 				$_SESSION['userType'] = $user[0]['user_type'];
-				$_SESSION['userVerified'] = $user[0]['verified'];
 				$stmt = null;
 			}
 		}

@@ -1,6 +1,6 @@
 	@@include('php/components/_head.php',{ "title":"OxyProject | Dashboard" })
 	<?php
-	if (!isset($_SESSION['userId'])) {
+	if (!isset($_SESSION['userID'])) {
 		header("Location: login");
 		exit();
 	}
@@ -27,6 +27,9 @@
 						<h2 class="profile__content-displayname">
 							<?php echo $user->getFullName(); ?>
 						</h2>
+						<h3 class="profile__content-username">
+							@<?php echo $user->getUsername(); ?>
+						</h3>
 					</div>
 					<div class="profile__stats">
 						<div class="profile__stats-item">
@@ -47,6 +50,15 @@
 					<?php
 					if ($user->getVerified() == 0) {
 						echo '<p style="color: hsl(348, 76%, 62%);">Your account is not verified. Please check your email for the verification link.</p>';
+					}
+					if (isset($_GET['error'])) {
+						if ($_GET['error'] == 'invalidkey') {
+							echo '<p class="form__error">Invalid verification link! Please try again.</p>';
+						} else if ($_GET['error'] == 'alreadyverified') {
+							echo '<p class="form__error">Your account has already been verified!</p>';
+						} else if ($_GET['error'] == 'verified') {
+							echo '<p class="form__success">Your account has been verified!</p>';
+						}
 					}
 					?>
 					<div class="section__buttons">

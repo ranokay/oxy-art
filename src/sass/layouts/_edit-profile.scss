@@ -24,6 +24,32 @@
 			flex-direction: column;
 			gap: 1rem;
 
+			.form {
+				&__error {
+					color: $red-500;
+					padding: 0.2rem 0.5rem;
+					background-color: $red-300;
+					border-radius: 0.5rem;
+					border: 1px solid $red-500;
+
+					@media (min-width: $breakpoint-tablet) {
+						align-self: center;
+					}
+				}
+
+				&__success {
+					color: $green-500;
+					padding: 0.2rem 0.5rem;
+					background-color: $green-300;
+					border-radius: 0.5rem;
+					border: 1px solid $green-500;
+
+					@media (min-width: $breakpoint-tablet) {
+						align-self: center;
+					}
+				}
+			}
+
 			.form__group {
 				display: flex;
 				flex-direction: column;
@@ -31,9 +57,23 @@
 
 				@media (min-width: $breakpoint-desktop) {
 					display: grid;
-					grid-template-columns: 1fr 1.5fr;
+					grid-template-columns: 1fr 1.2fr;
 					align-items: center;
 					gap: 0;
+				}
+
+				.form__subtitle {
+					font-size: 0.9rem;
+					color: $blue-gray-400;
+					max-width: 30ch;
+					overflow: hidden;
+					text-overflow: ellipsis;
+
+					@media (min-width: $breakpoint-desktop) {
+						margin-top: 0.2rem;
+						margin-right: 0.5rem;
+						max-width: 25ch;
+					}
 				}
 
 				input[type='text'] {

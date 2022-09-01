@@ -27,7 +27,6 @@ if (isset($_POST['submit'])) {
 				header("Location: ../signup?error=stmtfailed");
 				exit();
 			}
-			$stmt = null;
 
 			$to = $email;
 			$subject = "OxyProject - Account Verification";
@@ -45,10 +44,14 @@ if (isset($_POST['submit'])) {
 									background-color: hsl(214, 20%, 34%);
 									color: white;"
 									href="' . $url . '">Verify Account</a>';
-			$headers = "From: OxyProject <chief5465@gmail.com>\r\n";
+			$headers = "From: OxyProject <8dimmusic@gmail.com>\r\n";
 			$headers .= "Content-type: text/html\r\n";
 
 			mail($to, $subject, $message, $headers);
+
+			$stmt = null;
+			header("Location: ../login?signup=success");
+			exit();
 		}
 		protected function checkUsername($username)
 		{
@@ -246,8 +249,6 @@ if (isset($_POST['submit'])) {
 	}
 	$signup = new SignupContr($fullName, $username, $email, $password, $confirmPassword, $checkbox);
 	$signup->signupUser();
-
-	header("Location: ../login?signup=success");
 } else {
-	header("Location: ../home");
+	header("Location: home");
 }

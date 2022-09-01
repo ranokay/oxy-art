@@ -2,7 +2,7 @@
 
 function redirect($error)
 {
-	if (isset($_SESSION['userId'])) {
+	if (isset($_SESSION['userID'])) {
 		header("Location: ../dashboard?error=$error");
 	} else {
 		header("Location: ../login?error=$error");
@@ -50,7 +50,7 @@ if (isset($_GET['vkey']) && !empty($_GET['vkey'])) {
 				$error = "invalidkey";
 				redirect($error);
 				exit();
-			} elseif ($checkVKey === true) {
+			} else if ($checkVKey === true) {
 				$sql = "UPDATE users SET `verified` = 1, `v_key` = 0 WHERE `email` = ?;";
 				$stmt = $this->connect()->prepare($sql);
 
@@ -65,7 +65,9 @@ if (isset($_GET['vkey']) && !empty($_GET['vkey'])) {
 				redirect($error);
 				exit();
 			}
+
 			$stmt = null;
+			exit();
 		}
 	}
 
@@ -86,5 +88,5 @@ if (isset($_GET['vkey']) && !empty($_GET['vkey'])) {
 	$verifyAccount = new VerifyAccountContr($email, $vKey);
 	$verifyAccount->verifyUser();
 } else {
-	header("Location: ../home");
+	header("Location: home");
 }

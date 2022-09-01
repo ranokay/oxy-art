@@ -1,6 +1,6 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Login" })
 <?php
-if (isset($_SESSION['userId'])) {
+if (isset($_SESSION['userID'])) {
 	header("Location: dashboard");
 }
 ?>
@@ -24,6 +24,8 @@ if (isset($_SESSION['userId'])) {
 						echo '<p class="form__error">Your account has already been verified!</p>';
 					} else if ($_GET['error'] == 'verified') {
 						echo '<p class="form__success">Your account has been verified!</p>';
+					} else if ($_GET['error'] == 'verify') {
+						echo '<p class="form__success">Please verify your new email address!</p>';
 					} else if ($_GET['error'] == 'stmtfailed') {
 						echo '<p class="form__error">Server error!</p>';
 					}

@@ -151,6 +151,9 @@ if (isset($_POST['reset-password-submit'])) {
 	$resetPassword = new ResetPasswordContr($selector, $validator, $password, $confirmPassword);
 	$resetPassword->resetPassword();
 
+	session_unset();
+	session_destroy();
+
 	header("Location: ../login?reset=passwordupdated");
 } else {
 	header("Location: ../home");

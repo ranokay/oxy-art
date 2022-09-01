@@ -1,6 +1,6 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Sign Up" })
 <?php
-if (isset($_SESSION['userId'])) {
+if (isset($_SESSION['userID'])) {
 	header("Location: dashboard");
 }
 ?>

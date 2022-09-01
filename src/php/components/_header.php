@@ -10,10 +10,10 @@
 	<div class="left__side-mobile">
 		<?php
 		include "php/dbh.inc.php";
-		if (isset($_SESSION['userId'])) {
-			$userId = $_SESSION['userId'];
+		if (isset($_SESSION['userID'])) {
+			$userID = $_SESSION['userID'];
 			include "php/UserContr.inc.php";
-			$user = new UserContr($userId);
+			$user = new UserContr($userID);
 		?>
 			<a class="btn btn-profile-mobile" href="dashboard">
 				<img class="profile__icon-mobile" src="assets/icons/circle-user-regular.svg" alt="Profile" />
@@ -53,7 +53,7 @@
 				</div>
 			</nav>
 			<?php
-			if (isset($_SESSION['userId'])) {
+			if (isset($_SESSION['userID'])) {
 			?>
 				<a class="btn btn-profile" href="dashboard">
 					<img class="profile__icon" src="assets/icons/circle-user-regular.svg" alt="Profile" title="Profile" />
@@ -74,7 +74,7 @@
 		</div>
 		<div class="mobile__footer">
 			<?php
-			if (isset($_SESSION['userId'])) {
+			if (isset($_SESSION['userID'])) {
 			?>
 				<a class="btn btn__blue" href="php/logout.inc.php">
 					Logout
