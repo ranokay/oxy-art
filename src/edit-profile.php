@@ -84,6 +84,11 @@ if (!isset($_SESSION['userID'])) {
 					</div>
 				</form>
 
+				<form action="php/delete-account.inc.php" method="POST">
+					<button type="submit" name="delete-account" class="btn btn__danger">
+						Delete account
+					</button>
+				</form>
 			</section>
 		</main>
 		@@include('php/components/_footer.php')

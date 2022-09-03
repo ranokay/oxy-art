@@ -94,4 +94,86 @@
 			}
 		}
 	}
+
+	.arts__container {
+		margin-block: 2rem;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+
+		@media (min-width: $breakpoint-desktop) {
+			flex-direction: row;
+		}
+
+		.art {
+			position: relative;
+			animation: scaleAllCards 0.5s ease-in-out;
+
+			@keyframes scaleAllCards {
+				0% {
+					transform: scale(0.5);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}
+
+			&-card {
+				@media (min-width: $breakpoint-desktop) {
+					&:hover {
+						.card-name {
+							display: block;
+						}
+						.card-image {
+							animation: opacity 0.5s forwards;
+
+							@keyframes opacity {
+								from {
+									opacity: 1;
+								}
+								to {
+									opacity: 0.8;
+								}
+							}
+						}
+					}
+				}
+
+				.card-name {
+					position: absolute;
+					bottom: 0;
+					width: 100%;
+					padding-block: 1rem;
+					border-bottom-left-radius: 0.4rem;
+					border-bottom-right-radius: 0.4rem;
+					text-align: center;
+					background-color: $blue-gray-800-transparent;
+
+					@media (min-width: $breakpoint-desktop) {
+						padding-block: 2rem;
+						font-size: 1.2rem;
+						display: none;
+						animation: fade-in 0.3s forwards;
+
+						@keyframes fade-in {
+							0% {
+								opacity: 0;
+							}
+							100% {
+								opacity: 1;
+							}
+						}
+					}
+				}
+
+				.card-image {
+					width: 18rem;
+					height: 18rem;
+					border-radius: 0.5rem;
+				}
+			}
+		}
+	}
 }

@@ -78,6 +78,29 @@
 						</a>
 					</div>
 				</section>
+				<section class="arts__container">
+					<?php
+					include "php/CollectionClass.inc.php";
+					$art = new Collection();
+					if ($art->getUserArts()) {
+						foreach ($art->getUserArts() as $art) {
+							$artId = $art['id'];
+							$artName = $art['name'];
+							$artDir = $art['art_dir'];
+					?>
+							<div class="art">
+								<a class="art-card" href="art?id=<?php echo $artId; ?>">
+									<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>">
+									<h3 class="card-name"><?php echo $artName; ?></h3>
+								</a>
+							</div>
+					<?php
+						}
+					} else {
+						echo '<h2>You have not uploaded any art yet!</h2>';
+					}
+					?>
+				</section>
 			</main>
 			@@include('php/components/_footer.php')
 		</div>

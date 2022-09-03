@@ -29,7 +29,7 @@ if (isset($_POST['save-changes'])) {
 			if (isset($username) && !empty($username)) {
 				$sql = "UPDATE `users` SET `username` = ? WHERE `id` = ?;";
 				$stmt = $this->connect()->prepare($sql);
-				if (!$stmt->execute([$username, $userID])) {
+				if (!$stmt->execute([lcfirst($username), $userID])) {
 					$stmt = null;
 					header("Location: home?error=stmtfailed");
 					exit();

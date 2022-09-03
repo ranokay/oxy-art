@@ -30,6 +30,17 @@
 		}
 	}
 
+	&__danger {
+		background-color: $red-400;
+		border: 1px solid;
+		border-color: $red-600;
+
+		&:hover,
+		&:focus {
+			background-color: $blue-gray-800;
+		}
+	}
+
 	&__blue {
 		background-color: $blue-500;
 	}

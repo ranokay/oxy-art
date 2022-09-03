@@ -1,6 +1,15 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Homepage" })
 
 <body class="home__body">
+	<?php
+	if (isset($_GET['success'])) {
+		if ($_GET['success'] == "accountdeleted") {
+			echo '<script>
+							alert("Your account has been deleted.");
+						</script>';
+		}
+	}
+	?>
 	<div class="wrapper wrapper__home">
 		@@include('php/components/_header.php',{})
 		<main class="main__content">

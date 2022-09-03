@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 			$hashedKey = password_hash($vKey, PASSWORD_BCRYPT);
 			$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-			if (!$stmt->execute([$fullName, $username, $email, $hashedKey, $hashedPassword])) {
+			if (!$stmt->execute([$fullName, lcfirst($username), $email, $hashedKey, $hashedPassword])) {
 				$stmt = null;
 				header("Location: ../signup?error=stmtfailed");
 				exit();

@@ -15,9 +15,25 @@
 				</div>
 			</section>
 			<section class="description__container">
-				<h2 class="art-name">
-					<?php echo $art->getArtName(); ?>
-				</h2>
+				<?php
+				if ($art->getArtOwnerId() == $_SESSION['userID']) {
+				?>
+					<form action="php/update-art.inc.php" method="POST">
+						<div class="form__group">
+							<input class="" type="text" name="art-name" value="<?php echo $art->getArtName(); ?>">
+							<input type="submit" name="edit-art" value="Edit">
+						</div>
+					</form>
+				<?php
+
+				} else {
+				?>
+					<h2 class="art-name">
+						<?php echo $art->getArtName(); ?>
+					</h2>
+				<?php
+				}
+				?>
 				<p class="art-desc">
 					<?php echo $art->getArtDescription(); ?>
 				</p>

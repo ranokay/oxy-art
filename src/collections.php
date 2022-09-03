@@ -9,8 +9,8 @@
 				<?php
 				include "php/CollectionClass.inc.php";
 				$art = new Collection();
-				if ($art) {
-					foreach ($art->getArts() as $art) {
+				if ($art->getPublicArts()) {
+					foreach ($art->getPublicArts() as $art) {
 						$artId = $art['id'];
 						$artName = $art['name'];
 						$artDir = $art['art_dir'];
@@ -24,7 +24,7 @@
 				<?php
 					}
 				} else {
-					echo '<p>No arts found</p>';
+					echo "<h2>No public art found.</h2>";
 				}
 				?>
 			</section>
