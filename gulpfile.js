@@ -13,6 +13,7 @@ import imagemin from 'gulp-imagemin'
 import htmlmin from 'gulp-htmlmin'
 import fileinclude from 'gulp-file-include'
 import browsersync from 'browser-sync'
+import newer from 'gulp-newer'
 
 const prj_folder = 'oxyproject',
 	src_folder = 'src'
@@ -74,6 +75,7 @@ function browsersyncTask() {
 //php task
 function phpTask() {
 	return src(path.src.php)
+		.pipe(newer(path.build.php))
 		.pipe(fileinclude())
 		.pipe(htmlmin({ collapseWhitespace: true }))
 		.pipe(dest(path.build.php))
@@ -83,6 +85,7 @@ function phpTask() {
 //php server task
 function phpServerTask() {
 	return src(path.src.phpServer)
+		.pipe(newer(path.build.phpServer))
 		.pipe(fileinclude())
 		.pipe(dest(path.build.phpServer))
 		.pipe(browsersync.stream())
@@ -133,6 +136,7 @@ function jsTask() {
 //images task
 function imagesTask() {
 	return src(path.src.assets)
+		.pipe(newer(path.build.assets))
 		.pipe(dest(path.build.assets))
 		.pipe(src(path.src.assets))
 		.pipe(
@@ -140,7 +144,7 @@ function imagesTask() {
 				progressive: true,
 				svgoPlugins: [{ removeViewBox: false }],
 				interlaced: true,
-				optimizationLevel: 3,
+				optimizationLevel: 2,
 			})
 		)
 		.pipe(dest(path.build.assets))
@@ -149,6 +153,7 @@ function imagesTask() {
 //collection task
 function collectionTask() {
 	return src(path.src.collection)
+		.pipe(newer(path.build.collection))
 		.pipe(dest(path.build.collection))
 		.pipe(src(path.src.collection))
 		.pipe(

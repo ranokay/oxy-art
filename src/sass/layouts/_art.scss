@@ -7,9 +7,47 @@
 	margin-bottom: 6rem;
 
 	@media (min-width: $breakpoint-desktop) {
-		height: calc(100vh - 10rem);
+		margin-block: 0;
+		height: calc(100vh - 4rem);
 		flex-direction: row;
-		gap: 10rem;
+		justify-content: space-between;
+	}
+
+	.form {
+		&__error {
+			color: $red-500;
+			padding: 0.2rem 0.5rem;
+			background-color: $red-300;
+			border-radius: 0.5rem;
+			border: 1px solid $red-500;
+			margin-bottom: 2rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: center;
+			}
+		}
+
+		&__success {
+			color: $green-500;
+			padding: 0.2rem 0.5rem;
+			background-color: $green-300;
+			border-radius: 0.5rem;
+			border: 1px solid $green-500;
+			margin-bottom: 2rem;
+
+			@media (min-width: $breakpoint-tablet) {
+				align-self: center;
+			}
+		}
+	}
+
+	.art-not-found {
+		position: absolute;
+		top: 10rem;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+		text-align: center;
 	}
 
 	.art__container {
@@ -24,43 +62,137 @@
 		}
 	}
 	.description__container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		gap: 2rem;
-		font-size: 1.2rem;
-
 		@media (min-width: $breakpoint-desktop) {
-			align-items: flex-start;
-			text-align: start;
-		}
-
-		.art-desc {
-			color: $blue-gray-350;
-			max-width: 40ch;
-		}
-
-		.art-owner-n-date {
 			display: flex;
-			width: 100%;
-			justify-content: space-between;
 			align-items: center;
+			flex-direction: column;
+			width: 45%;
+		}
 
-			.art-owner {
-				display: flex;
-				align-items: center;
-				color: $blue-gray-300;
+		.desc-form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			font-size: 1.2rem;
+			width: 100%;
+			gap: 1rem;
 
-				.owner-avatar {
-					width: 2.5rem;
-					height: 2.5rem;
-					border-radius: 50%;
-					margin-right: 0.5rem;
+			.eye-icon {
+				align-self: flex-start;
+				width: 2rem;
+				height: 2rem;
+
+				&.hidden {
+					display: none;
 				}
 			}
-			.art-date {
-				color: $blue-gray-300;
+
+			.art-buttons {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				margin-top: 2rem;
+
+				&.hidden {
+					display: none;
+				}
+			}
+
+			.art-name {
+				all: unset;
+				font-size: 2rem;
+				width: 100%;
+				height: 3rem;
+				text-align: center;
+
+				@media (min-width: $breakpoint-desktop) {
+					text-align: left;
+				}
+			}
+
+			.art-desc {
+				all: unset;
+				color: $blue-gray-350;
+				width: 100%;
+				max-height: 40vh;
+			}
+
+			.art-textarea--edit {
+				border: 1px solid;
+				border-color: $blue-gray-600;
+				border-radius: 0.5rem;
+				padding: 0.5rem;
+				width: 100%;
+			}
+
+			.form__checkbox {
+				display: flex;
+				align-items: center;
+				align-self: flex-start;
+				gap: 1rem;
+
+				label {
+					color: $blue-gray-300;
+				}
+
+				input[type='checkbox'] {
+					cursor: pointer;
+					transform: scale(1.3);
+
+					&:checked {
+						animation: scaleBox 0.3s ease-in-out;
+						@keyframes scaleBox {
+							0% {
+								transform: scale(1.3);
+							}
+							50% {
+								transform: scale(1.5);
+							}
+							100% {
+								transform: scale(1.3);
+							}
+						}
+					}
+				}
+
+				&.hidden {
+					display: none;
+				}
+			}
+
+			.art-owner-n-date {
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+				align-items: center;
+
+				.art-owner {
+					display: flex;
+					align-items: center;
+					color: $blue-gray-300;
+
+					.owner-avatar {
+						width: 2.5rem;
+						height: 2.5rem;
+						border-radius: 50%;
+						margin-right: 0.5rem;
+					}
+				}
+				.art-date {
+					color: $blue-gray-300;
+				}
+			}
+		}
+		.edit-buttons {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			margin-top: 2rem;
+
+			&.hidden {
+				display: none;
 			}
 		}
 	}

@@ -7,8 +7,16 @@
 	gap: 2rem;
 	min-height: 100vh;
 
+	&-line {
+		width: 100%;
+		border: 0.1rem solid;
+		border-color: $blue-gray-800;
+		background-color: $blue-gray-800;
+		border-radius: 0.1rem;
+	}
+
 	.explore__container {
-		margin-block: 2rem;
+		margin-bottom: 2rem;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
@@ -17,6 +25,38 @@
 
 		@media (min-width: $breakpoint-desktop) {
 			flex-direction: row;
+		}
+
+		.form {
+			&__error {
+				color: $red-500;
+				padding: 0.2rem 0.5rem;
+				background-color: $red-300;
+				border-radius: 0.5rem;
+				border: 1px solid $red-500;
+				margin-bottom: 2rem;
+
+				@media (min-width: $breakpoint-tablet) {
+					align-self: center;
+				}
+			}
+
+			&__success {
+				color: $green-500;
+				padding: 0.2rem 0.5rem;
+				background-color: $green-300;
+				border-radius: 0.5rem;
+				border: 1px solid $green-500;
+				margin-bottom: 2rem;
+
+				@media (min-width: $breakpoint-tablet) {
+					align-self: center;
+				}
+			}
+		}
+
+		.no-public-arts {
+			color: $blue-gray-400;
 		}
 
 		.explore__arts {

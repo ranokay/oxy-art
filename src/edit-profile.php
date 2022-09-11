@@ -1,7 +1,7 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Edit Profile" })
 <?php
 if (!isset($_SESSION['userID'])) {
-	header("Location: login");
+	header("Location: ../login");
 	exit();
 }
 ?>
@@ -12,6 +12,18 @@ if (!isset($_SESSION['userID'])) {
 		<main class="main__content main__edit_profile">
 			<section class="profile">
 				<h1>Edit profile</h1>
+				<?php
+				if (isset($_SESSION['error'])) {
+					$errorMsg = $_SESSION['error'];
+					unset($_SESSION['error']);
+					echo "<p class='form__error'>{$errorMsg}</p>";
+				}
+				if (isset($_SESSION['success'])) {
+					$successMsg = $_SESSION['success'];
+					unset($_SESSION['success']);
+					echo "<p class='form__success'>{$successMsg}</p>";
+				}
+				?>
 				<form action="php/update-user.inc.php" class="form-edit" method="POST">
 					<div class="change-avatar">
 						<?php
@@ -24,29 +36,6 @@ if (!isset($_SESSION['userID'])) {
 						<input type="file" id="actual-btn" name="profile-img" hidden />
 						<label class="choose-file" for="actual-btn">Choose File</label>
 					</div>
-					<?php
-					if (isset($_GET['error'])) {
-						if ($_GET['error'] == "emptyeditfields") {
-							echo '<p class="form__error">Fill at least one field.</p>';
-						} else if ($_GET['error'] == "invalidfullname") {
-							echo '<p class="form__error">Invalid full name!</p>';
-						} else if ($_GET['error'] == "invalidusername") {
-							echo '<p class="form__error">Choose a proper username!</p>';
-						} else if ($_GET['error'] == "invalidemail") {
-							echo '<p class="form__error">Choose a proper email!</p>';
-						} else if ($_GET['error'] == "usernametaken") {
-							echo '<p class="form__error">Username is already taken!</p>';
-						} else if ($_GET['error'] == "emailtaken") {
-							echo '<p class="form__error">Email is already taken!</p>';
-						} else if ($_GET['error'] == "stmtfailed") {
-							echo '<p class="form__error">Something went wrong, try again!</p>';
-						} else if ($_GET['error'] == "none") {
-							echo '<p class="form__success">Your profile has been updated!</p>';
-						} else if ($_GET['error'] == "verify") {
-							echo '<p class="form__success">Your profile has been updated! <br> Please verify your new email!</p>';
-						}
-					}
-					?>
 					<div class="form__group">
 						<label for="full-name">
 							Full name
@@ -75,7 +64,7 @@ if (!isset($_SESSION['userID'])) {
 						<input type="text" name="email" aria-describedby="emailHelp" placeholder="new email">
 					</div>
 					<div class="form__group-btn">
-						<a href="reset-password" class="btn btn__default">
+						<a href="reset-password-request" class="btn btn__default">
 							Change password
 						</a>
 						<button type="submit" name="save-changes" class="btn btn__default">
@@ -84,10 +73,9 @@ if (!isset($_SESSION['userID'])) {
 					</div>
 				</form>
 
-				<form action="php/delete-account.inc.php" method="POST">
-					<button type="submit" name="delete-account" class="btn btn__danger">
-						Delete account
-					</button>
+				<form class="danger-zone" action="php/delete-account.inc.php" method="POST">
+					<a href="dashboard" class="btn btn__default">Back to dash</a>
+					<button type="submit" name="delete-account" class="btn btn__danger">Delete account</button>
 				</form>
 			</section>
 		</main>

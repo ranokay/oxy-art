@@ -5,10 +5,14 @@
 	top: 0;
 	left: 0;
 	shape-rendering: auto;
-	height: 100vh;
+	height: calc(100vh - 8rem);
 	width: 100%;
 	opacity: 0.13;
 	z-index: -1;
+
+	@media (min-width: $breakpoint-desktop) {
+		height: 100%;
+	}
 	.wave__1,
 	.wave__2,
 	.wave__3 {
@@ -20,16 +24,6 @@
 		.wave__2,
 		.wave__3 {
 			display: block;
-		}
-	}
-
-	&__bottom {
-		top: auto;
-		bottom: 0;
-		transform: rotate(180deg);
-
-		@media (min-width: $breakpoint-desktop) {
-			height: 60vh;
 		}
 	}
 }

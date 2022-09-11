@@ -1,7 +1,7 @@
 	@@include('php/components/_head.php',{ "title":"OxyProject | Dashboard" })
 	<?php
 	if (!isset($_SESSION['userID'])) {
-		header("Location: login");
+		header("Location: ../login");
 		exit();
 	}
 	?>
@@ -19,7 +19,7 @@
 							echo '<img class="user-pic" src="' . $user->getAvatar() . '" alt="Profile Image">';
 						}
 						if ($user->getVerified() == 1) {
-							echo '<img class="profile-verified" src="assets/icons/verified.svg" alt="Verified">';
+							echo '<img class="profile-verified" src="assets/icons/verified.svg" alt="Verified" title="Verified">';
 						}
 						?>
 					</div>
@@ -42,23 +42,30 @@
 							<img src="assets/icons/items.svg" alt="Items">
 							<h4>
 								<?php
-								echo $user->getUserItems() . ' Items';
+								// echo $user->getUserItems() . ' Arts';
+								echo '324 Arts';
 								?>
 							</h4>
 						</div>
 					</div>
 					<?php
-					if ($user->getVerified() == 0) {
-						echo '<p style="color: hsl(348, 76%, 62%);">Your account is not verified. Please check your email for the verification link.</p>';
+					if ($user->getVerified() === 0) {
+					?>
+						<form class="form-verification-msg" action="php/resend-verification.inc.php" method="POST">
+							<input type="hidden" name="email" value="<?php echo $user->getEmail(); ?>">
+							<p class="form__error-active">Your account is not verified. Please check your email for the verification link or <button class="resend-btn" type="submit" name="resend">click here</button> to resend the verification email.</p>
+						</form>
+					<?php
 					}
-					if (isset($_GET['error'])) {
-						if ($_GET['error'] == 'invalidkey') {
-							echo '<p class="form__error">Invalid verification link! Please try again.</p>';
-						} else if ($_GET['error'] == 'alreadyverified') {
-							echo '<p class="form__error">Your account has already been verified!</p>';
-						} else if ($_GET['error'] == 'verified') {
-							echo '<p class="form__success">Your account has been verified!</p>';
-						}
+					if (isset($_SESSION['error'])) {
+						$errorMsg = $_SESSION['error'];
+						unset($_SESSION['error']);
+						echo "<p class='form__error'>{$errorMsg}</p>";
+					}
+					if (isset($_SESSION['success'])) {
+						$successMsg = $_SESSION['success'];
+						unset($_SESSION['success']);
+						echo "<p class='form__success'>{$successMsg}</p>";
 					}
 					?>
 					<div class="section__buttons">
@@ -79,6 +86,8 @@
 					</div>
 				</section>
 				<section class="arts__container">
+					<h2 class="section__title">My Collection</h2>
+					<span class="arts__container-line"></span>
 					<?php
 					include "php/CollectionClass.inc.php";
 					$art = new Collection();
@@ -97,7 +106,7 @@
 					<?php
 						}
 					} else {
-						echo '<h2>You have not uploaded any art yet!</h2>';
+						echo '<h2 class="not-uploaded-images">You have not uploaded any art yet!</h2>';
 					}
 					?>
 				</section>

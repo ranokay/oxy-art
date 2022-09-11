@@ -1,7 +1,8 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Login" })
 <?php
 if (isset($_SESSION['userID'])) {
-	header("Location: dashboard");
+	header("Location: ../dashboard");
+	exit();
 }
 ?>
 
@@ -13,32 +14,15 @@ if (isset($_SESSION['userID'])) {
 				<label for="form">Login</label>
 				<span class="form__line"></span>
 				<?php
-				if (isset($_GET['error'])) {
-					if ($_GET['error'] == 'emptyfields') {
-						echo '<p class="form__error">Fill in all fields!</p>';
-					} else if ($_GET['error'] == 'usernotfound') {
-						echo '<p class="form__error">Incorrect username or password!</p>';
-					} else if ($_GET['error'] == 'invalidkey') {
-						echo '<p class="form__error">Invalid verification link! Please try again.</p>';
-					} else if ($_GET['error'] == 'alreadyverified') {
-						echo '<p class="form__error">Your account has already been verified!</p>';
-					} else if ($_GET['error'] == 'verified') {
-						echo '<p class="form__success">Your account has been verified!</p>';
-					} else if ($_GET['error'] == 'verify') {
-						echo '<p class="form__success">Please verify your new email address!</p>';
-					} else if ($_GET['error'] == 'stmtfailed') {
-						echo '<p class="form__error">Server error!</p>';
-					}
+				if (isset($_SESSION['error'])) {
+					$errorMsg = $_SESSION['error'];
+					unset($_SESSION['error']);
+					echo "<p class='form__error'>{$errorMsg}</p>";
 				}
-				if (isset($_GET['signup'])) {
-					if ($_GET['signup'] == 'success') {
-						echo '<p class="form__success">You have successfully signed up! <br> Please check your email to verify your account.</p>';
-					}
-				}
-				if (isset($_GET['reset'])) {
-					if ($_GET['reset'] == 'passwordupdated') {
-						echo '<p class="form__success">Your password has been reset!</p>';
-					}
+				if (isset($_SESSION['success'])) {
+					$successMsg = $_SESSION['success'];
+					unset($_SESSION['success']);
+					echo "<p class='form__success'>{$successMsg}</p>";
 				}
 				?>
 				<div class="form__group">
@@ -49,7 +33,7 @@ if (isset($_SESSION['userID'])) {
 				</div>
 				<div class="form__buttons">
 					<button type="submit" class="btn btn__gradient" name="submit">Log In</button>
-					<a class="forgot-password" href="reset-password">Forgot Password?</a>
+					<a class="forgot-password" href="reset-password-request">Forgot Password?</a>
 				</div>
 				<div class="form__delimiter">
 					<span class="line"></span>

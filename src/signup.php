@@ -1,7 +1,8 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Sign Up" })
 <?php
 if (isset($_SESSION['userID'])) {
-	header("Location: dashboard");
+	header("Location: ../dashboard");
+	exit();
 }
 ?>
 
@@ -13,30 +14,15 @@ if (isset($_SESSION['userID'])) {
 				<label for="form">Sign Up</label>
 				<span class="form__line"></span>
 				<?php
-				if (isset($_GET['error'])) {
-					if ($_GET['error'] == 'emptyfields') {
-						echo '<p class="form__error">Fill in all fields!</p>';
-					} else if ($_GET['error'] == 'invalidfullname') {
-						echo '<p class="form__error">Please enter a valid name.</p>';
-					} else if ($_GET['error'] == 'invalidmail') {
-						echo '<p class="form__error">Invalid email!</p>';
-					} else if ($_GET['error'] == 'invalidusername') {
-						echo '<p class="form__error">Username can only contain digits and letters!</p>';
-					} else if ($_GET['error'] == 'passwordlength') {
-						echo '<p class="form__error">Password must be between 8 and 25 characters long!</p>';
-					} else if ($_GET['error'] == 'invalidpassword') {
-						echo '<p class="form__error">Password must contain at least 1 number, 1 letter, 1 uppercase letter and 1 special character!</p>';
-					} else if ($_GET['error'] == 'passwordcheck') {
-						echo '<p class="form__error">Passwords do not match!</p>';
-					} else if ($_GET['error'] == 'checkbox') {
-						echo '<p class="form__error">You must agree to the terms and conditions!</p>';
-					} else if ($_GET['error'] == 'usernameexists') {
-						echo '<p class="form__error">Username already taken!</p>';
-					} else if ($_GET['error'] == 'emailexists') {
-						echo '<p class="form__error">User with this email already exists!</p>';
-					} else if ($_GET['error'] == 'stmtfailed') {
-						echo '<p class="form__error">Server error!</p>';
-					}
+				if (isset($_SESSION['error'])) {
+					$errorMsg = $_SESSION['error'];
+					unset($_SESSION['error']);
+					echo "<p class='form__error'>{$errorMsg}</p>";
+				}
+				if (isset($_SESSION['success'])) {
+					$successMsg = $_SESSION['success'];
+					unset($_SESSION['success']);
+					echo "<p class='form__success'>{$successMsg}</p>";
 				}
 				?>
 				<div class="form__group">

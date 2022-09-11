@@ -58,3 +58,75 @@ window.addEventListener('load', () => {
 		loader.classList.add('fadeout')
 	}
 })
+
+// autogrow art textarea
+const textarea = document.querySelectorAll('.art-textarea')
+if (textarea) {
+	textarea.forEach(item => {
+		if (item.scrollHeight > item.clientHeight) {
+			item.style.height = item.scrollHeight + 'px'
+		}
+	})
+}
+
+// hide edit button and show edit form
+const editBtn = document.querySelector('.edit-btn')
+const editBtnsDiv = document.querySelector('.edit-buttons')
+const artBtnsDiv = document.querySelector('.art-buttons')
+const cancelEditBtn = document.querySelector('.cancel-edit-btn')
+const checkboxPublic = document.querySelector('.form__checkbox')
+const editTextarea = document.querySelectorAll('.art-textarea')
+const eyeIcon = document.querySelector('.eye-icon')
+if (editBtn) {
+	editBtn.addEventListener('click', () => {
+		editBtnsDiv.classList.add('hidden')
+		eyeIcon.classList.add('hidden')
+		artBtnsDiv.classList.remove('hidden')
+		checkboxPublic.classList.remove('hidden')
+		editTextarea.forEach(item => {
+			item.removeAttribute('readonly')
+			item.classList.add('art-textarea--edit')
+		})
+	})
+}
+if (cancelEditBtn) {
+	cancelEditBtn.addEventListener('click', () => {
+		editBtnsDiv.classList.remove('hidden')
+		eyeIcon.classList.remove('hidden')
+		artBtnsDiv.classList.add('hidden')
+		checkboxPublic.classList.add('hidden')
+		editTextarea.forEach(item => {
+			item.setAttribute('readonly', 'readonly')
+			item.classList.remove('art-textarea--edit')
+		})
+		window.location.reload()
+	})
+}
+
+// hide success message
+const formSuccess = document.querySelector('.form__success')
+const successMsg = document.querySelector('.success-msg')
+if (formSuccess) {
+	setTimeout(() => {
+		formSuccess.style.display = 'none'
+	}, 5000)
+}
+if (successMsg) {
+	setTimeout(() => {
+		successMsg.style.display = 'none'
+	}, 5000)
+}
+
+// hide error message
+const formError = document.querySelector('.form__error')
+const errorMsg = document.querySelector('.error-msg')
+if (formError) {
+	setTimeout(() => {
+		formError.style.display = 'none'
+	}, 10000)
+}
+if (errorMsg) {
+	setTimeout(() => {
+		errorMsg.style.display = 'none'
+	}, 10000)
+}

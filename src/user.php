@@ -39,7 +39,7 @@
 					</div>
 				</div>
 				<?php
-				if ($user->getVerified() == 0) {
+				if ($user->getVerified() === 0) {
 					echo '<p style="color: hsl(348, 76%, 62%);">Your account is not verified. Please check your email for the verification link.</p>';
 				}
 				?>

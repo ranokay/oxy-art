@@ -7,21 +7,18 @@
 			<section class="left__side">
 				<form class="form form__contact" action="php/send-issue-message.inc.php" method="POST">
 					<?php
-					if (isset($_GET['error'])) {
-						if ($_GET['error'] == 'emptyfields') {
-							echo '<p class="form__error">Fill in all fields!</p>';
-						} else if ($_GET['error'] == 'stmtfailed') {
-							echo '<p class="form__error">Server error!</p>';
-						} else if ($_GET['error'] == 'invalidemail') {
-							echo '<p class="form__error">Invalid email!</p>';
-						}
+					if (isset($_SESSION['error'])) {
+						$errorMsg = $_SESSION['error'];
+						unset($_SESSION['error']);
+						echo "<p class='form__error'>{$errorMsg}</p>";
 					}
-					if (isset($_GET['sent'])) {
-						if ($_GET['sent'] == 'success') {
-							echo '<p class="form__success">Your message has been sent!</p>';
-						}
+					if (isset($_SESSION['success'])) {
+						$successMsg = $_SESSION['success'];
+						unset($_SESSION['success']);
+						echo "<p class='form__success'>{$successMsg}</p>";
 					}
 					?>
+					<h1 class="form__contact-title">Tell us about your issue</h1>
 					<div class="form__group">
 						<input type="text" name="name" class="form__input" placeholder="Your name" required>
 					</div>
@@ -35,7 +32,7 @@
 						<textarea name="message" class="form__input form__input-textarea" placeholder="Your message" required></textarea>
 					</div>
 					<div class="form__group">
-						<button type="submit" name="send-message" class="btn btn__gradient">Send Message</button>
+						<button type="submit" name="send-message" class="btn btn__gradient btn-send-msg">Send Message</button>
 					</div>
 				</form>
 			</section>

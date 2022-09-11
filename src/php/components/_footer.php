@@ -33,33 +33,21 @@
 						<img class="plane__icon" src="assets/icons/paper-plane.svg" alt="Send message">
 					</button>
 					<?php
-					$url = $_SERVER['REQUEST_URI'];
-					if (str_contains($url, 'error')) {
-						if (str_contains($url, 'error=emptyfields')) {
-							echo '<p class="form__error">Please fill in all fields!</p>';
-						}
-						if (str_contains($url, 'error=invalidemail')) {
-							echo '<p class="form__error">Invalid email!</p>';
-						}
-						if (str_contains($url, 'error=usernotfound')) {
-							echo '<p class="form__error">User not found!</p>';
-						}
-						if (str_contains($url, 'error=alreadysubscribed')) {
-							echo '<p class="form__error">You are already subscribed!</p>';
-						}
+					if (isset($_SESSION['error-subs'])) {
+						$errorMsg = $_SESSION['error-subs'];
+						unset($_SESSION['error-subs']);
+						echo "<p class='error-msg'>{$errorMsg}</p>";
 					}
-					if (str_contains($url, 'success')) {
-						if (str_contains($url, 'success=subscribed')) {
-							echo '<p class="form__success">You have been subscribed!</p>';
-						}
+					if (isset($_SESSION['success-subs'])) {
+						$successMsg = $_SESSION['success-subs'];
+						unset($_SESSION['success-subs']);
+						echo "<p class='success-msg'>{$successMsg}</p>";
 					}
 					?>
 				</form>
-
 			</div>
 			<p class="subscribe__subtitle">Your privacy is protected! We dont disclose Email.</p>
 		</div>
-
 	</div>
 	<div class="copyright">
 		<div class="copyright__text">

@@ -67,14 +67,15 @@ input {
 	}
 }
 
+.wrapper {
+	position: relative;
+}
+
 .main__content {
 	display: flex;
 	flex-direction: column;
 	margin-inline: 10%;
 	gap: 5rem 0;
-}
-.wrapper {
-	position: relative;
 }
 
 .loader {

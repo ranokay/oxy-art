@@ -8,27 +8,18 @@
 				<label for="form">Reset your password</label>
 				<span class="form__line"></span>
 				<?php
-				if (isset($_GET['reset'])) {
-					if ($_GET['reset'] == 'success') {
-						echo '<p class="form__success">Check your email for a reset link!</p>';
-					}
+				if (isset($_SESSION['error'])) {
+					$errorMsg = $_SESSION['error'];
+					unset($_SESSION['error']);
+					echo "<p class='form__error'>{$errorMsg}</p>";
 				}
-				if (isset($_GET['error'])) {
-					if ($_GET['error'] == 'stmtfailed') {
-						echo '<p class="form__error">Something went wrong!</p>';
-					}
-					if ($_GET['error'] == 'usernotfound') {
-						echo '<p class="form__error">User with that email not found!</p>';
-					}
-					if ($_GET['error'] == 'emptyfields') {
-						echo '<p class="form__error">Please fill in all fields!</p>';
-					}
-					if ($_GET['error'] == 'invalidtoken') {
-						echo '<p class="form__error">Invalid link! Please try again.</p>';
-					}
+				if (isset($_SESSION['success'])) {
+					$successMsg = $_SESSION['success'];
+					unset($_SESSION['success']);
+					echo "<p class='form__success'>{$successMsg}</p>";
 				}
 				?>
-				<p>An email will be send to you with instructions on how to reset your password.</p>
+				<p style="color:hsl(215, 20%, 65%);">An email will be send to you with instructions on how to reset your password.</p>
 				<div class="form__group-reset">
 					<input type="text" name="email" placeholder="Enter your email address">
 					<button type="submit" name="reset-request-submit" class="btn btn__default">Reset password</button>

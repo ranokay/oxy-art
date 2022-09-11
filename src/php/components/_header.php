@@ -39,11 +39,11 @@
 				<div class="search__icon">
 					<img src="assets/icons/search.svg" alt="Search" />
 				</div>
-				<input class="search__input" name="search" type="search" placeholder="Search arts, collections, and creators" />
+				<input class="search__input" name="search" type="search" placeholder="Search arts and creators" />
 			</form>
 			<nav class="navbar">
 				<div class="navbar__resources">
-					<a class="nav__btn" href="collections"><img class="link__icon" src="assets/icons/explore.svg" alt="">Collections</a>
+					<a class="nav__btn" href="collections"><img class="link__icon" src="assets/icons/explore.svg" alt="">Collection</a>
 				</div>
 				<div class="navbar__resources">
 					<a class="nav__btn" href="contact"><img class="link__icon" src="assets/icons/contact.svg" alt="">Contact</a>
@@ -64,10 +64,8 @@
 			<?php
 			} else {
 			?>
-				<a class="btn btn__gradient btn-connect" href="signup">Sign Up</a>
-				<a class="btn  btn-profile" href="login">
-					<img class="profile__icon" src="assets/icons/circle-user-regular.svg" alt="Profile" title="Login" />
-				</a>
+				<a class="btn btn__gradient" href="login">Login</a>
+				<a class="btn btn__default btn-connect" href="signup">Sign Up</a>
 			<?php
 			}
 			?>
@@ -76,15 +74,11 @@
 			<?php
 			if (isset($_SESSION['userID'])) {
 			?>
-				<a class="btn btn__blue" href="php/logout.inc.php">
-					Logout
-				</a>
+				<a class="btn btn__blue" href="php/logout.inc.php">Logout</a>
 			<?php
 			} else {
 			?>
-				<a class="btn btn__blue" href="signup">
-					Sign Up
-				</a>
+				<a class="btn btn__blue" href="signup">Sign Up</a>
 			<?php
 			}
 			?>
@@ -93,5 +87,4 @@
 			</div>
 		</div>
 	</div>
-
 </header>
