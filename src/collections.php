@@ -9,17 +9,23 @@
 			<section class="explore__container">
 				<?php
 				include "php/CollectionClass.inc.php";
-				$art = new Collection();
-				if ($art->getPublicArts()) {
-					foreach ($art->getPublicArts() as $art) {
+				$artCollection = new Collection();
+				if ($artCollection->getPublicArts()) {
+					foreach ($artCollection->getPublicArts() as $art) {
 						$artId = $art['id'];
 						$artName = $art['name'];
 						$artDir = $art['art_dir'];
 				?>
 						<div class="explore__arts">
 							<a class="explore__arts-card" href="art?id=<?php echo $artId; ?>">
-								<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>">
-								<h3 class="card-name"><?php echo $artName; ?></h3>
+								<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>" loading="lazy">
+								<div class="card-name">
+									<h3><?php echo $artName ?> </h3>
+									<p class="likes-count">
+										<?php echo $artCollection->getArtLikes($artId); ?>
+										<i class="fas fa-heart liked"></i>
+									</p>
+								</div>
 							</a>
 						</div>
 				<?php

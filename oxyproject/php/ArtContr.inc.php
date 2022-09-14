@@ -85,6 +85,21 @@ if (isset($_GET['id'])) {
 			$ownerId = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			return $ownerId[0]['owner_id'];
 		}
+
+		public function isLiked($artId, $userId)
+		{
+			$sql = "SELECT * FROM `likes` WHERE `art_id` = ? AND `user_id` = ?;";
+			$stmt = $this->connect()->prepare($sql);
+			$stmt->execute([$artId, $userId]);
+			$result = $stmt->fetchAll();
+			$stmt = null;
+
+			if (count($result) > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	class ArtContr extends Art
@@ -102,6 +117,7 @@ if (isset($_GET['id'])) {
 			$this->ownerName = $this->getOwnerName($artId);
 			$this->ownerId = $this->getOwnerId($artId);
 			$this->artId = $artId;
+			$this->isLiked = $this->isLiked($artId, $_SESSION['userID'] ?? 0);
 		}
 
 		public function getArtId()
@@ -148,10 +164,15 @@ if (isset($_GET['id'])) {
 		{
 			return $this->ownerId;
 		}
+
+		public function getArtIsLiked()
+		{
+			return $this->isLiked;
+		}
 	}
 
 	$art = new ArtContr($artId);
 } else {
-	header("Location: ../home");
+	echo "<h1>404. Page not found!</h1>";
 	exit();
 }

@@ -10,6 +10,29 @@
 			<section class="art__container">
 				<div class="art-card">
 					<img class="art-image" src="<?php echo $art->getArtDir(); ?>" alt="Art Image">
+					<form class="like-form" action="php/art-like.inc.php" method="POST">
+						<input type="hidden" name="art_id" value="<?php echo $art->getArtId(); ?>">
+						<?php
+						if (!isset($_SESSION['userID'])) {
+							echo '
+							<button class="like-btn__btn" type="submit" name="like-btn" value="like">
+								<i class="fas fa-heart" title="Like"></i>
+							</button>';
+						} else {
+							if (!$art->getArtIsLiked()) {
+								echo '
+							<button class="like-btn__btn" type="submit" name="like-btn" value="like">
+								<i class="fas fa-heart" title="Like"></i>
+							</button>';
+							} else {
+								echo '
+							<button class="like-btn__btn" type="submit" name="like-btn" value="unlike">
+								<i class="fas fa-heart liked" title="Unlike"></i>
+							</button>';
+							}
+						}
+						?>
+					</form>
 				</div>
 			</section>
 			<section class="description__container">
@@ -31,14 +54,14 @@
 					<?php
 					if (isset($_SESSION['userID']) && $art->getArtOwnerId() === $_SESSION['userID']) {
 						if ($art->getArtPublic() === 1) {
-							echo '<img class="eye-icon eye-public" src="assets/icons/visibility-public.svg" alt="Public" title="Public">';
+							echo '<img class="eye-icon eye-public" src="assets/icons/visibility-public.svg" alt="Public" title="Art is public">';
 						} else {
-							echo '<img class="eye-icon eye-private" src="assets/icons/visibility-private.svg" alt="Private" title="Private">';
+							echo '<img class="eye-icon eye-private" src="assets/icons/visibility-private.svg" alt="Private" title="Art is private">';
 						}
 					}
 					?>
 					<div class="form__checkbox hidden">
-						<label for="checkbox-art-public">Public</label>
+						<label for="checkbox-art-public">Make art public</label>
 						<?php
 						if ($art->getArtPublic() === 1) {
 							echo '<input type="checkbox" name="checkbox-art-public" value="on" checked>';
@@ -48,17 +71,23 @@
 						?>
 					</div>
 					<div class="art-owner-n-date">
-						<a class="art-owner" href="user?id=<?php echo $art->getArtOwnerId(); ?>">
+						<p class="art-owner">
 							<img class="owner-avatar" src="<?php echo $art->getArtOwnerAvatar(); ?>" alt="Owner Avatar">
 							<?php echo $art->getArtOwnerName(); ?>
-						</a>
+						</p>
 						<p class="art-date">
 							<?php echo $art->getArtDate(); ?>
 						</p>
 					</div>
 					<div class="art-buttons hidden">
-						<button class="btn btn__default save-edit-btn" type="submit" name="edit-art">Save changes</button>
-						<button class="btn btn__default cancel-edit-btn" type="button" name="cancel-edit-btn">Cancel</button>
+						<button class="btn btn__default save-edit-btn" type="submit" name="edit-art">
+							<i class="btn-icon fas fa-save"></i>
+							Save changes
+						</button>
+						<button class="btn btn__default cancel-edit-btn" type="button" name="cancel-edit-btn">
+							<i class="btn-icon fas fa-times"></i>
+							Cancel
+						</button>
 					</div>
 				</form>
 
@@ -66,9 +95,15 @@
 				if (isset($_SESSION['userID']) && $art->getArtOwnerId() === $_SESSION['userID']) {
 				?>
 					<div class="edit-buttons">
-						<button class="btn btn__default edit-btn">Edit art</button>
+						<button class="btn btn__default edit-btn">
+							<i class="btn-icon fas fa-edit"></i>
+							Edit art
+						</button>
 						<form class="delete-art" action="php/delete-art.inc.php?artId=<?php echo $art->getArtId(); ?>" method="POST">
-							<button class="btn btn__danger delete-art-btn" type="submit" name="delete-art">Delete art</button>
+							<button class="btn btn__danger delete-art-btn" type="submit" name="delete-art">
+								<i class="btn-icon fas fa-trash-alt"></i>
+								Delete art
+							</button>
 						</form>
 					</div>
 				<?php

@@ -10,9 +10,20 @@ if (isset($_POST['delete-art'])) {
 	{
 		public function deleteArt($artId)
 		{
-			$sql = "DELETE FROM `arts` WHERE `id` = ?;";
+			// Delete art from collection folder
+			$sql = "SELECT `art_dir` FROM `arts` WHERE `id` = ?;";
 			$stmt = $this->connect()->prepare($sql);
-			if (!$stmt->execute([$artId])) {
+			$stmt->execute([$artId]);
+			$artDir = $stmt->fetch();
+			$stmt = null;
+			if (file_exists($artDir['art_dir'])) {
+				unlink($artDir['art_dir']);
+			}
+
+			$sql = "DELETE FROM `arts` WHERE `id` = ?;
+							DELETE FROM `likes` WHERE `art_id` = ?;";
+			$stmt = $this->connect()->prepare($sql);
+			if (!$stmt->execute([$artId, $artId])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to delete art. Please try again.";
 				header("Location: ../art?id=$artId");

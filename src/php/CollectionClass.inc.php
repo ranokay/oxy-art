@@ -42,4 +42,19 @@ class Collection extends Dbh
 			return false;
 		}
 	}
+
+	public function getArtLikes($artId)
+	{
+		$sql = "SELECT * FROM `likes` WHERE `art_id` = ?;";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute([$artId]);
+		$result = $stmt->fetchAll();
+		$stmt = null;
+
+		if (count($result) > 0) {
+			return count($result);
+		} else {
+			return 0;
+		}
+	}
 }

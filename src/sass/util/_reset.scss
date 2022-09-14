@@ -48,7 +48,8 @@ img {
 	display: block;
 }
 
-input {
+input,
+textarea {
 	padding: 0.5rem;
 	border: 1px solid;
 	border-color: $blue-gray-600;
@@ -103,6 +104,67 @@ input {
 	@keyframes loader {
 		to {
 			transform: rotate(1turn);
+		}
+	}
+}
+
+.like-form {
+	position: absolute;
+	top: 1rem;
+	right: 1.5rem;
+	z-index: 1;
+	border: none;
+	border-radius: 5rem;
+	transform: scale(2);
+
+	.like-btn__btn {
+		cursor: pointer;
+		.liked {
+			path {
+				fill: $red-600;
+			}
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0.35rem;
+			right: 0.3rem;
+			width: 0.45rem;
+			height: 0.7rem;
+			border-top-left-radius: 0.55rem;
+			border-top-right-radius: 0.5rem;
+			border-bottom-left-radius: 0.1rem;
+			box-shadow: 0px 0px 1rem 0.15rem #000;
+			transform: rotate(-45deg);
+			z-index: -1;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0.35rem;
+			left: 0.3rem;
+			width: 0.45rem;
+			height: 0.7rem;
+			border-top-left-radius: 0.5rem;
+			border-top-right-radius: 0.55rem;
+			border-bottom-right-radius: 0.1rem;
+			box-shadow: 0px 0px 1rem 0.15rem #000;
+			transform: rotate(45deg);
+			z-index: -1;
+		}
+
+		&:hover {
+			transform: scale(1.1);
+
+			&::before {
+				top: 0.06rem;
+			}
+
+			&::after {
+				top: 0.06rem;
+			}
 		}
 	}
 }

@@ -12,6 +12,7 @@ if (isset($_POST['resend'])) {
 		public function resendVerification($email, $userID)
 		{
 			$vKey = random_bytes(32);
+			// $urlMail = "https://oxyproject.herokuapp.com/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 			$urlMail = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 			$hashedKey = password_hash($vKey, PASSWORD_BCRYPT);
 

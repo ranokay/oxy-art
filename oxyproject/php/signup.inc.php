@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
 		protected function setUser($fullName, $username, $email, $password)
 		{
 			$vKey = random_bytes(32);
+			// $urlMail = "https://oxyproject.herokuapp.com/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 			$urlMail = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 
 			$sql = "INSERT INTO users (`full_name`, `username`, `email`, `v_key`, `password`) VALUES (?, ?, ?, ?, ?);";
@@ -24,7 +25,7 @@ if (isset($_POST['submit'])) {
 			$hashedKey = password_hash($vKey, PASSWORD_BCRYPT);
 			$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-			if (!$stmt->execute([$fullName, lcfirst($username), $email, $hashedKey, $hashedPassword])) {
+			if (!$stmt->execute([ucfirst(trim($fullName)), lcfirst(trim($username)), trim($email), $hashedKey, $hashedPassword])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to create user!";
 				header("Location: ../signup");

@@ -35,15 +35,24 @@
 						<div class="profile__stats-item">
 							<img src="assets/icons/likes.svg" alt="Likes">
 							<h4>
-								324 Likes
+								<?php
+								if ($user->getLikesCount() === 1) {
+									echo $user->getLikesCount() . " Like";
+								} else {
+									echo $user->getLikesCount() . " Likes";
+								}
+								?>
 							</h4>
 						</div>
 						<div class="profile__stats-item">
 							<img src="assets/icons/items.svg" alt="Items">
 							<h4>
 								<?php
-								// echo $user->getUserItems() . ' Arts';
-								echo '324 Arts';
+								if ($user->getArtsCount() === 1) {
+									echo $user->getArtsCount() . ' Art';
+								} else {
+									echo $user->getArtsCount() . ' Arts';
+								}
 								?>
 							</h4>
 						</div>
@@ -69,40 +78,40 @@
 					}
 					?>
 					<div class="section__buttons">
-						<form class="form form__reset" action="upload-art" method="POST">
-							<div class="form__group-reset">
-								<button type="submit" name="upload-art" class="btn btn__gradient">
-									<img class="btn-icon" src="assets/icons/upload.svg" alt="upload button">
-									Upload Art
-								</button>
-							</div>
-						</form>
-						<a href="edit-profile">
-							<button type="submit" name="edit-profile" class="btn btn__default">
-								<img class="btn-icon" src="assets/icons/edit.svg" alt="Edit">
-								Edit profile
-							</button>
+						<a href="new-art" class="btn btn__gradient">
+							<img class="btn-icon" src="assets/icons/upload.svg" alt="upload button">
+							Upload Art
+						</a>
+						<a href="edit-profile" class="btn btn__default">
+							<img class="btn-icon" src="assets/icons/edit.svg" alt="Edit">
+							Edit profile
 						</a>
 					</div>
 				</section>
+				<div class="section__title">
+					<h2>My Collection</h2>
+					<span class="section__title-line"></span>
+				</div>
 				<section class="arts__container">
-					<h2 class="section__title">My Collection</h2>
-					<span class="arts__container-line"></span>
 					<?php
 					include "php/CollectionClass.inc.php";
-					$art = new Collection();
-					if ($art->getUserArts()) {
-						foreach ($art->getUserArts() as $art) {
+					$artCollection = new Collection();
+					if ($artCollection->getUserArts()) {
+						foreach ($artCollection->getUserArts() as $art) {
 							$artId = $art['id'];
 							$artName = $art['name'];
 							$artDir = $art['art_dir'];
 					?>
-							<div class="art">
-								<a class="art-card" href="art?id=<?php echo $artId; ?>">
-									<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>">
-									<h3 class="card-name"><?php echo $artName; ?></h3>
-								</a>
-							</div>
+							<a class="art-card" href="art?id=<?php echo $artId; ?>">
+								<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>" loading="lazy">
+								<div class="card-name">
+									<h3 class="art-title"><?php echo $artName ?> </h3>
+									<p class="likes-count">
+										<?php echo $artCollection->getArtLikes($artId); ?>
+										<i class="fas fa-heart liked"></i>
+									</p>
+								</div>
+							</a>
 					<?php
 						}
 					} else {

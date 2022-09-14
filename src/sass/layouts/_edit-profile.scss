@@ -2,13 +2,12 @@
 
 .main__edit_profile {
 	justify-content: flex-start;
-	height: 100vh;
+	margin-bottom: 3rem;
 
 	@media (min-width: $breakpoint-desktop) {
-		height: calc(100vh - 4rem);
 		justify-content: center;
 		align-items: center;
-		margin-bottom: 0;
+		margin-top: 2rem;
 	}
 
 	.profile {
@@ -99,6 +98,10 @@
 
 				.btn {
 					height: 2.5rem;
+
+					&-icon {
+						margin-right: 0.5rem;
+					}
 				}
 			}
 
@@ -114,33 +117,75 @@
 					height: 6rem;
 					border-radius: 50%;
 					box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+					object-fit: cover;
 				}
 
 				.choose-file {
 					background-color: $blue-gray-600;
-					padding: 0.5rem;
+					padding: 0.5rem 1rem;
 					border-radius: 0.5rem;
 					cursor: pointer;
+					height: 2.5rem;
 
 					&:hover {
 						background-color: $blue-gray-800;
+					}
+
+					.btn-icon {
+						margin-right: 0.5rem;
 					}
 				}
 			}
 		}
 
-		.danger-zone {
-			display: grid;
-			grid-template-columns: repeat(2, 2fr);
-			gap: 1rem;
+		.btn-cancel {
+			height: 2.5rem;
+			padding-inline: 1.2rem;
 			margin-top: -1rem;
+
+			@media (min-width: $breakpoint-desktop) {
+				padding-inline: 1.6rem;
+			}
+
+			.btn-icon {
+				width: 1.2rem;
+				margin-right: 0.5rem;
+			}
+		}
+
+		.danger-zone-delimiter {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			width: 100%;
+			white-space: nowrap;
+			margin-top: 2rem;
+
+			.line {
+				width: 100%;
+				height: 0.1rem;
+				border: 0.1rem solid;
+				border-color: $blue-gray-800;
+				background-color: $blue-gray-800;
+				border-radius: 0.1rem;
+			}
+		}
+
+		.danger-zone {
+			display: flex;
+			flex-direction: column;
+
+			@media (min-width: $breakpoint-desktop) {
+				margin-bottom: 1rem;
+			}
 
 			.btn {
 				height: 2.5rem;
 				padding-inline: 1.2rem;
 
-				@media (min-width: $breakpoint-desktop) {
-					padding-inline: 2.6rem;
+				.btn-icon {
+					width: 1.2rem;
+					margin-right: 0.5rem;
 				}
 			}
 		}

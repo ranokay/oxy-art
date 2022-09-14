@@ -2,6 +2,7 @@
 
 .main__explore {
 	margin-top: 2rem;
+	margin-inline: 5%;
 	display: flex;
 	align-items: center;
 	gap: 2rem;
@@ -76,7 +77,7 @@
 				@media (min-width: $breakpoint-desktop) {
 					&:hover {
 						.card-name {
-							display: block;
+							display: flex;
 						}
 						.card-image {
 							animation: opacity 0.5s forwards;
@@ -97,14 +98,22 @@
 					position: absolute;
 					bottom: 0;
 					width: 100%;
-					padding-block: 1rem;
+					display: flex;
+					justify-content: space-between;
+					padding: 1rem;
+					align-items: center;
+					gap: 1rem;
 					border-bottom-left-radius: 0.4rem;
 					border-bottom-right-radius: 0.4rem;
-					text-align: center;
 					background-color: $blue-gray-800-transparent;
 
+					.art-title {
+						text-overflow: ellipsis;
+						overflow: hidden;
+						white-space: nowrap;
+					}
+
 					@media (min-width: $breakpoint-desktop) {
-						padding-block: 2rem;
 						font-size: 1.2rem;
 						display: none;
 						animation: fade-in 0.3s forwards;
@@ -118,9 +127,22 @@
 							}
 						}
 					}
+
+					.likes-count {
+						display: flex;
+						align-items: center;
+						gap: 0.5rem;
+
+						.liked {
+							path {
+								fill: $red-600;
+							}
+						}
+					}
 				}
 
 				.card-image {
+					object-fit: cover;
 					width: 18rem;
 					height: 18rem;
 					border-radius: 0.5rem;

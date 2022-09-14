@@ -15,7 +15,12 @@ session_start();
 		} else {
 		?> <a class="btn btn-profile-mobile" href="login"><img class="profile__icon-mobile" src="assets/icons/circle-user-regular.svg" alt="Profile"> </a> <?php
 		}
-		?> <div class="mobile__burger"><span class="mobile__burger_line"></span> <span class="mobile__burger_line"></span> <span class="mobile__burger_line"></span></div></div><div class="mobile"><div class="mobile__menu"><form class="mobile__menu_search" action="" autocomplete="on"><div class="search__icon"><img src="assets/icons/search.svg" alt="Search"></div><input class="search__input" name="search" type="search" placeholder="Search arts and creators"></form><nav class="navbar"><div class="navbar__resources"><a class="nav__btn" href="collections"><img class="link__icon" src="assets/icons/explore.svg" alt="">Collection</a></div><div class="navbar__resources"><a class="nav__btn" href="contact"><img class="link__icon" src="assets/icons/contact.svg" alt="">Contact</a></div><div class="navbar__resources"><a class="nav__btn" href="about"><img class="link__icon" src="assets/icons/home.svg" alt="">About</a></div></nav> <?php
+		?> <div class="mobile__burger"><span class="mobile__burger_line"></span> <span class="mobile__burger_line"></span> <span class="mobile__burger_line"></span></div></div><div class="mobile"><div class="mobile__menu"><!-- <div class="mobile__menu_search">
+				<div class="search__icon">
+					<img src="assets/icons/search.svg" alt="Search" />
+				</div>
+				<input class="search__input" name="search" type="search" placeholder="Search arts and creators" autocomplete="on" />
+			</div> --><nav class="navbar"><div class="navbar__resources"><a class="nav__btn" href="collections"><img class="link__icon" src="assets/icons/explore.svg" alt="">Collection</a></div><div class="navbar__resources"><a class="nav__btn" href="contact"><img class="link__icon" src="assets/icons/contact.svg" alt="">Contact</a></div><div class="navbar__resources"><a class="nav__btn" href="about"><img class="link__icon" src="assets/icons/home.svg" alt="">About</a></div></nav> <?php
 			if (isset($_SESSION['userID'])) {
 			?> <a class="btn btn-profile" href="dashboard"><img class="profile__icon" src="assets/icons/circle-user-regular.svg" alt="Profile" title="Profile"> </a><a class="btn btn-profile" href="php/logout.inc.php"><img class="profile__icon" src="assets/icons/logout.svg" alt="Logout" title="Logout"> </a> <?php
 			} else {
@@ -36,9 +41,18 @@ session_start();
 						if ($user->getVerified() == 1) {
 							echo '<img class="profile-verified" src="assets/icons/verified.svg" alt="Verified" title="Verified">';
 						}
-						?> </div><div class="profile__content"><h2 class="profile__content-displayname"> <?php echo $user->getFullName(); ?> </h2><h3 class="profile__content-username">@<?php echo $user->getUsername(); ?> </h3></div><div class="profile__stats"><div class="profile__stats-item"><img src="assets/icons/likes.svg" alt="Likes"><h4>324 Likes</h4></div><div class="profile__stats-item"><img src="assets/icons/items.svg" alt="Items"><h4> <?php
-								// echo $user->getUserItems() . ' Arts';
-								echo '324 Arts';
+						?> </div><div class="profile__content"><h2 class="profile__content-displayname"> <?php echo $user->getFullName(); ?> </h2><h3 class="profile__content-username">@<?php echo $user->getUsername(); ?> </h3></div><div class="profile__stats"><div class="profile__stats-item"><img src="assets/icons/likes.svg" alt="Likes"><h4> <?php
+								if ($user->getLikesCount() === 1) {
+									echo $user->getLikesCount() . " Like";
+								} else {
+									echo $user->getLikesCount() . " Likes";
+								}
+								?> </h4></div><div class="profile__stats-item"><img src="assets/icons/items.svg" alt="Items"><h4> <?php
+								if ($user->getArtsCount() === 1) {
+									echo $user->getArtsCount() . ' Art';
+								} else {
+									echo $user->getArtsCount() . ' Arts';
+								}
 								?> </h4></div></div> <?php
 					if ($user->getVerified() === 0) {
 					?> <form class="form-verification-msg" action="php/resend-verification.inc.php" method="POST"><input type="hidden" name="email" value="<?php echo $user->getEmail(); ?>"><p class="form__error-active">Your account is not verified. Please check your email for the verification link or <button class="resend-btn" type="submit" name="resend">click here</button> to resend the verification email.</p></form> <?php
@@ -53,15 +67,15 @@ session_start();
 						unset($_SESSION['success']);
 						echo "<p class='form__success'>{$successMsg}</p>";
 					}
-					?> <div class="section__buttons"><form class="form form__reset" action="upload-art" method="POST"><div class="form__group-reset"><button type="submit" name="upload-art" class="btn btn__gradient"><img class="btn-icon" src="assets/icons/upload.svg" alt="upload button"> Upload Art</button></div></form><a href="edit-profile"><button type="submit" name="edit-profile" class="btn btn__default"><img class="btn-icon" src="assets/icons/edit.svg" alt="Edit"> Edit profile</button></a></div></section><section class="arts__container"><h2 class="section__title">My Collection</h2><span class="arts__container-line"></span> <?php
+					?> <div class="section__buttons"><a href="new-art" class="btn btn__gradient"><img class="btn-icon" src="assets/icons/upload.svg" alt="upload button"> Upload Art </a><a href="edit-profile" class="btn btn__default"><img class="btn-icon" src="assets/icons/edit.svg" alt="Edit"> Edit profile</a></div></section><div class="section__title"><h2>My Collection</h2><span class="section__title-line"></span></div><section class="arts__container"> <?php
 					include "php/CollectionClass.inc.php";
-					$art = new Collection();
-					if ($art->getUserArts()) {
-						foreach ($art->getUserArts() as $art) {
+					$artCollection = new Collection();
+					if ($artCollection->getUserArts()) {
+						foreach ($artCollection->getUserArts() as $art) {
 							$artId = $art['id'];
 							$artName = $art['name'];
 							$artDir = $art['art_dir'];
-					?> <div class="art"><a class="art-card" href="art?id=<?php echo $artId; ?>"><img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>"><h3 class="card-name"><?php echo $artName; ?></h3></a></div> <?php
+					?> <a class="art-card" href="art?id=<?php echo $artId; ?>"><img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>" loading="lazy"><div class="card-name"><h3 class="art-title"><?php echo $artName ?> </h3><p class="likes-count"> <?php echo $artCollection->getArtLikes($artId); ?> <i class="fas fa-heart liked"></i></p></div></a> <?php
 						}
 					} else {
 						echo '<h2 class="not-uploaded-images">You have not uploaded any art yet!</h2>';

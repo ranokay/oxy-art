@@ -6,12 +6,15 @@ if (isset($_POST['save-changes'])) {
 	$username = $_POST['username'];
 	$email = $_POST['email'];
 	$userID = $_SESSION['userID'];
+	$avatar = $_FILES['profile-img']['name'];
+	$avatarSize = $_FILES['profile-img']['size'];
+	$avatarError = $_FILES['profile-img']['error'];
 
 	include "dbh.inc.php";
 
 	class UpdateUser extends Dbh
 	{
-		protected function updateUser($fullName, $username, $email, $userID)
+		protected function updateUser($fullName, $username, $email, $userID, $avatar)
 		{
 			if (isset($fullName) && !empty($fullName)) {
 				$sql = "UPDATE `users` SET `full_name` = ? WHERE `id` = ?;";
@@ -37,6 +40,7 @@ if (isset($_POST['save-changes'])) {
 
 			if (isset($email) && !empty($email)) {
 				$vKey = random_bytes(32);
+				// $urlMail = "https://oxyproject.herokuapp.com/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 				$urlMail = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 				$hashedKey = password_hash($vKey, PASSWORD_BCRYPT);
 
@@ -68,7 +72,43 @@ if (isset($_POST['save-changes'])) {
 				header("Location: ../login");
 				exit();
 			}
+			if (isset($avatar) && !empty($avatar)) {
+				$avatarTmp = $_FILES['profile-img']['tmp_name'];
+				$fileExt = explode('.', $avatar);
+				$fileActualExt = strtolower(end($fileExt));
+				$allowed = array('jpg', 'jpeg', 'png');
 
+				if (!in_array($fileActualExt, $allowed)) {
+					$_SESSION['error'] = "You cannot upload files of this type! Only JPG, JPEG and PNG files are allowed.";
+					header("Location: ../edit-profile");
+					exit();
+				}
+
+				// Delete old avatar
+				$sql = "SELECT `avatar` FROM `users` WHERE `id` = ?;";
+				$stmt = $this->connect()->prepare($sql);
+				$stmt->execute([$userID]);
+				$oldAvatar = $stmt->fetch();
+				$stmt = null;
+				unlink($oldAvatar['avatar']);
+
+				// Upload new avatar
+				$avatarName = uniqid('', true) . "." . $fileActualExt;
+				if (!is_dir('../assets/avatars/' . $userID)) {
+					mkdir('../assets/avatars/' . $userID);
+				}
+				$avatarDestination = '../assets/avatars/' . $userID . '/' . $avatarName;
+				move_uploaded_file($avatarTmp, $avatarDestination);
+
+				$sql = "UPDATE `users` SET `avatar` = ? WHERE `id` = ?;";
+				$stmt = $this->connect()->prepare($sql);
+				if (!$stmt->execute([$avatarDestination, $userID])) {
+					$stmt = null;
+					$_SESSION['error'] = "Failed to update avatar!";
+					header("Location: ../edit-profile");
+					exit();
+				}
+			}
 			$stmt = null;
 			$_SESSION['success'] = "Profile updated!";
 			header("Location: ../edit-profile");
@@ -118,12 +158,15 @@ if (isset($_POST['save-changes'])) {
 	}
 	class UpdateContr extends UpdateUser
 	{
-		public function __construct($fullName, $username, $email, $userID)
+		public function __construct($fullName, $username, $email, $userID, $avatar, $avatarError, $avatarSize)
 		{
 			$this->fullName = $fullName;
 			$this->username = $username;
 			$this->email = $email;
 			$this->userID = $userID;
+			$this->avatar = $avatar;
+			$this->avatarError = $avatarError;
+			$this->avatarSize = $avatarSize;
 		}
 
 		public function editUser()
@@ -158,11 +201,21 @@ if (isset($_POST['save-changes'])) {
 				header("Location: ../edit-profile");
 				exit();
 			}
-			$this->updateUser($this->fullName, $this->username, $this->email, $this->userID);
+			if (!empty($this->avatar) && $this->avatarErrorCheck() === false) {
+				$_SESSION['error'] = "There was an error uploading your file!";
+				header("Location: ../edit-profile");
+				exit();
+			}
+			if (!empty($this->avatar) && $this->avatarSizeCheck() === false) {
+				$_SESSION['error'] = "Your file is too big! Max size is 5MB.";
+				header("Location: ../edit-profile");
+				exit();
+			}
+			$this->updateUser($this->fullName, $this->username, $this->email, $this->userID, $this->avatar);
 		}
 		private function emptyFields()
 		{
-			if (empty($this->fullName) && empty($this->username) && empty($this->email)) {
+			if (empty($this->fullName) && empty($this->username) && empty($this->email) && empty($this->avatar)) {
 				$result = false;
 			} else {
 				$result = true;
@@ -218,8 +271,27 @@ if (isset($_POST['save-changes'])) {
 			}
 			return $result;
 		}
+		private function avatarErrorCheck()
+		{
+			if ($this->avatarError !== 0) {
+				$result = false;
+			} else {
+				$result = true;
+			}
+			return $result;
+		}
+		private function avatarSizeCheck()
+		{
+			define('MB', 1048576);
+			if ($this->avatarSize > 5 * MB) {
+				$result = false;
+			} else {
+				$result = true;
+			}
+			return $result;
+		}
 	}
-	$update = new UpdateContr($fullName, $username, $email, $userID);
+	$update = new UpdateContr($fullName, $username, $email, $userID, $avatar, $avatarError, $avatarSize);
 	$update->editUser();
 } else {
 	header("Location: ../home");

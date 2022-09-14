@@ -130,3 +130,27 @@ if (errorMsg) {
 		errorMsg.style.display = 'none'
 	}, 10000)
 }
+
+// image upload preview
+const imageUpload = document.querySelector('#image-upload')
+const imagePreview = document.querySelector('#image-preview')
+if (imageUpload) {
+	imageUpload.addEventListener('change', () => {
+		const file = imageUpload.files[0]
+		if (file) {
+			const reader = new FileReader()
+			reader.addEventListener('load', () => {
+				imagePreview.setAttribute('src', reader.result)
+			})
+			reader.readAsDataURL(file)
+		}
+	})
+}
+
+// if image is not found
+const images = document.querySelectorAll('img')
+images.forEach(item => {
+	item.addEventListener('error', () => {
+		item.src = '../assets/icons/no-image.svg'
+	})
+})

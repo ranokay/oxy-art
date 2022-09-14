@@ -10,7 +10,8 @@
 		margin-block: 0;
 		height: calc(100vh - 4rem);
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: space-around;
+		gap: 5rem;
 	}
 
 	.form {
@@ -52,12 +53,18 @@
 
 	.art__container {
 		.art-card {
+			position: relative;
 			.art-image {
 				width: 100%;
-				max-height: 70vh;
+				max-height: 80vh;
 				height: auto;
-				object-fit: cover;
+				object-fit: fill;
 				border-radius: 0.5rem;
+
+				@media (min-width: $breakpoint-desktop) {
+					max-width: 40rem;
+					min-width: 25rem;
+				}
 			}
 		}
 	}
@@ -73,7 +80,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 			width: 100%;
 			gap: 1rem;
 
@@ -93,6 +100,13 @@
 				justify-content: space-between;
 				width: 100%;
 				margin-top: 2rem;
+
+				.btn {
+					height: 2.5rem;
+					&-icon {
+						margin-right: 0.5rem;
+					}
+				}
 
 				&.hidden {
 					display: none;
@@ -177,6 +191,7 @@
 						height: 2.5rem;
 						border-radius: 50%;
 						margin-right: 0.5rem;
+						object-fit: cover;
 					}
 				}
 				.art-date {
@@ -190,6 +205,13 @@
 			justify-content: space-between;
 			width: 100%;
 			margin-top: 2rem;
+
+			.btn {
+				height: 2.5rem;
+				&-icon {
+					margin-right: 0.5rem;
+				}
+			}
 
 			&.hidden {
 				display: none;

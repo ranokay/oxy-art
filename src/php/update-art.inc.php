@@ -17,7 +17,7 @@ if (isset($_POST['edit-art'])) {
 			if (isset($artName)) {
 				$sql = "UPDATE `arts` SET `name` = ? WHERE `id` = ?;";
 				$stmt = $this->connect()->prepare($sql);
-				if (!$stmt->execute([ucfirst($artName), $artId])) {
+				if (!$stmt->execute([ucfirst(trim($artName)), $artId])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to update art name! Try again later.";
 					header("Location: ../$url");
@@ -28,7 +28,7 @@ if (isset($_POST['edit-art'])) {
 			if (isset($artDesc)) {
 				$sql = "UPDATE `arts` SET `description` = ? WHERE `id` = ?;";
 				$stmt = $this->connect()->prepare($sql);
-				if (!$stmt->execute([ucfirst($artDesc), $artId])) {
+				if (!$stmt->execute([ucfirst(trim($artDesc)), $artId])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to update art description! Try again later.";
 					header("Location: ../$url");
@@ -85,7 +85,7 @@ if (isset($_POST['edit-art'])) {
 				exit();
 			}
 			if (!empty($this->artDesc) && $this->validateDesc() === false) {
-				$_SESSION['error'] = "Description must be between 10 and 300 characters and only contain letters, numbers and some special characters (. , : ; - _ () [] {} ! ? / &).";
+				$_SESSION['error'] = "Description must be between 10 and 300 characters and only contain letters, numbers and punctuation.";
 				header("Location: ../$this->url");
 				exit();
 			}
@@ -129,6 +129,6 @@ if (isset($_POST['edit-art'])) {
 	$update = new UpdateContr($artName, $artDesc, $artId, $url, $checkbox);
 	$update->editArt();
 } else {
-	header("Location: ../home");
+	echo "<h1>404. Page not found!</h1>";
 	exit();
 }

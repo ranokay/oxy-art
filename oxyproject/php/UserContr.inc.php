@@ -15,30 +15,40 @@ class User extends Dbh
 			$stmt = null;
 			session_unset();
 			session_destroy();
-			header("Location: home");
+			header("Location: ../home");
 			exit();
 		}
 		$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $user;
 	}
 
-	// protected function userItems($userID)
-	// {
-	// 	$sql = "SELECT `total_items` FROM user_collection WHERE `user_id` = ?;";
-	// 	$stmt = $this->connect()->prepare($sql);
+	protected function countUserArts($userID)
+	{
+		$sql = "SELECT COUNT(*) FROM `arts` WHERE `owner_id` = ?;";
+		$stmt = $this->connect()->prepare($sql);
 
-	// 	if (!$stmt->execute([$userID])) {
-	// 		$stmt = null;
-	// 		header("Location: home?error=stmtfailed");
-	// 		exit();
-	// 	}
-	// 	if ($stmt->rowCount() == 0) {
-	// 		return false;
-	// 	} else {
-	// 		$userItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	// 		return $userItems;
-	// 	}
-	// }
+		if (!$stmt->execute([$userID])) {
+			$stmt = null;
+			header("Location: ../home");
+			exit();
+		}
+		$count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $count[0]['COUNT(*)'];
+	}
+
+	protected function countUserLikes($userID)
+	{
+		$sql = "SELECT COUNT(*) FROM `likes` WHERE `user_id` = ?;";
+		$stmt = $this->connect()->prepare($sql);
+
+		if (!$stmt->execute([$userID])) {
+			$stmt = null;
+			header("Location: ../home");
+			exit();
+		}
+		$count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $count[0]['COUNT(*)'];
+	}
 }
 class UserContr extends User
 {
@@ -51,11 +61,8 @@ class UserContr extends User
 		$this->verified = $user[0]['verified'];
 		$this->avatar = $user[0]['avatar'];
 		$this->subscribed = $user[0]['subscribed'];
-
-		// if ($this->userItems($userID)) {
-		// 	$userItems = $this->userItems($userID);
-		// 	$this->userItems = $userItems[0]['total_items'];
-		// }
+		$this->artsCount = $this->countUserArts($userID);
+		$this->likesCount = $this->countUserLikes($userID);
 	}
 	public function getFullName()
 	{
@@ -81,12 +88,12 @@ class UserContr extends User
 	{
 		return $this->subscribed;
 	}
-	// public function getUserItems()
-	// {
-	// 	if (!$this->userItems === false) {
-	// 		return $this->userItems;
-	// 	} else {
-	// 		return 0;
-	// 	}
-	// }
+	public function getArtsCount()
+	{
+		return $this->artsCount;
+	}
+	public function getLikesCount()
+	{
+		return $this->likesCount;
+	}
 }

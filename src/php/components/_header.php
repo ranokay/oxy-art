@@ -35,12 +35,12 @@
 	</div>
 	<div class="mobile">
 		<div class="mobile__menu">
-			<form class="mobile__menu_search" action="" autocomplete="on">
+			<!-- <div class="mobile__menu_search">
 				<div class="search__icon">
 					<img src="assets/icons/search.svg" alt="Search" />
 				</div>
-				<input class="search__input" name="search" type="search" placeholder="Search arts and creators" />
-			</form>
+				<input class="search__input" name="search" type="search" placeholder="Search arts and creators" autocomplete="on" />
+			</div> -->
 			<nav class="navbar">
 				<div class="navbar__resources">
 					<a class="nav__btn" href="collections"><img class="link__icon" src="assets/icons/explore.svg" alt="">Collection</a>
