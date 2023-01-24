@@ -1,7 +1,7 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Sign Up" })
 <?php
 if (isset($_SESSION['userID'])) {
-	header("Location: ../dashboard");
+	header("Location: ../dashboard.php");
 	exit();
 }
 ?>
@@ -26,7 +26,8 @@ if (isset($_SESSION['userID'])) {
 				}
 				?>
 				<div class="form__group">
-					<input type="text" id="full-name" name="fullName" aria-describedby="fullnameHelp" placeholder="First and last name *">
+					<input type="text" id="full-name" name="fullName" aria-describedby="fullnameHelp"
+						placeholder="First and last name *">
 				</div>
 				<div class="form__group">
 					<input type="text" name="username" aria-describedby="usernameHelp" placeholder="Username *">
@@ -36,18 +37,20 @@ if (isset($_SESSION['userID'])) {
 				</div>
 				<div class="form__group">
 					<input type="password" name="password" placeholder="Password *">
-					<p class="form__group-suggest">Password must contain at least one number, one letter, one uppercase letter and one special character!</p>
+					<p class="form__group-suggest">Password must contain at least one number, one letter, one uppercase letter and
+						one special character!</p>
 				</div>
 				<div class="form__group">
 					<input type="password" name="confirmPassword" placeholder="Confirm password *">
 				</div>
 				<div class="form__checkbox">
 					<input type="checkbox" name="checkbox" value="checkbox">
-					<label for="checkbox-signup">I agree to the <a href="terms">Terms of Service</a> and <a href="terms/#privacy">Privacy Policy</a></label>
+					<label for="checkbox-signup">I agree to the <a href="terms.php">Terms of Service</a> and <a
+							href="terms.php#privacy-policy">Privacy Policy</a></label>
 				</div>
 				<div class="form__buttons">
 					<button type="submit" class="btn btn__gradient" name="submit">Sign Up</button>
-					<a href="login" class="have-account">
+					<a href="login.php" class="have-account">
 						Already have an account?
 					</a>
 				</div>

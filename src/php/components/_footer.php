@@ -4,7 +4,7 @@
 		<div class="logo">
 			<div class="logo__content">
 				<img src="assets/logo/logo-footer.svg" alt="Oxy Project Logo" />
-				<a class="logo__content_text" href="home">OxyProject</a>
+				<a class="logo__content_text" href="index.php">OxyProject</a>
 			</div>
 			@@include('_share-buttons.php')
 		</div>
@@ -12,15 +12,15 @@
 			<div class="column">
 				<div class="column__title">Navigation</div>
 				<div class="column__links">
-					<a href="home">Home</a>
-					<a href="collections">Collections</a>
+					<a href="index.php">Home</a>
+					<a href="collections.php">Collections</a>
 				</div>
 			</div>
 			<div class="column">
 				<div class="column__title">Community</div>
 				<div class="column__links">
-					<a href="about">About</a>
-					<a href="contact">Help Center</a>
+					<a href="about.php">About</a>
+					<a href="contact.php">Help Center</a>
 				</div>
 			</div>
 		</div>
@@ -51,11 +51,12 @@
 	</div>
 	<div class="copyright">
 		<div class="copyright__text">
-			&copy; <?= date('Y') ?> - OxyProject. All rights reserved.
+			&copy;
+			<?= date('Y') ?> - OxyProject. All rights reserved.
 		</div>
 		<div class="copyright__links">
-			<a href="terms#privacy-policy">Privacy Policy</a>
-			<a href="terms">Terms of Service</a>
+			<a href="terms.php#privacy-policy">Privacy Policy</a>
+			<a href="terms.php">Terms of Service</a>
 		</div>
 	</div>
 </footer>

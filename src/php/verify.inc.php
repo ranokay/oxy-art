@@ -4,10 +4,10 @@ session_start();
 function redirect()
 {
 	if (isset($_SESSION['userID'])) {
-		header("Location: ../dashboard");
+		header("Location: ../dashboard.php");
 		exit();
 	} else {
-		header("Location: ../login");
+		header("Location: ../login.php");
 		exit();
 	}
 }
@@ -77,6 +77,8 @@ if (isset($_GET['vkey']) && !empty($_GET['vkey'])) {
 
 	class VerifyAccountContr extends VerifyAccount
 	{
+		private $email;
+		private $vKey;
 		public function __construct($email, $vKey)
 		{
 			$this->email = $email;
@@ -90,6 +92,6 @@ if (isset($_GET['vkey']) && !empty($_GET['vkey'])) {
 	$verifyAccount = new VerifyAccountContr($email, $vKey);
 	$verifyAccount->verifyUser();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

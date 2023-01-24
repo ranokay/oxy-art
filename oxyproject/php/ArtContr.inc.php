@@ -104,6 +104,16 @@ if (isset($_GET['id'])) {
 
 	class ArtContr extends Art
 	{
+		public $name;
+		public $description;
+		public $artDir;
+		public $artPublic;
+		public $dateAdded;
+		public $ownerAvatar;
+		public $ownerName;
+		public $ownerId;
+		public $artId;
+		public $isLiked;
 		public function __construct($artId)
 		{
 			$art = $this->getArt($artId);

@@ -14,17 +14,18 @@
 							<span class="title__content">Digital Arts</span>
 						</h1>
 						<div class="buttons">
-							<a href="collections" class="btn btn__gradient">Explore</a>
+							<a href="collections.php" class="btn btn__gradient">Explore</a>
 							<?php
 							if (isset($_SESSION['userID'])) {
-								echo '<a href="new-art" class="btn btn__default">Upload</a>';
+								echo '<a href="new-art.php" class="btn btn__default">Upload</a>';
 							} else {
-								echo '<a href="login" class="btn btn__default">Upload</a>';
+								echo '<a href="login.php" class="btn btn__default">Upload</a>';
 							}
 							?>
 						</div>
 					</div>
-					<iframe id="iframe" src='https://my.spline.design/miniroomartcopy-29903b597d4fe4c577dc95d57d419f96/' frameborder='0' width='100%' height='100%'></iframe>
+					<iframe id="iframe" src='https://my.spline.design/miniroomartcopy-29903b597d4fe4c577dc95d57d419f96/'
+						frameborder='0' width='100%' height='100%'></iframe>
 				</div>
 			</section>
 		</main>

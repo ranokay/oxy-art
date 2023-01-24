@@ -19,7 +19,7 @@ if (isset($_POST['reset-request-submit'])) {
 			if (!$stmt->execute([$userEmail])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to send reset request! Please try again later.";
-				header("Location: ../reset-password-request");
+				header("Location: ../reset-password-request.php");
 				exit();
 			}
 			if ($stmt->rowCount() === 0) {
@@ -37,7 +37,7 @@ if (isset($_POST['reset-request-submit'])) {
 			if (!$stmt->execute([$userEmail])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to send reset request! Please try again later.";
-				header("Location: ../reset-password-request");
+				header("Location: ../reset-password-request.php");
 				exit();
 			}
 		}
@@ -45,8 +45,7 @@ if (isset($_POST['reset-request-submit'])) {
 		{
 			$selector = bin2hex(random_bytes(8));
 			$token = random_bytes(32);
-			// $url = "https://oxyproject.herokuapp.com/create-new-password?selector=" . $selector . "&validator=" . bin2hex($token);
-			$url = "https://localhost:3000/create-new-password?selector=" . $selector . "&validator=" . bin2hex($token);
+			$url = "https://localhost:3000/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 			$expires = date("U") + 1800;
 
@@ -58,7 +57,7 @@ if (isset($_POST['reset-request-submit'])) {
 			if (!$stmt->execute([$userEmail, $selector, $hashedToken, $expires])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to send reset request! Please try again later.";
-				header("Location: ../reset-password-request");
+				header("Location: ../reset-password-request.php");
 				exit();
 			}
 
@@ -75,13 +74,14 @@ if (isset($_POST['reset-request-submit'])) {
 
 			$stmt = null;
 			$_SESSION['success'] = "Email sent to <span style='font-weight: bold;'>" . $userEmail . "</span> with further instructions.";
-			header("Location: ../reset-password-request");
+			header("Location: ../reset-password-request.php");
 			exit();
 		}
 	}
 
 	class ResetRequestContr extends ResetRequest
 	{
+		private $email;
 		public function __construct($userEmail)
 		{
 			$this->email = $userEmail;
@@ -90,12 +90,12 @@ if (isset($_POST['reset-request-submit'])) {
 		{
 			if ($this->emptyFields() == false) {
 				$_SESSION['error'] = "Please fill in all fields.";
-				header("Location: ../reset-password-request");
+				header("Location: ../reset-password-request.php");
 				exit();
 			}
 			if ($this->userNotFound() == false) {
 				$_SESSION['error'] = "No user found with that email.";
-				header("Location: ../reset-password-request");
+				header("Location: ../reset-password-request.php");
 				exit();
 			}
 			$this->deleteToken($this->email);
@@ -123,6 +123,6 @@ if (isset($_POST['reset-request-submit'])) {
 	$resetRequest = new ResetRequestContr($userEmail);
 	$resetRequest->resetRequest();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

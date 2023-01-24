@@ -5,5 +5,5 @@ session_unset();
 session_destroy();
 
 // goin back to the home page
-header("Location: ../home");
+header("Location: ../index.php");
 exit();

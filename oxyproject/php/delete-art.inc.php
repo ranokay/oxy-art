@@ -26,13 +26,13 @@ if (isset($_POST['delete-art'])) {
 			if (!$stmt->execute([$artId, $artId])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to delete art. Please try again.";
-				header("Location: ../art?id=$artId");
+				header("Location: ../art.php?id=$artId");
 				exit();
 			}
 
 			$stmt = null;
 			$_SESSION['success'] = "Art deleted successfully!";
-			header("Location: ../dashboard");
+			header("Location: ../dashboard.php");
 			exit();
 		}
 	}
@@ -40,6 +40,6 @@ if (isset($_POST['delete-art'])) {
 	$deleteArt = new DeleteArt();
 	$deleteArt->deleteArt($artId);
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

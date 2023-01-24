@@ -5,9 +5,13 @@ if (isset($_POST['upload-art'])) {
 	$userID = $_SESSION['userID'];
 	$artName = $_POST['art-name'];
 	$artDesc = $_POST['art-desc'];
-	$checkbox = $_POST['checkbox-art-public'];
 	$fileSize = $_FILES['art-file']['size'];
 	$fileError = $_FILES['art-file']['error'];
+	$checkbox = 0;
+
+	if (isset($_POST['is-public'])) {
+		$checkbox = 1;
+	}
 
 	include "dbh.inc.php";
 
@@ -23,7 +27,7 @@ if (isset($_POST['upload-art'])) {
 
 			if (!in_array($fileActualExt, $allowed)) {
 				$_SESSION['error'] = "You cannot upload files of this type! Only JPG, JPEG, PNG, SVG and GIF files are allowed.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 
@@ -34,30 +38,28 @@ if (isset($_POST['upload-art'])) {
 			}
 			$artDir = '../assets/collection/' . $userID . '/' . $fileNewName;
 			move_uploaded_file($fileTmpName, $artDir);
-			function checkPublic($checkbox)
-			{
-				if (isset($checkbox)) {
-					return 1;
-				} else {
-					return 0;
-				}
-			}
 
 			$sql = "INSERT INTO `arts` (`name`, `description`, `owner_id`, `art_dir`, `public`) VALUES (?, ?, ?, ?, ?);";
 			$stmt = $this->connect()->prepare($sql);
 
-			if (!$stmt->execute([ucfirst(trim($artName)), ucfirst(trim($artDesc)), $userID, $artDir, checkPublic($checkbox)])) {
+			if (!$stmt->execute([ucfirst(trim($artName)), ucfirst(trim($artDesc)), $userID, $artDir, $checkbox])) {
 				$_SESSION['error'] = "Something went wrong. Please try again later.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 			$_SESSION['success'] = "Art uploaded successfully!";
-			header("Location: ../dashboard");
+			header("Location: ../dashboard.php");
 			exit();
 		}
 	}
 	class UploadContr extends UploadNewArt
 	{
+		private $artName;
+		private $artDesc;
+		private $userID;
+		private $checkbox;
+		private $fileSize;
+		private $fileError;
 		public function __construct($artName, $artDesc, $userID, $checkbox, $fileSize, $fileError)
 		{
 			$this->artName = $artName;
@@ -72,27 +74,27 @@ if (isset($_POST['upload-art'])) {
 		{
 			if ($this->emptyFields() === false) {
 				$_SESSION['error'] = "Please fill in all fields.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 			if (!empty($this->artName) && $this->validateName() === false) {
 				$_SESSION['error'] = "Name must be between 3 and 25 characters and only contain letters.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 			if (!empty($this->artDesc) && $this->validateDesc() === false) {
 				$_SESSION['error'] = "Description must be between 10 and 300 characters and only contain letters, numbers and punctuation.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 			if ($this->validFileSize() === false) {
 				$_SESSION['error'] = "File size must be less than 10MB.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 			if ($this->validFileError() === false) {
 				$_SESSION['error'] = "Something went wrong. Please try again later.";
-				header("Location: ../new-art");
+				header("Location: ../new-art.php");
 				exit();
 			}
 			$this->uploadNewArt($this->artName, $this->artDesc, $this->userID, $this->checkbox);
@@ -154,6 +156,6 @@ if (isset($_POST['upload-art'])) {
 	$upload = new UploadContr($artName, $artDesc, $userID, $checkbox, $fileSize, $fileError);
 	$upload->uploadArt();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

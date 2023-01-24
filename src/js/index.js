@@ -34,13 +34,14 @@ window.addEventListener('scroll', () => {
 const mobileBurger = document.querySelector('.mobile__burger')
 const mobile = document.querySelector('.mobile')
 const bodyScrollLock = document.querySelector('body')
-mobileBurger.addEventListener('click', () => {
-	mobileBurger.classList.toggle('open')
-	mobile.classList.toggle('open')
-	bodyScrollLock.classList.toggle('scroll__lock')
-	headerMain.classList.toggle('focus')
-})
-
+if (mobileBurger) {
+	mobileBurger.addEventListener('click', () => {
+		mobileBurger.classList.toggle('open')
+		mobile.classList.toggle('open')
+		bodyScrollLock.classList.toggle('scroll__lock')
+		headerMain.classList.toggle('focus')
+	})
+}
 // remove open class when resize window
 window.addEventListener('resize', () => {
 	if (breakpointDesktop.matches) {

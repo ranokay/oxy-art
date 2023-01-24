@@ -10,7 +10,7 @@
 				exit();
 			}
 			if (ctype_xdigit($_GET['selector']) !== false && ctype_xdigit($_GET['validator']) !== false) {
-			?>
+				?>
 				<form class="form form__reset" action="php/reset-password.inc.php" method="POST">
 					<input type="hidden" name="selector" value="<?php echo htmlspecialchars($_GET['selector']); ?>">
 					<input type="hidden" name="validator" value="<?php echo htmlspecialchars($_GET['validator']); ?>">
@@ -30,14 +30,15 @@
 					?>
 					<div class="form__group">
 						<input type="password" name="password" placeholder="New password *">
-						<p class="form__group-suggest">Password must contain at least one number, one letter, one uppercase letter and one special character!</p>
+						<p class="form__group-suggest">Password must contain at least one number, one letter, one uppercase letter and
+							one special character!</p>
 					</div>
 					<div class="form__group">
 						<input type="password" name="confirmPassword" placeholder="Confirm password *">
 					</div>
 					<button type="submit" class="btn btn__default" name="reset-password-submit">Reset password</button>
 				</form>
-			<?php
+				<?php
 			} else {
 				echo '<p class="form__error">Could not validate your request! Please try again.</p>';
 			}

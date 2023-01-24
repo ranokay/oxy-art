@@ -5,8 +5,12 @@ if (isset($_POST['edit-art'])) {
 	$artName = $_POST['art-name'];
 	$artDesc = $_POST['art-desc'];
 	$artId = $_GET['artId'];
-	$url = "art?id=$artId";
-	$checkbox = $_POST['checkbox-art-public'];
+	$url = "art.php?id=$artId";
+	$checkbox = 0;
+
+	if (isset($_POST['is-public'])) {
+		$checkbox = 1;
+	}
 
 	include "dbh.inc.php";
 
@@ -36,24 +40,27 @@ if (isset($_POST['edit-art'])) {
 				}
 			}
 
-			if (isset($checkbox)) {
-				$sql = "UPDATE `arts` SET `public` = 1 WHERE `id` = ?;";
-				$stmt = $this->connect()->prepare($sql);
-				if (!$stmt->execute([$artId])) {
-					$stmt = null;
-					$_SESSION['error'] = "Failed to update art public status";
-					header("Location: ../$url");
-					exit();
-				}
-			} else {
-				$sql = "UPDATE `arts` SET `public` = 0 WHERE `id` = ?;";
-				$stmt = $this->connect()->prepare($sql);
-				if (!$stmt->execute([$artId])) {
-					$stmt = null;
-					$_SESSION['error'] = "Failed to update art public status";
-					header("Location: ../$url");
-					exit();
-				}
+			switch ($checkbox) {
+				case 0:
+					$sql = "UPDATE `arts` SET `public` = 0 WHERE `id` = ?;";
+					$stmt = $this->connect()->prepare($sql);
+					if (!$stmt->execute([$artId])) {
+						$stmt = null;
+						$_SESSION['error'] = "Failed to update art public status";
+						header("Location: ../$url");
+						exit();
+					}
+					break;
+				case 1:
+					$sql = "UPDATE `arts` SET `public` = 1 WHERE `id` = ?;";
+					$stmt = $this->connect()->prepare($sql);
+					if (!$stmt->execute([$artId])) {
+						$stmt = null;
+						$_SESSION['error'] = "Failed to update art public status";
+						header("Location: ../$url");
+						exit();
+					}
+					break;
 			}
 			$stmt = null;
 			$_SESSION['success'] = "Art updated successfully!";
@@ -63,6 +70,11 @@ if (isset($_POST['edit-art'])) {
 	}
 	class UpdateContr extends UpdateArt
 	{
+		protected $artName;
+		protected $artDesc;
+		protected $artId;
+		protected $url;
+		protected $checkbox;
 		public function __construct($artName, $artDesc, $artId, $url, $checkbox)
 		{
 			$this->artName = $artName;

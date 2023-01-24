@@ -1,7 +1,7 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Login" })
 <?php
 if (isset($_SESSION['userID'])) {
-	header("Location: ../dashboard");
+	header("Location: ../dashboard.php");
 	exit();
 }
 ?>
@@ -33,14 +33,14 @@ if (isset($_SESSION['userID'])) {
 				</div>
 				<div class="form__buttons">
 					<button type="submit" class="btn btn__gradient" name="submit">Log In</button>
-					<a class="forgot-password" href="reset-password-request">Forgot Password?</a>
+					<a class="forgot-password" href="reset-password-request.php">Forgot Password?</a>
 				</div>
 				<div class="form__delimiter">
 					<span class="line"></span>
 					<span class="text">or</span>
 					<span class="line"></span>
 				</div>
-				<a href="signup" class="btn btn__default create-account">
+				<a href="signup.php" class="btn btn__default create-account">
 					Create an account
 				</a>
 			</form>

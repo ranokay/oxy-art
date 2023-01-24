@@ -15,12 +15,14 @@
 						$artId = $art['id'];
 						$artName = $art['name'];
 						$artDir = $art['art_dir'];
-				?>
+						?>
 						<div class="explore__arts">
-							<a class="explore__arts-card" href="art?id=<?php echo $artId; ?>">
+							<a class="explore__arts-card" href="art.php?id=<?php echo $artId; ?>">
 								<img class="card-image" src="<?php echo $artDir; ?>" alt="<?php echo $artName; ?>" loading="lazy">
 								<div class="card-name">
-									<h3><?php echo $artName ?> </h3>
+									<h3>
+										<?php echo $artName ?>
+									</h3>
 									<p class="likes-count">
 										<?php echo $artCollection->getArtLikes($artId); ?>
 										<i class="fas fa-heart liked"></i>
@@ -28,10 +30,10 @@
 								</div>
 							</a>
 						</div>
-				<?php
+						<?php
 					}
 				} else {
-					echo "<h2 class='no-public-arts'>No public art found.</h2>";
+					echo "<h2 class='no-public-arts'>No public arts found.</h2>";
 				}
 				if (isset($_SESSION['error'])) {
 					$errorMsg = $_SESSION['error'];

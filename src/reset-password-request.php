@@ -19,7 +19,8 @@
 					echo "<p class='form__success'>{$successMsg}</p>";
 				}
 				?>
-				<p style="color:hsl(215, 20%, 65%);">An email will be send to you with instructions on how to reset your password.</p>
+				<p style="color:hsl(215, 20%, 65%);">An email will be send to you with instructions on how to reset your
+					password.</p>
 				<div class="form__group-reset">
 					<input type="text" name="email" placeholder="Enter your email address">
 					<button type="submit" name="reset-request-submit" class="btn btn__default">Reset password</button>

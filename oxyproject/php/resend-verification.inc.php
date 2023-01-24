@@ -7,12 +7,11 @@ if (isset($_POST['resend'])) {
 
 	include "dbh.inc.php";
 
-	class ResendVerification  extends Dbh
+	class ResendVerification extends Dbh
 	{
 		public function resendVerification($email, $userID)
 		{
 			$vKey = random_bytes(32);
-			// $urlMail = "https://oxyproject.herokuapp.com/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 			$urlMail = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 			$hashedKey = password_hash($vKey, PASSWORD_BCRYPT);
 
@@ -22,7 +21,7 @@ if (isset($_POST['resend'])) {
 			if (!$stmt->execute([$email, $hashedKey, $userID])) {
 				$stmt = null;
 				$_SESSION['error'] = "Something went wrong! Please try again.";
-				header("Location: ../dashboard");
+				header("Location: ../dashboard.php");
 				exit();
 			}
 
@@ -38,7 +37,7 @@ if (isset($_POST['resend'])) {
 
 			$stmt = null;
 			$_SESSION['success'] = "Verification email sent!";
-			header("Location: ../dashboard");
+			header("Location: ../dashboard.php");
 			exit();
 		}
 	}
@@ -46,6 +45,6 @@ if (isset($_POST['resend'])) {
 	$resend = new ResendVerification();
 	$resend->resendVerification($email, $userID);
 } else {
-	header("Location: ../dashboard");
+	header("Location: ../dashboard.php");
 	exit();
 }

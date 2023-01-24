@@ -29,7 +29,8 @@
 						<input type="text" name="subject" class="form__input" placeholder="Subject" required>
 					</div>
 					<div class="form__group">
-						<textarea name="message" class="form__input form__input-textarea" placeholder="Your message" required></textarea>
+						<textarea name="message" class="form__input form__input-textarea" placeholder="Your message"
+							required></textarea>
 					</div>
 					<div class="form__group">
 						<button type="submit" name="send-message" class="btn btn__gradient btn-send-msg">Send Message</button>

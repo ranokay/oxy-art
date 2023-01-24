@@ -14,19 +14,23 @@ if (isset($_POST['send-message'])) {
 		protected function sendMessage($name, $email, $subject, $message)
 		{
 			$to = "8dimmusic@gmail.com";
-			$subject = $subject;
+			$subject = "OxyProject - " . $subject;
 			$message = $message . "\r\n\r\n" . "From: " . $name . "\r\n" . "Email: " . $email;
 			$headers = "From: " . $email;
 
 			mail($to, $subject, $message, $headers);
 
 			$_SESSION['success'] = "Message sent successfully! <br> We will get back to you as soon as possible.";
-			header("Location: ../contact");
+			header("Location: ../contact.php");
 			exit();
 		}
 	}
 	class SendMsgContr extends SendMessage
 	{
+		private $name;
+		private $email;
+		private $subject;
+		private $message;
 		public function __construct($name, $email, $subject, $message)
 		{
 			$this->name = $name;
@@ -39,12 +43,12 @@ if (isset($_POST['send-message'])) {
 		{
 			if ($this->emptyFields() === false) {
 				$_SESSION['error'] = "Please fill in all fields.";
-				header("Location: ../contact");
+				header("Location: ../contact.php");
 				exit();
 			}
 			if ($this->validateEmail() === false) {
 				$_SESSION['error'] = "Please enter a valid email.";
-				header("Location: ../contact");
+				header("Location: ../contact.php");
 				exit();
 			}
 
@@ -70,6 +74,6 @@ if (isset($_POST['send-message'])) {
 	$sendMsg = new SendMsgContr($name, $email, $subject, $message);
 	$sendMsg->sendMessageCheck();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

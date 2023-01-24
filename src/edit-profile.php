@@ -1,7 +1,7 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Edit Profile" })
 <?php
 if (!isset($_SESSION['userID'])) {
-	header("Location: ../login");
+	header("Location: ../login.php");
 	exit();
 }
 ?>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['userID'])) {
 						<input type="text" name="email" aria-describedby="emailHelp" placeholder="new email">
 					</div>
 					<div class="form__group-btn">
-						<a href="reset-password-request" class="btn btn__default">
+						<a href="reset-password-request.php" class="btn btn__default">
 							<i class="btn-icon fas fa-key"></i>
 							Change password
 						</a>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['userID'])) {
 						</button>
 					</div>
 				</form>
-				<a href="dashboard" class="btn btn__default btn-cancel">
+				<a href="dashboard.php" class="btn btn__default btn-cancel">
 					<i class=" btn-icon fas fa-arrow-left"></i>
 					Cancel
 				</a>

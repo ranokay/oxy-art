@@ -49,8 +49,10 @@
 				}
 				?>
 				<form class="desc-form" action="php/update-art.inc.php?artId=<?php echo $art->getArtId(); ?>" method="POST">
-					<textarea class="art-textarea art-name" name="art-name" readonly="readonly" rows="1" placeholder="Art Name"><?php echo $art->getArtName(); ?></textarea>
-					<textarea id="textcontent" class="art-textarea art-desc" name="art-desc" readonly="readonly" rows="1" placeholder="Description" required><?php echo $art->getArtDescription(); ?></textarea>
+					<textarea class="art-textarea art-name" name="art-name" readonly="readonly" rows="1"
+						placeholder="Art Name"><?php echo $art->getArtName(); ?></textarea>
+					<textarea id="textcontent" class="art-textarea art-desc" name="art-desc" readonly="readonly" rows="1"
+						placeholder="Description" required><?php echo $art->getArtDescription(); ?></textarea>
 					<?php
 					if (isset($_SESSION['userID']) && $art->getArtOwnerId() === $_SESSION['userID']) {
 						if ($art->getArtPublic() === 1) {
@@ -61,12 +63,12 @@
 					}
 					?>
 					<div class="form__checkbox hidden">
-						<label for="checkbox-art-public">Make art public</label>
+						<label for="is-public">Make art public</label>
 						<?php
 						if ($art->getArtPublic() === 1) {
-							echo '<input type="checkbox" name="checkbox-art-public" value="on" checked>';
+							echo '<input type="checkbox" id="is-public" name="is-public" value="on" checked>';
 						} else {
-							echo '<input type="checkbox" name="checkbox-art-public" value="off">';
+							echo '<input type="checkbox" id="is-public" name="is-public" value="off">';
 						}
 						?>
 					</div>
@@ -93,7 +95,7 @@
 
 				<?php
 				if (isset($_SESSION['userID']) && $art->getArtOwnerId() === $_SESSION['userID']) {
-				?>
+					?>
 					<div class="edit-buttons">
 						<button class="btn btn__default edit-btn">
 							<i class="btn-icon fas fa-edit"></i>
@@ -106,7 +108,7 @@
 							</button>
 						</form>
 					</div>
-				<?php
+					<?php
 				}
 				?>
 			</section>

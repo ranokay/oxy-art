@@ -16,7 +16,6 @@ if (isset($_POST['submit'])) {
 		protected function setUser($fullName, $username, $email, $password)
 		{
 			$vKey = random_bytes(32);
-			// $urlMail = "https://oxyproject.herokuapp.com/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 			$urlMail = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 
 			$sql = "INSERT INTO users (`full_name`, `username`, `email`, `v_key`, `password`) VALUES (?, ?, ?, ?, ?);";
@@ -28,7 +27,7 @@ if (isset($_POST['submit'])) {
 			if (!$stmt->execute([ucfirst(trim($fullName)), lcfirst(trim($username)), trim($email), $hashedKey, $hashedPassword])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to create user!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 
@@ -45,7 +44,7 @@ if (isset($_POST['submit'])) {
 
 			$stmt = null;
 			$_SESSION['success'] = "Account created successfully. Please check your email to verify your account!";
-			header("Location: ../login");
+			header("Location: ../login.php");
 			exit();
 		}
 		protected function checkUsername($username)
@@ -56,7 +55,7 @@ if (isset($_POST['submit'])) {
 			if (!$stmt->execute([$username])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to check username!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($stmt->rowCount() > 0) {
@@ -74,7 +73,7 @@ if (isset($_POST['submit'])) {
 			if (!$stmt->execute([$email])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to check email!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($stmt->rowCount() > 0) {
@@ -87,6 +86,12 @@ if (isset($_POST['submit'])) {
 	}
 	class SignupContr extends Signup
 	{
+		private $fullName;
+		private $username;
+		private $email;
+		private $password;
+		private $confirmPassword;
+		private $checkbox;
 		public function __construct($fullName, $username, $email, $password, $confirmPassword, $checkbox)
 		{
 			$this->fullName = ucwords($fullName);
@@ -100,52 +105,52 @@ if (isset($_POST['submit'])) {
 		{
 			if ($this->emptyFields() == false) {
 				$_SESSION['error'] = "Please fill in all fields!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->validateFullName() === false) {
 				$_SESSION['error'] = "Full name must be between 3 and 50 characters!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->validateUsername() === false) {
 				$_SESSION['error'] = "Username must be between 3 and 25 characters and can only contain letters, numbers and underscores!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->validateEmail() === false) {
 				$_SESSION['error'] = "Please enter a valid email!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->validatePasswordLength() === false) {
 				$_SESSION['error'] = "Password must be between 8 and 30 characters!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->validatePassword() === false) {
 				$_SESSION['error'] = "Password must contain at least one number, one uppercase and lowercase letter, and one special character!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->passwordsMatch() === false) {
 				$_SESSION['error'] = "Passwords do not match!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->validateCheckbox() === false) {
 				$_SESSION['error'] = "Please accept the terms and conditions!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->usernameTakenCheck() === false) {
 				$_SESSION['error'] = "Username already taken!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			if ($this->emailTakenCheck() === false) {
 				$_SESSION['error'] = "Email already taken!";
-				header("Location: ../signup");
+				header("Location: ../signup.php");
 				exit();
 			}
 			$this->setUser($this->fullName, $this->username, $this->email, $this->password);
@@ -252,6 +257,6 @@ if (isset($_POST['submit'])) {
 	$signup = new SignupContr($fullName, $username, $email, $password, $confirmPassword, $checkbox);
 	$signup->signupUser();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

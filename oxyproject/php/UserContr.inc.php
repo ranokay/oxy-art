@@ -8,14 +8,14 @@ class User extends Dbh
 
 		if (!$stmt->execute([$userID])) {
 			$stmt = null;
-			header("Location: ../home");
+			header("Location: ../index.php");
 			exit();
 		}
 		if ($stmt->rowCount() === 0) {
 			$stmt = null;
 			session_unset();
 			session_destroy();
-			header("Location: ../home");
+			header("Location: ../index.php");
 			exit();
 		}
 		$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,7 +29,7 @@ class User extends Dbh
 
 		if (!$stmt->execute([$userID])) {
 			$stmt = null;
-			header("Location: ../home");
+			header("Location: ../index.php");
 			exit();
 		}
 		$count = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,7 +43,7 @@ class User extends Dbh
 
 		if (!$stmt->execute([$userID])) {
 			$stmt = null;
-			header("Location: ../home");
+			header("Location: ../index.php");
 			exit();
 		}
 		$count = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -52,6 +52,14 @@ class User extends Dbh
 }
 class UserContr extends User
 {
+	private $fullName;
+	private $username;
+	private $email;
+	private $verified;
+	private $avatar;
+	private $subscribed;
+	private $artsCount;
+	private $likesCount;
 	public function __construct($userID)
 	{
 		$user = $this->getUser($userID);

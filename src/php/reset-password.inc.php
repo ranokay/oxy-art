@@ -20,13 +20,13 @@ if (isset($_POST['reset-password-submit'])) {
 			if (!$stmt->execute([$selector, $currentDate])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to reset password! Please try again.";
-				header("Location: ../create-new-password");
+				header("Location: ../create-new-password.php");
 				exit();
 			}
 			if ($stmt->rowCount() === 0) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to reset password! Invalid link.";
-				header("Location: ../create-new-password");
+				header("Location: ../create-new-password.php");
 				exit();
 			}
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ if (isset($_POST['reset-password-submit'])) {
 			if ($tokenCheck === false) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to reset password! Invalid link.";
-				header("Location: ../create-new-password");
+				header("Location: ../create-new-password.php");
 				exit();
 			} else if ($tokenCheck === true) {
 				$tokenEmail = $result[0]['reset_email'];
@@ -47,13 +47,13 @@ if (isset($_POST['reset-password-submit'])) {
 				if (!$stmt->execute([$tokenEmail])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to reset password! Please try again later.";
-					header("Location: ../create-new-password");
+					header("Location: ../create-new-password.php");
 					exit();
 				}
 				if ($stmt->rowCount() === 0) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to reset password! Invalid link.";
-					header("Location: ../create-new-password");
+					header("Location: ../create-new-password.php");
 					exit();
 				}
 			}
@@ -65,7 +65,7 @@ if (isset($_POST['reset-password-submit'])) {
 			if (!$stmt->execute([$hashedPassword, $tokenEmail])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to reset password! Please try again later.";
-				header("Location: ../create-new-password");
+				header("Location: ../create-new-password.php");
 				exit();
 			}
 			$sql = "DELETE FROM password_reset WHERE `reset_email` = ?;";
@@ -74,18 +74,22 @@ if (isset($_POST['reset-password-submit'])) {
 			if (!$stmt->execute([$tokenEmail])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to reset password! Please try again later.";
-				header("Location: ../create-new-password");
+				header("Location: ../create-new-password.php");
 				exit();
 			}
 			$stmt = null;
 			$_SESSION['success'] = "Your password has been updated!";
-			header("Location: ../login");
+			header("Location: ../login.php");
 			exit();
 		}
 	}
 
 	class ResetPasswordContr extends ResetPassword
 	{
+		private $selector;
+		private $validator;
+		private $password;
+		private $confirmPassword;
 		public function __construct($selector, $validator, $password, $confirmPassword)
 		{
 			$this->selector = $selector;
@@ -97,22 +101,22 @@ if (isset($_POST['reset-password-submit'])) {
 		{
 			if ($this->emptyFields() === false) {
 				$_SESSION['error'] = "Please fill in all fields.";
-				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator);
+				header("Location: ../create-new-password.php?selector=" . $this->selector . "&validator=" . $this->validator);
 				exit();
 			}
 			if ($this->validatePasswordLength() === false) {
 				$_SESSION['error'] = "Password must be between 8 and 30 characters.";
-				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator);
+				header("Location: ../create-new-password.php?selector=" . $this->selector . "&validator=" . $this->validator);
 				exit();
 			}
 			if ($this->validatePassword() === false) {
 				$_SESSION['error'] = "Password must contain at least one number, one uppercase and lowercase letter, and one special character!";
-				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator);
+				header("Location: ../create-new-password.php?selector=" . $this->selector . "&validator=" . $this->validator);
 				exit();
 			}
 			if ($this->passwordsMatch() === false) {
 				$_SESSION['error'] = "Passwords do not match!";
-				header("Location: ../create-new-password?selector=" . $this->selector . "&validator=" . $this->validator);
+				header("Location: ../create-new-password.php?selector=" . $this->selector . "&validator=" . $this->validator);
 				exit();
 			}
 			$this->updatePassword($this->selector, $this->validator, $this->password);
@@ -161,6 +165,6 @@ if (isset($_POST['reset-password-submit'])) {
 	$resetPassword = new ResetPasswordContr($selector, $validator, $password, $confirmPassword);
 	$resetPassword->resetPassword();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

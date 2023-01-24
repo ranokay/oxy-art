@@ -16,7 +16,7 @@ if (isset($_POST['delete-account'])) {
 			if (!$stmt->execute([$userID, $userID])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to delete account! Please try again later.";
-				header("Location: ../dashboard");
+				header("Location: ../dashboard.php");
 				exit();
 			}
 
@@ -25,7 +25,7 @@ if (isset($_POST['delete-account'])) {
 			session_destroy();
 			session_start();
 			$_SESSION['success'] = "Account deleted successfully!";
-			header("Location: ../login");
+			header("Location: ../login.php");
 			exit();
 		}
 	}
@@ -33,6 +33,6 @@ if (isset($_POST['delete-account'])) {
 	$deleteAccount = new DeleteAccount();
 	$deleteAccount->deleteAccount($userID);
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

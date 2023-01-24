@@ -12,7 +12,6 @@ import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
 import htmlmin from 'gulp-htmlmin'
 import fileinclude from 'gulp-file-include'
-import browsersync from 'browser-sync'
 import newer from 'gulp-newer'
 
 const prj_folder = 'oxyproject',
@@ -63,15 +62,6 @@ function cleanTask() {
 	return deleteAsync(path.clean.all)
 }
 
-//browsersync task
-function browsersyncTask() {
-	browsersync.init({
-		proxy: {
-			target: 'https://oxyproject.test',
-		},
-	})
-}
-
 //php task
 function phpTask() {
 	return src(path.src.php)
@@ -79,7 +69,6 @@ function phpTask() {
 		.pipe(fileinclude())
 		.pipe(htmlmin({ collapseWhitespace: true }))
 		.pipe(dest(path.build.php))
-		.pipe(browsersync.stream())
 }
 
 //php server task
@@ -88,7 +77,6 @@ function phpServerTask() {
 		.pipe(newer(path.build.phpServer))
 		.pipe(fileinclude())
 		.pipe(dest(path.build.phpServer))
-		.pipe(browsersync.stream())
 }
 
 //style task
@@ -114,7 +102,6 @@ function styleTask() {
 		)
 		.pipe(write('.'))
 		.pipe(dest(path.build.css))
-		.pipe(browsersync.stream())
 }
 
 //js task
@@ -130,7 +117,6 @@ function jsTask() {
 		.pipe(concat('main.min.js'))
 		.pipe(write('.'))
 		.pipe(dest(path.build.js))
-		.pipe(browsersync.stream())
 }
 
 //images task
@@ -169,7 +155,6 @@ function collectionTask() {
 
 //watch task
 function watchTask() {
-	watch(path.build.php).on('change', browsersync.reload)
 	watch(path.watch.php, phpTask)
 	watch(path.watch.php, phpServerTask)
 	watch(path.watch.css, styleTask)
@@ -185,7 +170,7 @@ const _build = series(
 )
 
 //watch
-const _watch = parallel(_build, watchTask, browsersyncTask)
+const _watch = parallel(_build, watchTask)
 
 //gulp tasks
 export const _clean = cleanTask

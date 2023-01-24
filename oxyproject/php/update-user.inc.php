@@ -22,7 +22,7 @@ if (isset($_POST['save-changes'])) {
 				if (!$stmt->execute([ucwords($fullName), $userID])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to update full name!";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 			}
@@ -33,14 +33,13 @@ if (isset($_POST['save-changes'])) {
 				if (!$stmt->execute([lcfirst($username), $userID])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to update username!";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 			}
 
 			if (isset($email) && !empty($email)) {
 				$vKey = random_bytes(32);
-				// $urlMail = "https://oxyproject.herokuapp.com/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 				$urlMail = "https://localhost:3000/php/verify.inc.php?email=" . $email . "&vkey=" . bin2hex($vKey);
 				$hashedKey = password_hash($vKey, PASSWORD_BCRYPT);
 
@@ -50,7 +49,7 @@ if (isset($_POST['save-changes'])) {
 				if (!$stmt->execute([$email, $hashedKey, $userID])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to update email!";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 
@@ -69,7 +68,7 @@ if (isset($_POST['save-changes'])) {
 				session_destroy();
 				session_start();
 				$_SESSION['success'] = "Email updated! Please verify your new email address.";
-				header("Location: ../login");
+				header("Location: ../login.php");
 				exit();
 			}
 			if (isset($avatar) && !empty($avatar)) {
@@ -80,7 +79,7 @@ if (isset($_POST['save-changes'])) {
 
 				if (!in_array($fileActualExt, $allowed)) {
 					$_SESSION['error'] = "You cannot upload files of this type! Only JPG, JPEG and PNG files are allowed.";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 
@@ -90,7 +89,9 @@ if (isset($_POST['save-changes'])) {
 				$stmt->execute([$userID]);
 				$oldAvatar = $stmt->fetch();
 				$stmt = null;
-				unlink($oldAvatar['avatar']);
+				if (file_exists($oldAvatar['avatar'])) {
+					unlink($oldAvatar['avatar']);
+				}
 
 				// Upload new avatar
 				$avatarName = uniqid('', true) . "." . $fileActualExt;
@@ -105,13 +106,13 @@ if (isset($_POST['save-changes'])) {
 				if (!$stmt->execute([$avatarDestination, $userID])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to update avatar!";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 			}
 			$stmt = null;
 			$_SESSION['success'] = "Profile updated!";
-			header("Location: ../edit-profile");
+			header("Location: ../edit-profile.php");
 			exit();
 		}
 
@@ -124,7 +125,7 @@ if (isset($_POST['save-changes'])) {
 				if (!$stmt->execute([$username])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to check username!";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 				if ($stmt->rowCount() > 0) {
@@ -144,7 +145,7 @@ if (isset($_POST['save-changes'])) {
 				if (!$stmt->execute([$email])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to check email!";
-					header("Location: ../edit-profile");
+					header("Location: ../edit-profile.php");
 					exit();
 				}
 				if ($stmt->rowCount() > 0) {
@@ -158,6 +159,13 @@ if (isset($_POST['save-changes'])) {
 	}
 	class UpdateContr extends UpdateUser
 	{
+		private $fullName;
+		private $username;
+		private $email;
+		private $userID;
+		private $avatar;
+		private $avatarError;
+		private $avatarSize;
 		public function __construct($fullName, $username, $email, $userID, $avatar, $avatarError, $avatarSize)
 		{
 			$this->fullName = $fullName;
@@ -173,42 +181,42 @@ if (isset($_POST['save-changes'])) {
 		{
 			if ($this->emptyFields() === false) {
 				$_SESSION['error'] = "Please fill in at least one field!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->fullName) && $this->validateFullName() === false) {
 				$_SESSION['error'] = "Full name must be between 3 and 50 characters!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->username) && $this->validateUsername() === false) {
 				$_SESSION['error'] = "Username must be between 3 and 25 characters and can only contain letters, numbers and underscores!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->email) && $this->validateEmail() === false) {
 				$_SESSION['error'] = "Please enter a valid email!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->username) && $this->usernameTakenCheck() === false) {
 				$_SESSION['error'] = "Username already taken!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->email) && $this->emailTakenCheck() === false) {
 				$_SESSION['error'] = "Email already taken!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->avatar) && $this->avatarErrorCheck() === false) {
 				$_SESSION['error'] = "There was an error uploading your file!";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			if (!empty($this->avatar) && $this->avatarSizeCheck() === false) {
 				$_SESSION['error'] = "Your file is too big! Max size is 5MB.";
-				header("Location: ../edit-profile");
+				header("Location: ../edit-profile.php");
 				exit();
 			}
 			$this->updateUser($this->fullName, $this->username, $this->email, $this->userID, $this->avatar);
@@ -294,6 +302,6 @@ if (isset($_POST['save-changes'])) {
 	$update = new UpdateContr($fullName, $username, $email, $userID, $avatar, $avatarError, $avatarSize);
 	$update->editUser();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

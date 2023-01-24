@@ -62,6 +62,8 @@ if (isset($_POST['subscribe'])) {
 	}
 	class SubscribeContr extends Subscribe
 	{
+		private $email;
+		private $url;
 		public function __construct($email, $url)
 		{
 			$this->email = $email;
@@ -104,6 +106,6 @@ if (isset($_POST['subscribe'])) {
 	$subscribe = new SubscribeContr($userEmail, $url);
 	$subscribe->subscribeUser();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }

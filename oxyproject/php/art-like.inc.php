@@ -7,7 +7,7 @@ if (isset($_POST['like-btn'])) {
 
 	if (!isset($_SESSION['userID'])) {
 		$_SESSION['error'] = "You must be logged in to like an art!";
-		header("Location: ../art?id={$artId}");
+		header("Location: ../art.php?id={$artId}");
 		exit();
 	}
 
@@ -29,11 +29,11 @@ if (isset($_POST['like-btn'])) {
 				if (!$stmt->execute([$artId, $userId])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to unlike art! Try again later.";
-					header("Location: ../art?id=$artId");
+					header("Location: ../art.php?id=$artId");
 					exit();
 				}
 				$stmt = null;
-				header("Location: ../art?id=$artId");
+				header("Location: ../art.php?id=$artId");
 				exit();
 			} else {
 				$sql = "INSERT INTO `likes` (`art_id`, `user_id`) VALUES (?, ?);";
@@ -41,11 +41,11 @@ if (isset($_POST['like-btn'])) {
 				if (!$stmt->execute([$artId, $userId])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to like art! Try again later.";
-					header("Location: ../art?id=$artId");
+					header("Location: ../art.php?id=$artId");
 					exit();
 				}
 				$stmt = null;
-				header("Location: ../art?id=$artId");
+				header("Location: ../art.php?id=$artId");
 				exit();
 			}
 		}

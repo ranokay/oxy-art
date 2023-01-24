@@ -27,17 +27,18 @@
 					}
 					?>
 					<input class="art-textarea art-name" name="art-name" placeholder="Art Name" required>
-					<textarea id="textcontent" class="art-textarea art-desc" name="art-desc" rows="5" placeholder="Description" required></textarea>
+					<textarea id="textcontent" class="art-textarea art-desc" name="art-desc" rows="5" placeholder="Description"
+						required></textarea>
 					<div class="form__checkbox">
-						<label for="checkbox-art-public">Make this art public</label>
-						<input type="checkbox" name="checkbox-art-public" value="off">
+						<label for="is-public">Make this art public</label>
+						<input type="checkbox" name="is-public" id="is-public" value="off">
 					</div>
 					<div class="upload-buttons">
 						<button type="submit" name="upload-art" class="btn btn__gradient">
 							<img class="btn-icon" src="assets/icons/upload.svg" alt="upload button">
 							Upload Art
 						</button>
-						<a href="dashboard" class="btn btn__default">
+						<a href="dashboard.php" class="btn btn__default">
 							<i class=" btn-icon fas fa-arrow-left"></i>
 							Cancel
 						</a>

@@ -17,13 +17,13 @@ if (isset($_POST['submit'])) {
 			if (!$stmt->execute([$username, $username])) {
 				$stmt = null;
 				$_SESSION['error'] = "Failed to connect to server. Please try again later.";
-				header("Location: ../login");
+				header("Location: ../login.php");
 				exit();
 			}
 			if ($stmt->rowCount() == 0) {
 				$stmt = null;
 				$_SESSION['error'] = "User not found!";
-				header("Location: ../login");
+				header("Location: ../login.php");
 				exit();
 			}
 			$passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 			if ($checkPassword === false) {
 				$stmt = null;
 				$_SESSION['error'] = "Password is incorrect!";
-				header("Location: ../login");
+				header("Location: ../login.php");
 				exit();
 			} else if ($checkPassword === true) {
 				$sql = "SELECT * FROM users WHERE (`username` = ? OR `email` = ?) AND `password` = ?;";
@@ -41,13 +41,13 @@ if (isset($_POST['submit'])) {
 				if (!$stmt->execute([$username, $username, $passwordHashed[0]['password']])) {
 					$stmt = null;
 					$_SESSION['error'] = "Failed to connect to server. Please try again later.";
-					header("Location: ../login");
+					header("Location: ../login.php");
 					exit();
 				}
 				if ($stmt->rowCount() === 0) {
 					$stmt = null;
 					$_SESSION['error'] = "User not found!";
-					header("Location: ../login");
+					header("Location: ../login.php");
 					exit();
 				}
 				$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,13 +55,15 @@ if (isset($_POST['submit'])) {
 				$_SESSION['userID'] = $user[0]['id'];
 				$_SESSION['userType'] = $user[0]['user_type'];
 				$stmt = null;
-				header("Location: ../dashboard");
+				header("Location: ../dashboard.php");
 				exit();
 			}
 		}
 	}
 	class LoginContr extends Login
 	{
+		private $username;
+		private $password;
 		public function __construct($username, $password)
 		{
 			$this->username = $username;
@@ -71,12 +73,12 @@ if (isset($_POST['submit'])) {
 		{
 			if ($this->emptyFields() === false) {
 				$_SESSION['error'] = "Please fill in all fields!";
-				header("Location: ../login");
+				header("Location: ../login.php");
 				exit();
 			}
 			if ($this->validPassword() === false) {
 				$_SESSION['error'] = "Password is incorrect!";
-				header("Location: ../login");
+				header("Location: ../login.php");
 				exit();
 			}
 			$this->getUser($this->username, $this->password);
@@ -103,6 +105,6 @@ if (isset($_POST['submit'])) {
 	$login = new LoginContr($username, $password);
 	$login->loginUser();
 } else {
-	header("Location: ../home");
+	header("Location: ../index.php");
 	exit();
 }
