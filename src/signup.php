@@ -44,7 +44,7 @@ if (isset($_SESSION['userID'])) {
 					<input type="password" name="confirmPassword" placeholder="Confirm password *">
 				</div>
 				<div class="form__checkbox">
-					<input type="checkbox" name="checkbox" value="checkbox">
+					<input type="checkbox" name="checkbox" value="off">
 					<label for="checkbox-signup">I agree to the <a href="terms.php">Terms of Service</a> and <a
 							href="terms.php#privacy-policy">Privacy Policy</a></label>
 				</div>

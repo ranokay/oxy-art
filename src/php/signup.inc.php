@@ -7,7 +7,11 @@ if (isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$confirmPassword = $_POST['confirmPassword'];
-	$checkbox = $_POST['checkbox'];
+	$checkbox = 0;
+
+	if (isset($_POST['checkbox'])) {
+		$checkbox = 1;
+	}
 
 	include "dbh.inc.php";
 
@@ -228,10 +232,13 @@ if (isset($_POST['submit'])) {
 		}
 		private function validateCheckbox()
 		{
-			if (!filter_has_var(INPUT_POST, $this->checkbox)) {
-				$result = false;
-			} else {
-				$result = true;
+			switch ($this->checkbox) {
+				case 0:
+					$result = false;
+					break;
+				case 1:
+					$result = true;
+					break;
 			}
 			return $result;
 		}

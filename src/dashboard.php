@@ -1,10 +1,4 @@
 @@include('php/components/_head.php',{ "title":"OxyProject | Dashboard" })
-<?php
-if (!isset($_SESSION['userID'])) {
-	header("Location: ../login.php");
-	exit();
-}
-?>
 
 <body>
 	<div class="wrapper">
@@ -13,6 +7,11 @@ if (!isset($_SESSION['userID'])) {
 			<section class="profile">
 				<div class="profile__image">
 					<?php
+					if (!isset($_SESSION['userID'])) {
+						echo '<h2 class="profile__image-msg">You are not logged in!</h2>';
+						return;
+					}
+
 					if ($user->getAvatar() == "") {
 						echo '<img class="user-pic" src="assets/icons/user.svg" alt="Profile Image">';
 					} else {
