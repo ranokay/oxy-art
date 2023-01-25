@@ -160,9 +160,11 @@
 		gap: 1rem;
 		margin-bottom: 10rem;
 		margin-top: -4rem;
+		width: 100vw;
 
 		@media (min-width: $breakpoint-desktop) {
 			margin-top: 0;
+			width: auto;
 		}
 
 		.not-uploaded-images {

@@ -36,7 +36,7 @@ if (isset($_SESSION['userID'])) {
 					<input type="text" name="email" aria-describedby="emailHelp" placeholder="Email *">
 				</div>
 				<div class="form__group">
-					<input type="password" name="password" placeholder="Password *">
+					<input type="password" name="password" placeholder="Password *" autocomplete="off">
 					<p class="form__group-suggest">Password must contain at least one number, one letter, one uppercase letter and
 						one special character!</p>
 				</div>

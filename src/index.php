@@ -9,7 +9,7 @@
 				<div class="container">
 					<div class="left__side">
 						<h1 class="title">
-							<span class="title__content">The Platform</span>
+							<span class="title__content">Your Platform</span>
 							<span class="title__content">For</span>
 							<span class="title__content">Digital Arts</span>
 						</h1>

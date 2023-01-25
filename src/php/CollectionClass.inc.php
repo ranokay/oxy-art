@@ -4,7 +4,7 @@ class Collection extends Dbh
 {
 	public function getPublicArts()
 	{
-		$sql = "SELECT * FROM `arts` WHERE `public` = 1;";
+		$sql = "SELECT * FROM `arts` WHERE `public` = 1 ORDER BY `date_added` DESC;";
 		$stmt = $this->connect()->prepare($sql);
 
 		if (!$stmt->execute()) {

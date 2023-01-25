@@ -3,13 +3,13 @@ session_start();
 
 if (isset($_POST['like-btn'])) {
 	$artId = $_POST['art_id'];
-	$userId = $_SESSION['userID'];
 
 	if (!isset($_SESSION['userID'])) {
 		$_SESSION['error'] = "You must be logged in to like an art!";
 		header("Location: ../art.php?id={$artId}");
 		exit();
 	}
+	$userId = $_SESSION['userID'];
 
 	include 'dbh.inc.php';
 
