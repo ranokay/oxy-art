@@ -12,4 +12,3 @@
 *.vsix
 node_modules
 .dccache
-oxyproject
