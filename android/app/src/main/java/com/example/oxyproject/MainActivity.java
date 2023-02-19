@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 		if (savedInstanceState == null) {
-			webView.loadUrl("http://10.0.0.65:8000/");
+			webView.loadUrl("http://141.147.51.188:8000/");
 		}
 
 		swipeRefreshLayout.setOnRefreshListener(() -> {
